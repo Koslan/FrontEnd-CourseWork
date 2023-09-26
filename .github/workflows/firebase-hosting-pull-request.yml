@@ -21,3 +21,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_LINGUAFLIX_1EDB6 }}'
           projectId: linguaflix-1edb6
+          entryPoint: LinguaFlix
