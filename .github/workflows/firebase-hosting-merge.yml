@@ -23,4 +23,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_LINGUAFLIX_1EDB6 }}'
           channelId: live
           projectId: linguaflix-1edb6
-          entryPoint: LinguaFlix
+          entryPoint: LinguaFlix/dist
