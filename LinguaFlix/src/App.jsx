@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <div>
-        <h1>LinguaFlix</h1>
+        <h1>LinguaFlix changes</h1>
       </div>
 
     </>
