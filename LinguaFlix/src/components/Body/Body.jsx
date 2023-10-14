@@ -7,7 +7,7 @@ function Body({ movie }) {
   const levels = ['c2', 'c1', 'b2', 'b1', 'a2', 'a1'];
   const [selectedLevel, setSelectedLevel] = useState(null);
   const [selectedLanguages, setSelectedLanguages] = useState({
-    firstLanguage: 'usa',
+    firstLanguage: 'eng',
     secondLanguage: 'ukr',
   });
 
@@ -61,9 +61,7 @@ function Body({ movie }) {
           <label>
             <h3>First Language</h3>
             <select value={selectedLanguages.firstLanguage} onChange={handleFirstLanguageChange}>
-              <option value='usa'>English</option>
-              <option value='ukr'>Ukrainian</option>
-              <option value='spa'>Spanish</option>
+              <option value='eng'>English</option>
             </select>
           </label>
           <label>
@@ -71,7 +69,6 @@ function Body({ movie }) {
             <select value={selectedLanguages.secondLanguage} onChange={handleSecondLanguageChange}>
               <option value='ukr'>Ukrainian</option>
               <option value='spa'>Spanish</option>
-              <option value='usa'>English</option>
             </select>
           </label>
           <button type='submit' onClick={handleSubmit}>
