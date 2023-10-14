@@ -1,12 +1,11 @@
-import React from 'react';
 import './table.css';
 
 function Table({ movie, selectedLevel }) {
   const vocab = movie.vocab;
   //const levels = movie.levels;
 
-  console.log(vocab);
-  console.log(selectedLevel);
+  console.log("vocab:", vocab);
+  console.log("selectedLevel:", selectedLevel);
 
   return (
     <div>

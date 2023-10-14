@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import './body.css';
 import Table from './Table.jsx';
 import LevelButton from './LevelButton.jsx';
@@ -10,6 +10,8 @@ function Body({ movie }) {
     firstLanguage: 'usa',
     secondLanguage: 'ukr',
   });
+
+  console.log('body : ', selectedLanguages);
 
   const handleFirstLanguageChange = (e) => {
     setSelectedLanguages({
@@ -26,12 +28,12 @@ function Body({ movie }) {
   };
 
   const saveData = () => {
-    console.log(selectedLanguages);
-    console.log(selectedLevel);
+    console.debug("Selected Languages:", selectedLanguages);
+    console.debug("Selected Level:", selectedLevel);
   };
 
   const handleSubmit = () => {
-    console.log("Accepted");
+    console.debug("Accepted button clicked.");
     saveData();
   };
 
