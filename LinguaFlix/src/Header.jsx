@@ -1,17 +1,14 @@
-import React from 'react';
 import Nav from './components/Nav.jsx';
 import './App.css'; 
+import Logo from './assets/logo.svg';
+
 
 function Header() {
     return (
     <header className="header">
-            <div className="header__left">
-            <img className="header__logo-logo" src="../src/assets/logo.svg" alt="Logo" />
-                <div className="header__logo-text">
-                    <p>LinguaFlix</p>
-                    <p className="header__subtitle">Watch. Learn. Speak.</p>
-                </div>
-            </div>
+            <div className='logo'>
+            <img src={Logo} className='logo' width="160" height="33" />
+          </div>
             <div className="header__center">
                 <div class="search-container">
                     <img src="../src/assets/search.svg" alt="search"  />
