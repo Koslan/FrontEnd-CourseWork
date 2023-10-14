@@ -4,7 +4,7 @@ import Table from './Table.jsx';
 import LevelButton from './LevelButton.jsx';
 
 function Body({ movie }) {
-  const levels = ['C2', 'C1', 'B2', 'B1', 'A2', 'A1'];
+  const levels = ['c2', 'c1', 'b2', 'b1', 'a2', 'a1'];
   const [selectedLevel, setSelectedLevel] = useState(null);
   const [selectedLanguages, setSelectedLanguages] = useState({
     firstLanguage: 'usa',
@@ -28,12 +28,16 @@ function Body({ movie }) {
   };
 
   const saveData = () => {
-    console.debug("Selected Languages:", selectedLanguages);
-    console.debug("Selected Level:", selectedLevel);
+    //const SelectedLanguages = useState(selectedLanguages);
+
+
+    
+    console.log("Selected Languages:", selectedLanguages);
+    console.log("Selected Level:", selectedLevel);
   };
 
   const handleSubmit = () => {
-    console.debug("Accepted button clicked.");
+    console.log("Accepted button clicked.");
     saveData();
   };
 
