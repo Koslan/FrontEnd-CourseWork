@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import './App.css';
+
 import Body from './components/Body/Body.jsx';
 import Footer from './components/Footer';
+import Header from './Header';
+import Sidebar from './Sidebar';
+import MovieDetails from './MovieDetails';
 import { DB_URL } from './store/firebase';
 
-
 function App() {
-  console.log('app');
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -43,21 +47,28 @@ function App() {
   },[]);
 
   return (
-    <>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-          <div>
-            {movies.length > 0 && movies.map((movie) => (
-              <Body movie={movie} key={movie.id} />
-            ))}
-          </div>
-        </>
-      )}
+    <Router>
+      <Header />
+      <div className="main-content">
+        <Sidebar />
+        <Routes>
+          {isLoading ? (
+            <Route path="/" element={<div>Loading...</div>} />
+          ) : (
+            <Route path="/" element={
+              <div>
+                {movies.length > 0 && movies.map((movie) => (
+                  <Body movie={movie} key={movie.id} />
+                ))}
+              </div>
+            } />
+          )}
+          <Route path="/movie/:id" element={<MovieDetails />} />
+        </Routes>
+      </div>
       <Footer />
-    </>
-  )
+    </Router>
+  );
 }
 
 export default App;
