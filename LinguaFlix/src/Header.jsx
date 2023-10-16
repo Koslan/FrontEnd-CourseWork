@@ -10,7 +10,7 @@ function Header() {
             <img src={Logo} className='logo' width="160" height="33" />
           </div>
             <div className="header__center">
-                <div class="search-container">
+                <div className="search-container">
                     <img src="../src/assets/search.svg" alt="search"  />
                     <input type="text" placeholder="Search"  />
                 </div>
