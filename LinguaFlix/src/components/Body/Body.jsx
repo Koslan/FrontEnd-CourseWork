@@ -40,7 +40,7 @@ function Body({ movie }) {
   return (
     <>
       <div className='content'>
-        {movie && (
+      {movie   && (
           <div className='content-movie' key={movie.id}>
             <div className='content-img'>
               <img src={movie.img} alt='poster' />

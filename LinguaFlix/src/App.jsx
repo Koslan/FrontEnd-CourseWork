@@ -8,6 +8,9 @@ import Footer from './components/Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import MovieDetails from './MovieDetails';
+import MoviesPage from './MoviesPage';
+import AboutTeam from './AboutTeam';
+import AboutProject from './AboutProject'
 import { DB_URL } from './store/firebase';
 
 function App() {
@@ -63,7 +66,10 @@ function App() {
               </div>
             } />
           )}
+          <Route path="/movies" element={<MoviesPage movies={movies}/>} /> 
           <Route path="/movie/:id" element={<MovieDetails />} />
+          <Route path="/about_team" element={<AboutTeam />} /> 
+          <Route path="/about_project" element={<AboutProject />} /> 
         </Routes>
       </div>
       <Footer />

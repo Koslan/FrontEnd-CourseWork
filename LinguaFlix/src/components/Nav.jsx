@@ -6,10 +6,8 @@ function Nav() {
     return (
         <nav>
                 <Link to="/movies">Movies</Link>
-                <Link to="/tv-shows">Tv-shows</Link>
-                <Link to="/books">Books</Link>
-                <Link to="/about">About</Link>
-                <Link to="/contacts">Contacts</Link>
+                <Link to="/about_team">About team</Link>
+                <Link to="/about_project">About Project</Link>
         </nav>
     );
 }
