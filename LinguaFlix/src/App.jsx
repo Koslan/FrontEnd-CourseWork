@@ -8,7 +8,7 @@ import Sidebar from './Sidebar';
 import MovieDetails from './MovieDetails';
 import MoviesPage from './MoviesPage';
 import AboutTeam from './AboutTeam';
-import AboutProject from './AboutProject'
+import AboutProject from './AboutProject';
 import { DB_URL } from './store/firebase';
 
 function App() {
@@ -63,40 +63,41 @@ function App() {
     setFilteredMovies(filtered);
     setIsDropdownVisible(true); 
 }
+
+
+
   return (
     <Router>
       <Header onSearch={handleSearch} />
       <div className="main-content">
-    <Sidebar />
-    <Routes>
-        {isLoading ? (
+        <Sidebar />
+        <Routes>
+          {isLoading ? (
             <Route path="/" element={<div>Loading...</div>} />
-        ) : (
+          ) : (
             <>
-                <Route path="/" element={
-                    <div>
-                        {isDropdownVisible && <div className="search-results">
-                            {filteredMovies.map(movie => (
-                                <div key={movie.id}>
-                                    <Link to={`/movie/${movie.id}`}>{movie.name}</Link>
-                                </div>
-                            ))}
-                        </div>}
-                    </div>
-                } />
-                          <Route path="/movies" element={<MoviesPage movies={movies}/>} /> 
-          <Route path="/movie/:id" element={<MovieDetails />} />
-          <Route path="/about_team" element={<AboutTeam />} /> 
-          <Route path="/about_project" element={<AboutProject />} /> 
+              <Route path="/" element={
+                  <div>
+                      {isDropdownVisible && <div className="search-results">
+                          {filteredMovies.map(movie => (
+                              <div key={movie.id}>
+                                  <Link to={`/movie/${movie.id}`}>{movie.name}</Link>
+                              </div>
+                          ))}
+                      </div>}
+                  </div>
+              } />
+              <Route path="/movies" element={<MoviesPage movies={movies}/>} />
+              <Route path="/movie/:id" element={<MovieDetails />} />
+              <Route path="/about_team" element={<AboutTeam />} /> 
+              <Route path="/about_project" element={<AboutProject />} /> 
             </>
-        )}
-    </Routes>
-</div>
+          )}
+        </Routes>
+      </div>
       <Footer />
     </Router>
   );
 }
-
-
 
 export default App;
