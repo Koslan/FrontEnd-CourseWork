@@ -4,8 +4,8 @@
   margin: 0 auto;
   text-align: center;
   align-items: center;
-  min-height: 100vh; 
-  background-color: #f0f0f0; 
+  min-height: 100vh;
+  background-color: #f0f0f0;
   color: black;
   font-size: 14px;
 }
@@ -80,12 +80,12 @@
 .header__logo-text p:first-child {
   font-size: 18px;
   font-weight: bold;
-  margin: 0; 
+  margin: 0;
 }
 
 .header__subtitle {
   font-size: 12px;
-  margin: -6px 0 0 0; 
+  margin: -6px 0 0 0;
 }
 
 .header__logo-logo {
@@ -98,9 +98,9 @@
   width: 260px;
   padding: 5px;
   border-radius: 20px;
-  border-color: #6612ED;
+  border-color: #6612ed;
   background-color: transparent;
-  padding-left: 25px; 
+  padding-left: 25px;
 }
 
 .header__center input:focus {
@@ -108,7 +108,7 @@
 }
 
 .header__center input::placeholder {
-  color: #6612ED;
+  color: #6612ed;
 }
 
 .search-container {
@@ -116,10 +116,32 @@
   display: inline-block;
 }
 
+.search-results {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 250px; /* можно изменить по вашему усмотрению */
+  position: absolute;
+  background-color: white;
+  z-index: 1000; /* чтобы выпадающий список был поверх других элементов */
+}
+
+.search-results a {
+  display: block;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: black;
+}
+
+.search-results a:hover {
+  background-color: #eaeaea;
+}
+
 .header__center img {
   position: absolute;
   top: 50%;
-  left: 10px; 
+  left: 10px;
   transform: translateY(-50%);
 }
 
@@ -131,7 +153,7 @@
 }
 
 .header__right a:hover {
-  color: #6612ED;
+  color: #6612ed;
 }
 
 /* Sidebar */
@@ -169,13 +191,13 @@
   gap: 8px;
   display: flex;
   margin: 12px 2px;
-  border: 2px solid transparent; 
+  border: 2px solid transparent;
   border-radius: 12px;
   transition: border 0.3s ease-in-out;
 }
 
 .movie-card:hover {
-  border: #6612ED solid 2px;
+  border: #6612ed solid 2px;
   transform: scale(1.02);
 }
 
@@ -186,7 +208,7 @@
 }
 
 .movie-card-right-info p {
-  background: var(--Purple, #DAC7FA);
+  background: var(--Purple, #dac7fa);
   border-radius: 16px;
   padding: 1px 8px;
   margin-top: 8px;
@@ -198,7 +220,7 @@
   display: flex;
   gap: 10px;
   flex: 1;
-  flex-direction: row; 
+  flex-direction: row;
   align-items: center;
   box-sizing: border-box;
 }
@@ -211,8 +233,8 @@
 
 .favorite-container {
   display: flex;
-  align-items: center; 
-  margin-top: 8px; 
+  align-items: center;
+  margin-top: 8px;
 }
 
 .favorite-content {
@@ -233,7 +255,7 @@
 }
 
 .favorite {
-  background-color: #6612ED;
+  background-color: #6612ed;
   color: #f0f0f0;
   border: none;
 }
@@ -244,5 +266,5 @@
 }
 
 .line {
-  outline: #DAC7FA solid 1px;
+  outline: #dac7fa solid 1px;
 }

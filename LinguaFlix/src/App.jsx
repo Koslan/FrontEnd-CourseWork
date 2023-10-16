@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './App.css';
 import Footer from './components/Footer';
 import Header from './Header';
@@ -9,7 +10,9 @@ import { DB_URL } from './store/firebase';
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -43,18 +46,46 @@ function App() {
     });
   }, []);
 
+  const handleSearch = (searchValue) => {
+    console.log("search:", searchValue);
+    if (searchValue.trim().length === 0) {
+        setFilteredMovies([]);
+        setIsDropdownVisible(false);
+        return;
+    }
+
+    const filtered = movies.filter(movie =>
+        movie.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setFilteredMovies(filtered);
+    setIsDropdownVisible(true); 
+}
   return (
     <Router>
-      <Header />
+      <Header onSearch={handleSearch} />
       <div className="main-content">
-        <Sidebar />
-        <Routes>
-          {isLoading ? (
+    <Sidebar />
+    <Routes>
+        {isLoading ? (
             <Route path="/" element={<div>Loading...</div>} />
-          ) : null}
-          <Route path="/movie/:id" element={<MovieDetails />} />
-        </Routes>
-      </div>
+        ) : (
+            <>
+                <Route path="/" element={
+                    <div>
+                        {isDropdownVisible && <div className="search-results">
+                            {filteredMovies.map(movie => (
+                                <div key={movie.id}>
+                                    <Link to={`/movie/${movie.id}`}>{movie.name}</Link>
+                                </div>
+                            ))}
+                        </div>}
+                    </div>
+                } />
+                <Route path="/movie/:id" element={<MovieDetails />} />
+            </>
+        )}
+    </Routes>
+</div>
       <Footer />
     </Router>
   );
