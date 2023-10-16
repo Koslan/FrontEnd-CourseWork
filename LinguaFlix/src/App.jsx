@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
 import './App.css';
-
-import Body from './components/Body/Body.jsx';
 import Footer from './components/Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -44,7 +41,7 @@ function App() {
       console.error("Error fetching movies:", error);
       setIsLoading(false);
     });
-  },[]);
+  }, []);
 
   return (
     <Router>
@@ -54,15 +51,7 @@ function App() {
         <Routes>
           {isLoading ? (
             <Route path="/" element={<div>Loading...</div>} />
-          ) : (
-            <Route path="/" element={
-              <div>
-                {movies.length > 0 && movies.map((movie) => (
-                  <Body movie={movie} key={movie.id} />
-                ))}
-              </div>
-            } />
-          )}
+          ) : null}
           <Route path="/movie/:id" element={<MovieDetails />} />
         </Routes>
       </div>

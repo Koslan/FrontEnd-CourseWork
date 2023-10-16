@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './levelButton.css';
 
-function LevelButton({ levels, setSelectedLevel, saveData }) {
+function LevelButton({ levels, setSelectedLevel }) {
   const [clickedLevels, setClickedLevels] = useState([]);
 
   const handleClick = (level) => {
@@ -15,7 +15,6 @@ function LevelButton({ levels, setSelectedLevel, saveData }) {
 
     setClickedLevels(updatedLevels);
     setSelectedLevel(updatedLevels.length > 0 ? updatedLevels : null);
-    saveData();
   };
 
   return (

@@ -1,15 +1,19 @@
 import './table.css';
 
-function Table({ movie, selectedLevel }) {
+function Table({ movie, selectedLevel, selectedLanguages }) {
   const vocab = movie.vocab;
-  const lang1 = "eng";
-  const lang2 = "ukrainian";
+  const lang1 = selectedLanguages.firstLanguage;
+  const lang2 = selectedLanguages.secondLanguage;
   console.log("selectedLevel" , selectedLevel);
 
   console.log("  vocab", vocab);
-
+  console.log(selectedLanguages);
+  console.log(selectedLevel);
+  
   const selectedLanguagePair = `${lang1}:${lang2}`;
   const selectedVocab = vocab[selectedLanguagePair] && vocab[selectedLanguagePair][selectedLevel];
+
+  console.log(selectedLanguagePair);
 
   console.log("  selectedLanguagePair", selectedLanguagePair);
   console.log("  selectedVocab",  vocab[selectedLanguagePair]);
