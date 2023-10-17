@@ -4,6 +4,8 @@
 }
 
 .movie-details img {
+    max-width: 264px;
+    width: 100%;
     border-radius: 12px;
     background: url(<path-to-image>), lightgray 50% / cover no-repeat;
 }

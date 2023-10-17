@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import './components/movieDetails.css';
 import LevelButton from './components/Body/LevelButton';
 import Table from './components/Body/Table';
+import { DB_URL } from './store/firebase';
 
 function MovieDetails() {
     const [movie, setMovie] = useState(null);
@@ -16,13 +17,10 @@ function MovieDetails() {
     });
 
     const { id } = useParams();
-    console.log(movie);
-
-    console.log(id);
 
     useEffect(() => {
         axios
-            .get(`https://linguaflix-1edb6-default-rtdb.europe-west1.firebasedatabase.app/movies/${id}.json`)
+            .get(`${DB_URL}/movies/${id}.json`)
             .then((response) => {
                 setMovie(response.data);
             })
@@ -56,7 +54,7 @@ function MovieDetails() {
     const handleSubmit = () => {
         console.log("Accepted button clicked.");
     };
-
+console.log(movie);
     return (
         <>
             <div className="movie-details">
@@ -90,6 +88,7 @@ function MovieDetails() {
                 <div className='level_button'>
                     <LevelButton levels={levels} setSelectedLevel={setSelectedLevel} />
                 </div>
+                <Table movies={movie} selectedLevel={selectedLevel} selectedLanguages={selectedLanguages} />
             </div>
         </>
 

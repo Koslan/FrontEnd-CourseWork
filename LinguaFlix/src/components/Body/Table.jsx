@@ -1,27 +1,30 @@
 import './table.css';
 
-function Table({ movie, selectedLevel, selectedLanguages }) {
-  const vocab = movie.vocab;
-  const lang1 = selectedLanguages.firstLanguage;
-  const lang2 = selectedLanguages.secondLanguage;
-  console.log("selectedLevel" , selectedLevel);
+function Table({ movies, selectedLevel, selectedLanguages }) {
+  const vocab = movies.vocabByLanguage;
+  const lang1 = selectedLanguages?.firstLanguage;
+  const lang2 = selectedLanguages?.secondLanguage;
+  
+  const selectedLanguagePair = `${lang1}:${lang2}`;
+  const selectedVocab = vocab?.[selectedLanguagePair]?.[selectedLevel];
 
+  console.log(movies);
+
+  console.log(selectedLanguagePair);
+  console.log(selectedVocab);
+
+  console.log("selectedLanguagePair", selectedLanguagePair);
+  console.log("vocab[selectedLanguagePair]", vocab?.[selectedLanguagePair]);
+  console.log("vocab[selectedLanguagePair][selectedLevel]", vocab?.[selectedLanguagePair]?.[selectedLevel]);
+  console.log("selectedVocab", selectedVocab);
+
+  console.log("selectedLevel" , selectedLevel);
   console.log("  vocab", vocab);
   console.log(selectedLanguages);
   console.log(selectedLevel);
-  
-  const selectedLanguagePair = `${lang1}:${lang2}`;
-  const selectedVocab = vocab[selectedLanguagePair] && vocab[selectedLanguagePair][selectedLevel];
-
-  console.log(selectedLanguagePair);
-
-  console.log("  selectedLanguagePair", selectedLanguagePair);
-  console.log("  selectedVocab",  vocab[selectedLanguagePair]);
-  console.log("  selectedVocab2",  vocab[selectedLanguagePair][selectedLevel]);
-  console.log("  selectedVocab3",  selectedVocab);
 
   return (
-    <div>
+    <>
       {selectedVocab && 
         <div key={`${selectedLanguagePair}-${selectedLevel}`}>
           <table>
@@ -45,7 +48,7 @@ function Table({ movie, selectedLevel, selectedLanguages }) {
           </table>
         </div>
       }
-    </div>
+    </>
   )
 }
 

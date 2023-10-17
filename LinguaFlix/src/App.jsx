@@ -64,8 +64,6 @@ function App() {
     setIsDropdownVisible(true); 
 }
 
-
-
   return (
     <Router>
       <Header onSearch={handleSearch} />
