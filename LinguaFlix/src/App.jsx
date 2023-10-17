@@ -16,6 +16,7 @@ function App() {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -66,38 +67,28 @@ function App() {
 
 
 
-  return (
-    <Router>
-      <Header onSearch={handleSearch} />
-      <div className="main-content">
-        <Sidebar />
-        <Routes>
-          {isLoading ? (
-            <Route path="/" element={<div>Loading...</div>} />
-          ) : (
-            <>
-              <Route path="/" element={
-                  <div>
-                      {isDropdownVisible && <div className="search-results">
-                          {filteredMovies.map(movie => (
-                              <div key={movie.id}>
-                                  <Link to={`/movie/${movie.id}`}>{movie.name}</Link>
-                              </div>
-                          ))}
-                      </div>}
-                  </div>
-              } />
-              <Route path="/movies" element={<MoviesPage movies={movies}/>} />
-              <Route path="/movie/:id" element={<MovieDetails />} />
-              <Route path="/about_team" element={<AboutTeam />} /> 
-              <Route path="/about_project" element={<AboutProject />} /> 
-            </>
-          )}
-        </Routes>
-      </div>
-      <Footer />
-    </Router>
-  );
+return (
+  <Router>
+    <Header onSearch={handleSearch} results={filteredMovies} isVisible={isDropdownVisible} />
+    <div className="main-content">
+      <Sidebar />
+      <Routes>
+        {isLoading ? (
+          <Route path="/" element={<div>Loading...</div>} />
+        ) : (
+          <>
+            <Route path="/" element={<div />} />
+            <Route path="/movies" element={<MoviesPage movies={movies}/>} />
+            <Route path="/movie/:id" element={<MovieDetails />} />
+            <Route path="/about_team" element={<AboutTeam />} /> 
+            <Route path="/about_project" element={<AboutProject />} /> 
+          </>
+        )}
+      </Routes>
+    </div>
+    <Footer />
+  </Router>
+);
 }
 
 export default App;
