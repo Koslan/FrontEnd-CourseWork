@@ -9,7 +9,7 @@ import { DB_URL } from './store/firebase';
 function MovieDetails() {
     const [movie, setMovie] = useState(null);
     const [error, setError] = useState(null);
-    const levels = ['c2', 'c1', 'b2', 'b1', 'a2', 'a1'];
+    const levels = ['C2', 'C1', 'B2', 'B1', 'A2', 'A1'];
     const [selectedLevel, setSelectedLevel] = useState(null);
     const [selectedLanguages, setSelectedLanguages] = useState({
         firstLanguage: 'eng',

@@ -8,21 +8,6 @@ function Table({ movies, selectedLevel, selectedLanguages }) {
   const selectedLanguagePair = `${lang1}:${lang2}`;
   const selectedVocab = vocab?.[selectedLanguagePair]?.[selectedLevel];
 
-  console.log(movies);
-
-  console.log(selectedLanguagePair);
-  console.log(selectedVocab);
-
-  console.log("selectedLanguagePair", selectedLanguagePair);
-  console.log("vocab[selectedLanguagePair]", vocab?.[selectedLanguagePair]);
-  console.log("vocab[selectedLanguagePair][selectedLevel]", vocab?.[selectedLanguagePair]?.[selectedLevel]);
-  console.log("selectedVocab", selectedVocab);
-
-  console.log("selectedLevel" , selectedLevel);
-  console.log("  vocab", vocab);
-  console.log(selectedLanguages);
-  console.log(selectedLevel);
-
   return (
     <>
       {selectedVocab && 

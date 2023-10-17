@@ -1,5 +1,5 @@
 #root {
-  max-width: 1280px;
+  max-width: 1920px;
   margin: 0 auto;
   text-align: center;
   align-items: center;
@@ -49,6 +49,7 @@
 
 .main-content {
   display: flex;
+  margin: 0 396px;
 }
 
 .movie-details {

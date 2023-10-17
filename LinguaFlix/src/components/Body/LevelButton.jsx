@@ -37,4 +37,3 @@ function LevelButton({ levels, setSelectedLevel }) {
 }
 
 export default LevelButton;
-

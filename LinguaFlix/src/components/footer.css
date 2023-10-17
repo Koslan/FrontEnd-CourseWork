@@ -1,12 +1,13 @@
 footer {
   display: flex;
-  max-width: 100%;
+  max-width: 1920px;
+  max-height: 295px;
   background: var(--Purple, #dac7fa);
   padding: 0 20px 50px;
 }
 
-.logo {
-  margin-top: 44px;
+footer .logo {
+  margin: 44px 0 0 396px;
   padding: 0;
 }
 
