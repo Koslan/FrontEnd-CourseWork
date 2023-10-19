@@ -22,7 +22,7 @@ const teamMembers = [
     },
     {
         name: 'Olena Stovolosova',
-        photo: 'olena.png',
+        photo: './src/assets/olena.png',
         socialLinks: {
             facebook: 'https://www.facebook.com/johndoe',
             twitter: 'https://www.twitter.com/johndoe',

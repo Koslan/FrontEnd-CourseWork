@@ -9,6 +9,7 @@ import MovieDetails from './MovieDetails';
 import MoviesPage from './MoviesPage';
 import AboutTeam from './AboutTeam';
 import AboutProject from './AboutProject';
+import AddMovie from './AddMovie';
 import { DB_URL } from './store/firebase';
 
 function App() {
@@ -65,7 +66,6 @@ function App() {
 }
 
 
-
   return (
     <Router>
       <Header onSearch={handleSearch} />
@@ -95,6 +95,7 @@ function App() {
           )}
         </Routes>
       </div>
+      <AddMovie />
       <Footer />
     </Router>
   );

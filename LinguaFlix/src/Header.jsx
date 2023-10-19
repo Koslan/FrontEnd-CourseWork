@@ -11,9 +11,9 @@ function Header({ onSearch }) {
 
     return (
         <header className="header">
-            <div className='logo'>
+            <div className='header__logo'>
             <Link to="/">
-                    <img src={Logo} className='logo' width="160" height="33" alt="Logo" />
+                    <img src={Logo}  width="160" height="33" alt="Logo" />
                 </Link>
             </div>
             <div className="header__center">

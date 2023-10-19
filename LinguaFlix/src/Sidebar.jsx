@@ -18,7 +18,8 @@ function Sidebar() {
                         movieList.push({ id: movieKey, ...response.data[movieKey], isFavorite: false });
                     }
                 }
-                setMovies(movieList);
+                const last10Movies = movieList.slice(-10);
+                setMovies(last10Movies);
             })
             .catch((error) => {
                 setError('Error loading data: ' + error.message);
