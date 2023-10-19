@@ -1,5 +1,6 @@
 import Nav from './components/Nav.jsx';
-import { useState, useEffect, useDispatch, useSelector } from 'react';
+import { useState, useEffect} from 'react';
+import {  useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import Logo from './assets/logo.svg';
 import { Link } from 'react-router-dom';
@@ -15,9 +16,10 @@ function Header({ onSearch, results, isVisible }) {
 
     return (
         <header className="header">
-            <div className='logo'>
-                <Link to="/">
-                    <img src={Logo} className='logo' width="160" height="33" alt="Logo" />
+
+            <div className='header__logo'>
+            <Link to="/">
+                    <img src={Logo}  width="160" height="33" alt="Logo" />
                 </Link>
             </div>
             <div className="header__center">

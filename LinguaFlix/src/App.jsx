@@ -13,6 +13,7 @@ import MovieDetails from './MovieDetails';
 import MoviesPage from './MoviesPage';
 import AboutTeam from './AboutTeam';
 import AboutProject from './AboutProject';
+import AddMovieRequest from './AddMovieRequest';
 import { DB_URL } from './store/firebase';
 import Login from './components/Login';
 
@@ -70,6 +71,7 @@ function App() {
     setIsDropdownVisible(true);
   }
 
+
   return (
     <Provider store={store}>
       <Router>
@@ -103,6 +105,7 @@ function App() {
             )}
           </Routes>
         </div>
+        <AddMovieRequest />
         <Footer />
       </Router>
     </Provider>
