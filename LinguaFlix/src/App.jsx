@@ -5,6 +5,8 @@ import './App.css';
 import { Provider } from 'react-redux';
 import store from './store';
 import Footer from './components/Footer';
+import AddMovie from './components/Movie/AddMovie';
+import EditMovie from './components/Movie/EditMovie';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import MovieDetails from './MovieDetails';
@@ -19,6 +21,7 @@ function App() {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -70,7 +73,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Header onSearch={handleSearch} />
+        <Header onSearch={handleSearch} results={filteredMovies} isVisible={isDropdownVisible} />
         <div className="main-content">
           <Sidebar />
           <Routes>
@@ -93,6 +96,8 @@ function App() {
                 <Route path="/movie/:id" element={<MovieDetails />} />
                 <Route path="/about_team" element={<AboutTeam />} />
                 <Route path="/about_project" element={<AboutProject />} />
+                <Route path="/add_movie" element={<AddMovie />} />
+                <Route path="/edit_movie/:id" element={<EditMovie />} />
                 <Route path='/login' element={<Login />} />
               </>
             )}

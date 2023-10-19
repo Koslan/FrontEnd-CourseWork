@@ -1,11 +1,11 @@
 import Nav from './components/Nav.jsx';
+import { useState, useEffect, useDispatch, useSelector } from 'react';
 import './App.css';
 import Logo from './assets/logo.svg';
 import { Link } from 'react-router-dom';
 import HeaderUser from './components/HeaderUser.jsx';
-import { useDispatch, useSelector } from 'react-redux';
 
-function Header({ onSearch }) {
+function Header({ onSearch, results, isVisible }) {
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
 
@@ -28,6 +28,13 @@ function Header({ onSearch }) {
                         placeholder="Search"
                         onChange={handleInputChange}
                     />
+                    {isVisible && <div className="search-results">
+                        {results.map(movie => (
+                            <div key={movie.id}>
+                                <Link to={`/movie/${movie.id}`}>{movie.name}</Link>
+                            </div>
+                        ))}
+                    </div>}
                 </div>
             </div>
             <div className="header__right">
