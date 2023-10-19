@@ -1,18 +1,24 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 import './App.css';
-
-import Body from './components/Body/Body.jsx';
 import Footer from './components/Footer';
+import AddMovie from './components/Movie/AddMovie';
+import EditMovie from './components/Movie/EditMovie';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import MovieDetails from './MovieDetails';
+import MoviesPage from './MoviesPage';
+import AboutTeam from './AboutTeam';
+import AboutProject from './AboutProject';
 import { DB_URL } from './store/firebase';
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -44,31 +50,49 @@ function App() {
       console.error("Error fetching movies:", error);
       setIsLoading(false);
     });
-  },[]);
+  }, []);
 
-  return (
-    <Router>
-      <Header />
-      <div className="main-content">
-        <Sidebar />
-        <Routes>
-          {isLoading ? (
-            <Route path="/" element={<div>Loading...</div>} />
-          ) : (
-            <Route path="/" element={
-              <div>
-                {movies.length > 0 && movies.map((movie) => (
-                  <Body movie={movie} key={movie.id} />
-                ))}
-              </div>
-            } />
-          )}
-          <Route path="/movie/:id" element={<MovieDetails />} />
-        </Routes>
-      </div>
-      <Footer />
-    </Router>
-  );
+  const handleSearch = (searchValue) => {
+    console.log("search:", searchValue);
+    if (searchValue.trim().length === 0) {
+        setFilteredMovies([]);
+        setIsDropdownVisible(false);
+        return;
+    }
+
+    const filtered = movies.filter(movie =>
+        movie.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setFilteredMovies(filtered);
+    setIsDropdownVisible(true); 
+}
+
+
+
+return (
+  <Router>
+    <Header onSearch={handleSearch} results={filteredMovies} isVisible={isDropdownVisible} />
+    <div className="main-content">
+      <Sidebar />
+      <Routes>
+        {isLoading ? (
+          <Route path="/" element={<div>Loading...</div>} />
+        ) : (
+          <>
+            <Route path="/" element={<div />} />
+            <Route path="/movies" element={<MoviesPage movies={movies}/>} />
+            <Route path="/movie/:id" element={<MovieDetails />} />
+            <Route path="/add_movie" element={<AddMovie />} />
+            <Route path="/edit_movie/:id" element={<EditMovie />} />
+            <Route path="/about_team" element={<AboutTeam />} /> 
+            <Route path="/about_project" element={<AboutProject />} /> 
+          </>
+        )}
+      </Routes>
+    </div>
+    <Footer />
+  </Router>
+);
 }
 
 export default App;
