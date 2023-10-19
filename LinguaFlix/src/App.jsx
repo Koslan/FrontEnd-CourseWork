@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './App.css';
 import Footer from './components/Footer';
+import AddMovie from './components/Movie/AddMovie';
+import EditMovie from './components/Movie/EditMovie';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import MovieDetails from './MovieDetails';
@@ -80,6 +82,8 @@ return (
             <Route path="/" element={<div />} />
             <Route path="/movies" element={<MoviesPage movies={movies}/>} />
             <Route path="/movie/:id" element={<MovieDetails />} />
+            <Route path="/add_movie" element={<AddMovie />} />
+            <Route path="/edit_movie/:id" element={<EditMovie />} />
             <Route path="/about_team" element={<AboutTeam />} /> 
             <Route path="/about_project" element={<AboutProject />} /> 
           </>
