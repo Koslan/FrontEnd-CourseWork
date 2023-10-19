@@ -1,3 +1,28 @@
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa-Regular.ttf) format('ttf');
+    font-style: normal;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa-Regular.woff) format('woff');
+    font-style: normal;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa-SemiBold.ttf) format('ttf');
+    font-style: normal;
+    font-weight: 600;
+}
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa-SemiBold.woff) format('woff');
+    font-style: normal;
+    font-weight: 600;
+}
+
 .movie-details {
     width: 100%;
     margin: 0 20px 64px 24px;
@@ -19,7 +44,7 @@
 }
 
 .details-text h1 {
-    font-family: Comfortaa;
+    font-family: 'Comfortaa';
     font-size: 36px;
     font-style: normal;
     font-weight: 400;
@@ -28,7 +53,7 @@
 }
 
 .details-text-year {
-    font-family: Comfortaa;
+    font-family: 'Comfortaa';
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -43,7 +68,7 @@
 }
 
 .details-text h5 {
-    font-family: Comfortaa;
+    font-family: 'Comfortaa';
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -52,7 +77,7 @@
 }
 
 .details-text h4 {
-    font-family: Comfortaa;
+    font-family: 'Comfortaa';
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -72,7 +97,7 @@
 
 .selectedLanguage h3 {
     color: var(--Black, #131315);
-    font-family: Comfortaa;
+    font-family: 'Comfortaa';
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -86,7 +111,7 @@
     border: 1px solid var(--Violet, #6612ED);
     background: var(--Purple, #DAC7FA);
     color: var(--Violet, #6612ED);
-    font-family: Comfortaa;
+    font-family: 'Comfortaa';
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -103,7 +128,7 @@ select {
     border: 1px solid var(--Violet, #6612ED);
     background-color: transparent;
     color: var(--Black, #131315);
-    font-family: Comfortaa;
+    font-family: 'Comfortaa';
     font-size: 14px;
     font-style: normal;
     font-weight: 600;

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './App.css';
+import { Provider } from 'react-redux';
+import store from './store';
 import Footer from './components/Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -10,6 +12,7 @@ import MoviesPage from './MoviesPage';
 import AboutTeam from './AboutTeam';
 import AboutProject from './AboutProject';
 import { DB_URL } from './store/firebase';
+import Login from './components/Login';
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -47,55 +50,59 @@ function App() {
       console.error("Error fetching movies:", error);
       setIsLoading(false);
     });
-  }, []);
+  }, []);  
 
   const handleSearch = (searchValue) => {
     console.log("search:", searchValue);
     if (searchValue.trim().length === 0) {
-        setFilteredMovies([]);
-        setIsDropdownVisible(false);
-        return;
+      setFilteredMovies([]);
+      setIsDropdownVisible(false);
+      return;
     }
 
     const filtered = movies.filter(movie =>
-        movie.name.toLowerCase().includes(searchValue.toLowerCase())
+      movie.name.toLowerCase().includes(searchValue.toLowerCase())
     );
     setFilteredMovies(filtered);
-    setIsDropdownVisible(true); 
-}
+    setIsDropdownVisible(true);
+  }
 
   return (
-    <Router>
-      <Header onSearch={handleSearch} />
-      <div className="main-content">
-        <Sidebar />
-        <Routes>
-          {isLoading ? (
-            <Route path="/" element={<div>Loading...</div>} />
-          ) : (
-            <>
-              <Route path="/" element={
+    <Provider store={store}>
+      <Router>
+        <Header onSearch={handleSearch} />
+        <div className="main-content">
+          <Sidebar />
+          <Routes>
+            {isLoading ? (
+              <Route path="/" element={<div>Loading...</div>} />
+            ) : (
+              <>
+                <Route path="/" element={
                   <div>
-                      {isDropdownVisible && <div className="search-results">
-                          {filteredMovies.map(movie => (
-                              <div key={movie.id}>
-                                  <Link to={`/movie/${movie.id}`}>{movie.name}</Link>
-                              </div>
-                          ))}
-                      </div>}
+                    {isDropdownVisible && <div className="search-results">
+                      {filteredMovies.map(movie => (
+                        <div key={movie.id}>
+                          <Link to={`/movie/${movie.id}`}>{movie.name}</Link>
+                        </div>
+                      ))}
+                    </div>}
                   </div>
-              } />
-              <Route path="/movies" element={<MoviesPage movies={movies}/>} />
-              <Route path="/movie/:id" element={<MovieDetails />} />
-              <Route path="/about_team" element={<AboutTeam />} /> 
-              <Route path="/about_project" element={<AboutProject />} /> 
-            </>
-          )}
-        </Routes>
-      </div>
-      <Footer />
-    </Router>
+                } />
+                <Route path="/movies" element={<MoviesPage movies={movies} />} />
+                <Route path="/movie/:id" element={<MovieDetails />} />
+                <Route path="/about_team" element={<AboutTeam />} />
+                <Route path="/about_project" element={<AboutProject />} />
+                <Route path='/login' element={<Login />} />
+              </>
+            )}
+          </Routes>
+        </div>
+        <Footer />
+      </Router>
+    </Provider>
   );
 }
 
 export default App;
+
