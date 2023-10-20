@@ -67,7 +67,7 @@ function AddMovieRequest () {
     
 
     return (
-        <div className='main-content'>
+        <div className='addmovie-content'>
         <div className="addmovie__container">
         <div className='addmovie__info'>
                 <h1>Didn't find the movie you want?</h1>

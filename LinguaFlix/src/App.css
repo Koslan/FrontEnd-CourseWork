@@ -34,7 +34,6 @@
   font-size: 14px;
   overflow: hidden;
   font-family: 'Comfortaa';
-  max-width: 1440px;
 }
 
 .logo {
@@ -77,6 +76,7 @@
 
 .main-content {
   display: flex;
+  margin: 0 396px;
 }
 
 .movie-details {
@@ -90,10 +90,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 12px 20px;*/
-  /* margin: 0 396px 55px;*/
-  margin-top: 20px;
-  margin-bottom: 44px;
+  margin: 20px 396px 44px;
 }
 
 .header__logo:hover {
@@ -439,33 +436,50 @@
 
 /* Add Movie */
 
+.addmovie-content {
+
+}
+
 .addmovie__container {
   display: flex;
   flex-direction: wrap;
-  justify-content: space-between;
   margin-top: 44px;
   background-color: #f4f4f6 !important;
 }
 
 .addmovie__info {
   text-align: left;
-  margin-left: 4px;
+  display: flex;
+    width: 604px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 44px 128px 0 396px;
 }
 
 .addmovie__info h1 {
-  font-weight: 400;
-  margin-bottom: 10px;
+  font-family: Comfortaa;
+  font-size: 36px;
+  line-height: 44px;
 }
 
 .addmovie__info h2 {
-  margin: 0;
-  font-weight: 300;
+  font-family: Comfortaa;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .form__container {
-  margin-right: 150px;
-  margin-left: 150px;
+  display: inline-flex;
+  margin: 44px 0 128px;
+  gap: 16px;
+  width: 300px;
+  height: 244px;
+  background: var(--White, #FFFFFC);
+  border-radius: 12px;
   padding: 36px 20px 24px 20px;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .form__container button {
@@ -502,6 +516,7 @@ footer {
   margin-left: 0;
   margin-right: 0;
 }
+
 
 
 
