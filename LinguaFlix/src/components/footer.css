@@ -31,7 +31,6 @@ footer {
 
 .footer-content {
   display: flex;
-    width: 1128px;
     justify-content: space-between;
     align-items: center;
     max-height: 33px;

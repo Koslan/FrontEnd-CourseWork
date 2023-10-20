@@ -32,6 +32,8 @@
   background-color: #fff; 
   color: black;
   font-size: 14px;
+  overflow: hidden;
+  font-family: 'Comfortaa';
 }
 
 .logo {
@@ -74,7 +76,6 @@
 
 .main-content {
   display: flex;
-  margin: 0 396px;
 }
 
 .movie-details {
@@ -122,7 +123,29 @@
 
 .search-container {
   position: relative;
-  display: inline-block;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.header__center input:focus + .search-results,
+.search-results:hover {
+  display: block;
+}
+
+.search-results {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header__center img {
@@ -319,10 +342,11 @@
 
 .movie-card-bottom h2 {
   text-align: start;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   margin: 0;
 }
+
 
 
 /* About Team */
@@ -349,7 +373,14 @@
 
 .team-card img {
   max-width: 100%;
-  height: auto;
+  height: 195px;
+}
+
+.team-card h2 {
+  margin: 10px 0;
+  height: 32px;
+  font-size: 18px;
+
 }
 
 .social-links a {
@@ -427,7 +458,8 @@
 }
 
 .form__container {
-  margin-right: 15%;
+  margin-right: 150px;
+  margin-left: 150px;
   padding: 36px 20px 24px 20px;
 }
 
@@ -437,6 +469,11 @@
   color: #fff;
   border: transparent;
   margin: 0;
+}
+
+.forms {
+  display: flex;
+  flex-direction: column;
 }
 
 .forms input {
