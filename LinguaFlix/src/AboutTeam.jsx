@@ -11,37 +11,37 @@ const teamMembers = [
         name: 'Kostintyn Buriak',
         photo: Kostintyn,
         socialLinks: {
-            facebook: 'https://www.facebook.com/johndoe',
-            twitter: 'https://www.twitter.com/johndoe',
+            linkedin: 'https://www.linkedin.com/in/kburiak/',
+            github: 'https://github.com/Koslan',
         },
-        about: 'Andrew got started with web development by making sites with WordPress, and eventually tricked himself into doing JavaScript. His favorite pastime is karaoke. Andrew is either a Disney villain or a Disney princess, depending on the day.',
+        about: 'Kostiantyn Buriak is a competent Full Stack Developer, weaving together backend, frontend, and DevOps expertise with ease. Mastery in Java, HTML, CSS, JS, React, Redux, and Firebase ensures he`s equipped to engineer intricate UI components and cohesive web platforms. While he`s recognized as a certified Salesforce Developer, his vast experience speaks to a broader technological depth, with projects ranging from app integrations to streamlining CI/CD processes using GitHub actions. An esteemed graduate from the Odessa National Academy of Communications and fluent in English (B2), Kostiantyn is a valuable asset to any development venture.',
     },
     {
         name: 'Elmira Volokhova',
         photo: Elmira,
         socialLinks: {
-            facebook: 'https://www.facebook.com/johndoe',
-            twitter: 'https://www.twitter.com/johndoe',
+            linkedin: 'https://www.facebook.com/johndoe',
+            github: 'https://github.com/Elmimira',
         },
-        about: 'Dan got into programming after he accidentally discovered Visual Basic inside Microsoft PowerPoint. He has found his true calling in turning Sebastian’s tweets into long-form blog posts. Dan occasionally wins at Fortnite by hiding in a bush until the game ends.',
+        about: 'Elmira Volokhova is an aspiring front-end developer with a passion for creating attractive and user-friendly web interfaces. Proficient in HTML, CSS, JavaScript and modern front-end libraries such as React, he strives to create exceptional user experiences. With a bachelor`s degree in mathematics teaching and a keen eye for design, Elmira strives to contribute to web development projects and bring them to life.',
     },
     {
         name: 'Olena Stovolosova',
         photo: Olena,
         socialLinks: {
-            facebook: 'https://www.facebook.com/johndoe',
-            twitter: 'https://www.twitter.com/johndoe',
+            linkedin: 'https://www.facebook.com/johndoe',
+            github: 'https://github.com/Stovolosova',
         },
-        about: 'Eli got into programming after he got suspended from middle school for hacking. He has been working on React and React Native since 2017. He enjoys eating treats, especially ice cream and apple pie. You can find Eli trying quirky activities like parkour, indoor skydiving, and aerial silks.',
+        about: 'Olena Stovolosova is an aspiring Front-End Developer with a passion for creating intuitive and visually appealing web experiences. Proficient in HTML, CSS, and JavaScript, Olena is dedicated to crafting responsive and user-friendly websites. She has also gained proficiency in popular front-end frameworks, including React, and has a keen eye for design, ensuring a seamless user interface. Olena is a quick learner and a team player, always eager to collaborate with others to bring creative ideas to life. ',
     },
     {
         name: 'Anna Buriak',
         photo: Anna,
         socialLinks: {
-            facebook: 'https://www.facebook.com/johndoe',
-            twitter: 'https://www.twitter.com/johndoe',
+            linkedin: 'https://www.facebook.com/johndoe',
+            github: 'https://www.twitter.com/johndoe',
         },
-        about: 'Andrey started his career as a designer and then gradually transitioned into web development. After joining the React Data team at Meta he worked on adding an incremental JavaScript compiler to Relay, and then later on, worked on removing the same compiler from Relay. Outside of work, Andrey likes to play music and engage in various sports.',
+        about: 'Anna Buriak is a budding web designer with a passion for crafting visually appealing and user-friendly digital experiences. Her journey into the world of web design began with a fascination for the intersection of creativity and technology. She is dedicated to honing my skills in HTML, CSS, and responsive design to bring my creative visions to life. She believe that every website should not only look great but also provide a seamless and engaging user experience. She is excited to learn, grow, and contribute to the ever-evolving field of web design.',
     },
 ];
 
@@ -59,11 +59,11 @@ function AboutTeam() {
                     <img src={member.photo} alt={member.name} />
                     <h2>{member.name}</h2>
                     <div className="social-links">
-                        <a href={member.socialLinks.facebook} target="_blank" rel="noopener noreferrer">
-                            Facebook
+                        <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
+                            Linkedin
                         </a>
-                        <a href={member.socialLinks.twitter} target="_blank" rel="noopener noreferrer">
-                            Twitter
+                        <a href={member.socialLinks.github} target="_blank" rel="noopener noreferrer">
+                        Github
                         </a>
                     </div>
                     <p>{member.about}</p>
