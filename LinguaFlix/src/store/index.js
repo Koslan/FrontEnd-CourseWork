@@ -1,4 +1,4 @@
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { configureStore } from "@reduxjs/toolkit";
 import { userSlice } from "./userSlice";
 

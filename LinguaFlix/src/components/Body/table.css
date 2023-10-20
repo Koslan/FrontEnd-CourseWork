@@ -9,14 +9,14 @@ table {
 
 thead {
     border-bottom: 1px solid var(--Violet, #6612ED);
- 
+    width: 100%;
 }
 
 thead tr {
     display: flex;
-align-items: flex-start;
-background: var(--Purple, #DAC7FA);
-border-top-left-radius: 16px;
+    align-items: flex-start;
+    background: var(--Purple, #DAC7FA);
+    border-top-left-radius: 16px;
     border-top-right-radius: 16px;
 }
 
@@ -33,9 +33,8 @@ tbody {
 
 tbody tr {
     display: flex;
-
-align-items: flex-start;
-border-bottom: 1px solid var(--Violet, #6612ED);
+    align-items: flex-start;
+    border-bottom: 1px solid var(--Violet, #6612ED);
 }
 
 tbody tr:last-child {
@@ -43,10 +42,10 @@ tbody tr:last-child {
 }
 
 tbody tr td {
-        width: 396px;
-        padding: 8px 12px;
-        flex-shrink: 0;
-        color: var(--Black, #131315);
+    width: 396px;
+    padding: 8px 12px;
+    flex-shrink: 0;
+    color: var(--Black, #131315);
     text-align: center;
     font-family: Comfortaa;
     font-size: 14px;
