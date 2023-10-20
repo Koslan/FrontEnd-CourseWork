@@ -7,6 +7,8 @@ import Table from './components/Body/Table';
 import { DB_URL } from './store/firebase';
 
 function MovieDetails( ) {
+  document.querySelector('.sidebar').style.display = 'flex';
+  
     const [movie, setMovie] = useState(null);
     const [error, setError] = useState(null);
     const levels = ['C2', 'C1', 'B2', 'B1', 'A2', 'A1'];

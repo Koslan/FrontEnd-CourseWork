@@ -84,6 +84,7 @@
     line-height: 20px;
     text-align: start;
     margin: 0;
+    max-width: 552px;
 }
 
 .selectedLanguage {

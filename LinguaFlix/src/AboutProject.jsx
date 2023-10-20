@@ -6,6 +6,10 @@ import FunctionalityImage from './assets/3.png';
 
 
 function AboutProject() {
+
+    document.querySelector('.sidebar').style.display = 'none';
+
+    
     return (
         <div className='about-project-container'> 
         <h1>Hello, We are a LinguaFlix</h1>

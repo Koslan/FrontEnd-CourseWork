@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { auth } from '../store/firebase';
 import { useDispatch } from 'react-redux';

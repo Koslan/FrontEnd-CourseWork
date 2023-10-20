@@ -46,6 +46,10 @@ const teamMembers = [
 ];
 
 function AboutTeam() {
+
+    document.querySelector('.sidebar').style.display = 'none';
+
+    
     return (
         <div className="about-team-container">
         <h1>About LinguaFlix team</h1>
