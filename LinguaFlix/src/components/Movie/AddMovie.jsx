@@ -1,252 +1,319 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { DB_URL } from '../../store/firebase';
-import { useParams } from 'react-router-dom';
-import './AddMovie.css';
+import { useState } from "react";
+import axios from "axios";
+import { DB_URL } from "../../store/firebase";
+import "./AddMovie.css";
+import sample from "./sampleMovie.jsx";
 
+const languages = [
+  { label: "Ukrainian", value: "ukr" },
+  { label: "Spanish", value: "spa" },
+  { label: "English", value: "eng" },
+  { label: "French", value: "fre" },
+  { label: "German", value: "ger" },
+  { label: "Italian", value: "ita" },
+  { label: "Portuguese", value: "por" },
+  { label: "Dutch", value: "dut" },
+  { label: "Polish", value: "pol" },
+];
 
-function AddMovie() {
-   
-    const customLabels = {
-        title: "Movie Title",
-        description: "Movie Description",
-        year: "Release Year",
-        posterURL: "Poster URL",
-        lexicalComplexity: "Lexical Complexity",
-        languagePairs: "Language Pairs",
-        vocabulary: "Vocabulary Word"
-    };
+const customLabels = {
+  title: "Movie Title",
+  description: "Movie Description",
+  year: "Release Year",
+  posterURL: "Poster URL",
+  lexicalComplexity: "Lexical Complexity",
+  languagePairs: "Language Pairs",
+  vocabulary: "Vocabulary Word",
+};
 
-    const [formData, setFormData] = useState({
-        description: '',
-        languagePairs: ["eng:spa", "eng:ukr"],
-        lexicalComplexity: '',
-        posterURL: 'https://www.reelviews.net/resources/img/default_poster.jpg',
-        title: '',
-        year: '',
-        vocabByLanguage: JSON.stringify({
-            "eng:spa" : {
-              A1: [
-                "city: ciudad",
-                "music: música",
-                "dream: sueño",
-                "love: amor",
-                "dance: danza",
-                "night: noche",
-                "star: estrella",
-                "song: canción",
-                "street: calle",
-                "light: luz"
-              ],
-              A2: [
-                "career: carrera",
-                "movie: película",
-                "audition: audición",
-                "jazz: jazz",
-                "performance: actuación",
-                "talent: talento",
-                "fame: fama",
-                "success: éxito",
-                "stage: escenario",
-                "passion: pasión"
-              ],
-                B1: [
-                "aspiration: aspiración",
-                "struggle: lucha",
-                "romance: romance",
-                "opportunity: oportunidad",
-                "dedication: dedicación",
-                "artistry: arte",
-                "compromise: compromiso",
-                "inspiration: inspiración",
-                "ambition: ambición",
-                "nostalgia: nostalgia"
-              ],
-              B2: [
-                "perseverance: perseverancia",
-                "rejection: rechazo",
-                "achievement: logro",
-                "melancholy: melancolía",
-                "cinematic: cinematográfico",
-                "ensemble: conjunto",
-                "rendition: interpretación",
-                "improvise: improvisar",
-                "dazzling: deslumbrante",
-                "ephemeral: efímero"
-              ],
-              C1: [
-                "ephemeral: efímero",
-                "resonance: resonancia",
-                "captivating: cautivador",
-                "nuance: matiz",
-                "culmination: culminación",
-                "yearning: anhelo",
-                "mesmerizing: hipnótico",
-                "rendezvous: cita",
-                "quintessential: quintaesencia",
-                "luminous: luminoso"
-              ],
-              C2: [
-                "transcendent: trascendente",
-                "intricacy: complejidad",
-                "euphonious: eufónico",
-                "synchronicity: sincronicidad",
-                "metaphorical: metafórico",
-                "aesthetic: estético",
-                "resplendent: resplandeciente",
-                "sublime: sublime",
-                "ephemeral: efímero",
-                "intangible: intangible"
-              ]
-            },
-            "eng:ukr" : {
-              A1: [
-                "city: місто",
-                "music: музика",
-                "dream: сон",
-                "love: кохання",
-                "dance: танець",
-                "night: ніч",
-                "star: зірка",
-                "song: пісня",
-                "street: вулиця",
-                "light: світло"
-              ],
-              A2: [
-                "career: кар'єра",
-                "movie: фільм",
-                "audition: прослуховування",
-                "jazz: джаз",
-                "performance: виступ",
-                "talent: талант",
-                "fame: слава",
-                "success: успіх",
-                "stage: сцена",
-                "passion: пристрасть"
-              ],
-              B1: [
-                "aspiration: прагнення",
-                "struggle: боротьба",
-                "romance: романтика",
-                "opportunity: можливість",
-                "dedication: прихильність",
-                "artistry: мистецтво",
-                "compromise: компроміс",
-                "inspiration: натхнення",
-                "ambition: амбіція",
-                "nostalgia: ностальгія"
-              ],
-              B2: [
-                "perseverance: наполегливість",
-                "rejection: відмова",
-                "achievement: досягнення",
-                "melancholy: меланхолія",
-                "cinematic: кінематографічний",
-                "ensemble: ансамбль",
-                "rendition: виконання",
-                "improvise: імпровізувати",
-                "dazzling: приголомшливий",
-                "ephemeral: миттєвий"
-              ],
-              C1: [
-                "ephemeral: миттєвий",
-                "resonance: резонанс",
-                "captivating: захоплюючий",
-                "nuance: нюанс",
-                "culmination: кульмінація",
-                "yearning: прагнення",
-                "mesmerizing: чарівний",
-                "rendezvous: побачення",
-                "quintessential: квінтесенція",
-                "luminous: світлий"
-              ],
-              C2: [
-                "transcendent: надзвичайний",
-                "intricacy: складність",
-                "euphonious: мелодійний",
-                "synchronicity: синхронність",
-                "metaphorical: метафоричний",
-                "aesthetic: естетичний",
-                "resplendent: сяючий",
-                "sublime: возвишений",
-                "ephemeral: миттєвий",
-                "intangible: невловимий"
-              ]
-            }
-          })
-        
-    });
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        if (name.startsWith("vocabulary-")) {
-            const index = parseInt(name.split("-")[1], 10);
-            const vocabList = [...formData.vocabulary];
-            vocabList[index] = value;
-            setFormData(prevData => ({ ...prevData, vocabulary: vocabList }));
-        } else {
-            setFormData(prevData => ({
-                ...prevData,
-                [name]: value
-            }));
-        }
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (formData.description.length < 20) {
-            alert("Description must be at least 20 characters.");
-            return;
-        }
-        try {
-            await axios.post(`${DB_URL}/movies.json`, formData);
-            alert("Movie added successfully!");
-        } catch (error) {
-            console.error("Error adding movie:", error);
-            alert("Error adding movie.");
-        }
-    };
-
-    return (
-    <div className="AddMovieContainer">
-        <h2 className="AddMovieTitle">Add New Movie</h2>
-        <form onSubmit={handleSubmit}>
-            
-            <label className="AddMovieLabel" htmlFor="title">{customLabels.title}</label>
-            <input className="AddMovieInput" type="text" name="title" value={formData.title} onChange={handleInputChange} placeholder={customLabels.title} required />
-
-            <label className="AddMovieLabel" htmlFor="description">{customLabels.description}</label>
-            <textarea className="AddMovieTextArea" name="description" value={formData.description} onChange={handleInputChange} placeholder={customLabels.description} required />
-
-            <label className="AddMovieLabel" htmlFor="year">{customLabels.year}</label>
-            <input className="AddMovieInput" type="number" name="year" value={formData.year} min="1900" max={new Date().getFullYear()} onChange={handleInputChange} placeholder={customLabels.year} required />
-
-            <label className="AddMovieLabel" htmlFor="posterURL">{customLabels.posterURL}</label>
-            <input className="AddMovieInput" type="text" name="posterURL" value={formData.posterURL} onChange={handleInputChange} placeholder={customLabels.posterURL} required />
-
-            <label className="AddMovieLabel" htmlFor="lexicalComplexity">{customLabels.lexicalComplexity}</label>
-            <select className="AddMovieSelect" name="lexicalComplexity" value={formData.lexicalComplexity} onChange={handleInputChange}>
-                <option value="A1">A1</option>
-                <option value="A2">A2</option>
-                <option value="B1">B1</option>
-                <option value="B2">B2</option>
-                <option value="C1">C1</option>
-                <option value="C2">C2</option>
-            </select>
-
-            <label className="AddMovieLabel" htmlFor="languagePairs">{customLabels.languagePairs}</label>
-            <input className="AddMovieInput" type="text" name="languagePairs" value={formData.languagePairs} onChange={handleInputChange} placeholder={customLabels.languagePairs} required />
-
-
-            <label className="AddMovieLabel" htmlFor="languagePairs">{customLabels.languagePairs}</label>
-            <input className="AddMovieInput" type="text" name="vocabByLanguage" value={formData.vocabByLanguage} onChange={handleInputChange} placeholder={customLabels.vocabByLanguage} required />
-
-
-            <button className="AddMovieButton" type="submit">Add Movie</button>
-        </form>
-    </div>
+const InputField = ({
+  label,
+  name,
+  type,
+  value,
+  onChange,
+  placeholder,
+  ...otherProps
+}) => (
+  <div className="InputWrapper">
+    <label className="AddMovieLabel" htmlFor={name}>
+      {label}
+    </label>
+    <input
+      className="AddMovieInput"
+      type={type}
+      name={name}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      {...otherProps}
+    />
+  </div>
 );
 
-}
+const TextAreaField = ({ label, name, value, onChange, placeholder }) => (
+  <div className="InputWrapper">
+    <label className="AddMovieLabel" htmlFor={name}>
+      {label}
+    </label>
+    <textarea
+      className="AddMovieTextArea"
+      name={name}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+    />
+  </div>
+);
+
+const SelectField = ({ label, name, value, onChange, options }) => (
+  <div className="InputWrapper">
+    <label className="AddMovieLabel" htmlFor={name}>
+      {label}
+    </label>
+    <select
+      className="AddMovieSelect"
+      name={name}
+      value={value}
+      onChange={onChange}
+    >
+      {options.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </select>
+  </div>
+);
+
+const AddMovie = () => {
+  const [formData, setFormData] = useState({
+    description: "",
+    languagePairs: sample.languagePairs,
+    lexicalComplexity: "B1",
+    posterURL: sample.posterURL,
+    title: "",
+    year: "",
+    vocabByLanguage: sample.vocabByLanguage,
+  });
+
+  const [showPopup, setShowPopup] = useState(false);
+  const [languagePairs, setLanguagePairs] = useState([]);
+  const [newLanguagePair, setNewLanguagePair] = useState({
+    lang1: "eng",
+    lang2: "ukr",
+  });
+
+  const addLanguagePair = () => {
+    if (newLanguagePair.lang1 && newLanguagePair.lang2) {
+      setLanguagePairs([
+        ...languagePairs,
+        `${newLanguagePair.lang1}:${newLanguagePair.lang2}`,
+      ]);
+      setNewLanguagePair({ lang1: "", lang2: "" });
+    }
+  };
+
+  const [vocabByLanguage, setVocabByLanguage] = useState({});
+  const [currentLanguagePair, setCurrentLanguagePair] = useState(null);
+  const [currentLevel, setCurrentLevel] = useState("A1");
+
+  const addWordPair = (wordPair) => {
+    if (currentLanguagePair) {
+      setVocabByLanguage((prev) => ({
+        ...prev,
+        [currentLanguagePair]: {
+          ...prev[currentLanguagePair],
+          [currentLevel]: [
+            ...(prev[currentLanguagePair][currentLevel] || []),
+            wordPair,
+          ],
+        },
+      }));
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.description.length < 20) {
+      alert("Description must be at least 20 characters.");
+      return;
+    }
+    try {
+      await axios.post(`${DB_URL}/movies.json`, formData);
+      alert("Movie added successfully!");
+    } catch (error) {
+      console.error("Error adding movie:", error);
+      alert("Error adding movie.");
+    }
+  };
+
+  const availableLangs1 = languages.filter(
+    (lang) => lang.value !== newLanguagePair.lang2
+  );
+
+  const availableLangs2 = languages.filter(
+    (lang) => lang.value !== newLanguagePair.lang1
+  );
+
+  return (
+    <div className="AddMovieContainer">
+      <h2 className="AddMovieTitle">Add New Movie</h2>
+      <form onSubmit={handleSubmit}>
+        <InputField
+          label={customLabels.title}
+          name="title"
+          type="text"
+          value={formData.title}
+          onChange={handleInputChange}
+          placeholder={customLabels.title}
+          required
+        />
+        <TextAreaField
+          label={customLabels.description}
+          name="description"
+          value={formData.description}
+          onChange={handleInputChange}
+          placeholder={customLabels.description}
+        />
+        <InputField
+          label={customLabels.year}
+          name="year"
+          type="number"
+          value="1999"
+          min="1900"
+          max={new Date().getFullYear().toString()}
+          onChange={handleInputChange}
+          placeholder={customLabels.year}
+          required
+        />
+        <InputField
+          label={customLabels.posterURL}
+          name="posterURL"
+          type="URL"
+          value={formData.posterURL}
+          onChange={handleInputChange}
+          placeholder={customLabels.posterURL}
+          required
+        />
+        <SelectField
+          label={customLabels.lexicalComplexity}
+          name="lexicalComplexity"
+          value={formData.lexicalComplexity}
+          onChange={handleInputChange}
+          options={[
+            { label: "A1", value: "A1" },
+            { label: "A2", value: "A2" },
+            { label: "B1", value: "B1" },
+            { label: "B2", value: "B2" },
+            { label: "C1", value: "C1" },
+            { label: "C2", value: "C2" },
+          ]}
+        />
+        <SelectField
+          label={customLabels.languagePairs}
+          name="languagePairs"
+          value={formData.languagePairs}
+          onChange={handleInputChange}
+          options={languagePairs.map((pair) => ({ label: pair, value: pair }))}
+        />
+
+        <div className="languagePairTabs">
+          {languagePairs.map((pair) => (
+            <button
+              key={pair}
+              className={`tabButton ${
+                currentLanguagePair === pair ? "active" : ""
+              }`}
+              onClick={() => setCurrentLanguagePair(pair)}
+            >
+              {pair}
+            </button>
+          ))}
+          <button onClick={() => setShowPopup(true)}>+</button>
+        </div>
+
+        {/* Попап для добавления новой языковой пары */}
+        {showPopup && (
+          <div className="popup">
+            <h3>Добавить языковую пару</h3>
+            <div className="langPairRow">
+              <SelectField
+                label="Язык 1"
+                name="lang1"
+                value={newLanguagePair.lang1}
+                onChange={(e) =>
+                  setNewLanguagePair({
+                    ...newLanguagePair,
+                    lang1: e.target.value,
+                  })
+                }
+                options={availableLangs1}
+              />
+              <SelectField
+                label="Язык 2"
+                name="lang2"
+                value={newLanguagePair.lang2}
+                onChange={(e) =>
+                  setNewLanguagePair({
+                    ...newLanguagePair,
+                    lang2: e.target.value,
+                  })
+                }
+                options={availableLangs2}
+              />
+              <button onClick={addLanguagePair}>Добавить пару</button>
+              <button onClick={() => setShowPopup(false)}>Сlose</button>
+            </div>
+          </div>
+        )}
+
+        {/* Нижний ряд вкладок для выбора уровня языка */}
+        <div className="languageLevelTabs">
+          {["A1", "A2", "B1", "B2", "C1", "C2"].map((level) => (
+            <button
+              key={level}
+              className={`tabButton ${currentLevel === level ? "active" : ""}`}
+              onClick={() => setCurrentLevel(level)}
+            >
+              {level}
+            </button>
+          ))}
+        </div>
+
+        {/* Список слов */}
+        <ul>
+          {vocabByLanguage[currentLanguagePair] &&
+            vocabByLanguage[currentLanguagePair][currentLevel].map(
+              (wordPair, index) => <li key={index}>{wordPair}</li>
+            )}
+        </ul>
+        <button
+          onClick={() => {
+            const wordPair = prompt("Введите пару слов:");
+            if (wordPair) addWordPair(wordPair);
+          }}
+        >
+          Добавить слово
+        </button>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <button className="AddMovieButton" type="submit">
+          Add Movie
+        </button>
+      </form>
+    </div>
+  );
+};
 
 export default AddMovie;

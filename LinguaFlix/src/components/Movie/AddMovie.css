@@ -1,3 +1,13 @@
+:root {
+    --input-padding: 10px;
+    --input-margin-bottom: 15px;
+    --input-border: 1px solid #ccc;
+    --input-border-radius: 5px;
+    --input-bg-color: white;
+    --input-color: black;
+    --input-font-size: 16px;
+}
+
 .AddMovieContainer {
     width: 70%;
     margin: 40px auto;
@@ -17,13 +27,13 @@
 .AddMovieTextArea,
 .AddMovieSelect {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: white;
-    color: black; /* Adding the color property here for the text */
-    font-size: 16px;
+    padding: var(--input-padding);
+    margin-bottom: var(--input-margin-bottom);
+    border: var(--input-border);
+    border-radius: var(--input-border-radius);
+    background-color: var(--input-bg-color);
+    color: var(--input-color); 
+    font-size: var(--input-font-size);
 }
 
 .AddMovieLabel {
@@ -47,4 +57,102 @@
 
 .AddMovieButton:hover {
     background-color: #0056b3;
+}
+
+
+/* Увеличение отступов между элементами */
+.InputWrapper {
+    margin-bottom: 20px;
+  }
+  
+  /* Короткий плейсхолдер для "Poster URL" */
+  .AddMovieInput[name="posterURL"]::placeholder {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Стили для кнопок */
+  button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+  }
+  
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Яркие кнопки */
+  button.tabButton.active,
+  button[onClick="addLanguagePair"],
+  button[onClick="..."] { /* Предполагается, что это ваша кнопка "Add Movie" */
+    background-color: #ff4500;
+    color: white;
+  }
+  
+  /* Тени для полей ввода */
+  .AddMovieInput,
+  .AddMovieSelect,
+  .AddMovieTextArea {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Ширина кнопки Add Movie */
+  button[onClick="..."] { /* Предполагается, что это ваша кнопка "Add Movie" */
+    width: 100%;
+    max-width: calc(100% - 30px); /* С учетом padding */
+  }
+  
+
+  .langPairRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+  .AddMovieInput,
+.AddMovieTextArea,
+.AddMovieSelect,
+.AddMovieButton {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding shadow for depth */
+}
+
+.languagePairTabs {
+    display: flex; /* Lining the elements horizontally */
+    gap: 10px;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding shadow for depth */
+}
+
+.AddMovieButton {
+    background-color: #FF5733; /* Making the button color more vibrant */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.AddMovieButton:hover {
+    background-color: #FF704D; /* Slightly lighter color on hover */
+}
+
+.AddMovieTitleInput {
+    width: 100%; /* Making it same width as Poster URL */
 }
