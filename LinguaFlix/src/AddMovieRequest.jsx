@@ -1,97 +1,94 @@
 import React, { useState } from 'react';
-import { ref, push, set } from 'firebase/database';
+import { getDatabase, ref, push, set } from 'firebase/database';
 import { DB_URL } from './store/firebase.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Alert from 'react-bootstrap/Alert';
 
 
 
-const AddMovieRequest = () => {
-    const [movieName, setMovieName] = useState('');
-    const [movieYear, setMovieYear] = useState('');
-    const [email, setEmail] = useState('');
+function AddMovieRequest () {
 
-    
-    const handleMovieNameChange = (e) => {
-        setMovieName(e.target.value);
+    const customLabels  = {
+        title: "Movie Title",
+        year: "Release Year",
     };
 
-    const handleMovieYearChange = (e) => {
-        setMovieYear(e.target.value);
-    };
+    const [formData, setFormData] = useState({
+        title: '',
+        year: '',
+        
+    });
 
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-    };
-
-    const handleSendClick = () => {
-        saveMovieToDatabase(movieName, movieYear, email);
-    };
-
-    const saveMovieToDatabase = (movieName, movieYear, email) => {
-        const database = ref(DB_URL);
-        const moviesRef = ref(database, 'movies');
-
-        const newMovieKey = push(moviesRef).key;
-
-        if (newMovieKey) {
-            const movieData = {
-                name: movieName,
-                year: movieYear,
-                email: email, 
-            };
-
-            set(ref(database, `movies/${newMovieKey}`), movieData)
-                .then(() => {
-                    console.log('Фильм успешно сохранен в базе данных.');
-                })
-                .catch((error) => {
-                    console.error('Ошибка при сохранении фильма:', error);
-                });
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        if (name.startsWith("vocabulary-")) {
+            const index = parseInt(name.split("-")[1], 10);
+            const vocabList = [...formData.vocabulary];
+            vocabList[index] = value;
+            setFormData(prevData => ({ ...prevData, vocabulary: vocabList }));
+        } else {
+            setFormData(prevData => ({
+                ...prevData,
+                [name]: value
+            }));
         }
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (formData.title === '' || formData.year === '') {
+            handleAlert("Please fill out both title and year fields.", false);
+            return;
+        }
+        try {
+            const database = getDatabase();
+            const wantMovieRef = ref(database, 'wantmovie'); 
+            const newMovieRef = push(wantMovieRef); 
+            set(newMovieRef, formData); 
+            setFormData({ title: '', year: '' });
+            handleAlert("Movie added to 'Want Movie' list successfully!", true);
+        } catch (error) {
+            console.error("Error adding movie:", error);
+            handleAlert("Error adding movie.", false);
+        }
+    };
+    const [alertMessage, setAlertMessage] = useState('');
+    const [isSuccessAlert, setIsSuccessAlert] = useState(false);
+
+    const handleAlert = (message, isSuccess) => {
+        setAlertMessage(message);
+        setIsSuccessAlert(isSuccess);
+        setTimeout(() => {
+            setAlertMessage('');
+            setIsSuccessAlert(false);
+        }, 3000);
+    };
+    
+    
+
     return (
-        <div className='addmovie__container'>
-            <div className='addmovie__info'>
+        <div className='main-content'>
+        <div className="addmovie__container">
+        <div className='addmovie__info'>
                 <h1>Didn't find the movie you want?</h1>
                 <h2>Fill out a form, and we will inform you when it is available in our library.</h2>
-            </div>
-            <form className='form__container'>
-                <div className='forms'>
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="Movie Name"
-                            id="movieName"
-                            name='movieName'
-                            value={movieName}
-                            onChange={handleMovieNameChange}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="Year"
-                            id="movieYear"
-                            name="movieYear"
-                            value={movieYear}
-                            onChange={handleMovieYearChange}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="Your email"
-                            id="email"
-                            name="email"
-                            value={email}
-                            onChange={handleEmailChange}
-                        />
-                    </div>
+        </div>
+            <form onSubmit={handleSubmit}  className='form__container'>
+            <div className='forms'>
+                <input type="text" name="title" value={formData.title} onChange={handleInputChange} placeholder={customLabels.title} required />
+                <input type="number" name="year" value={formData.year} min="1900" max={new Date().getFullYear()} onChange={handleInputChange} placeholder={customLabels.year} required />
+                <button type="submit">Send</button>
                 </div>
-                <button onClick={handleSendClick}>Send</button>
             </form>
         </div>
+        {alertMessage && (
+                <Alert variant={isSuccessAlert ? 'success' : 'danger'}>
+                    {alertMessage}
+                </Alert>
+            )}
+        </div>
     );
-};
+}
+
 
 export default AddMovieRequest;

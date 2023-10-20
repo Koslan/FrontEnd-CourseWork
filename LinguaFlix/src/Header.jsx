@@ -15,6 +15,7 @@ function Header({ onSearch, results, isVisible }) {
         onSearch(e.target.value);
     };
 
+
     return (
         <header className="header">
 
@@ -34,7 +35,8 @@ function Header({ onSearch, results, isVisible }) {
                     {isVisible && <div className="search-results">
                         {results.map(movie => (
                             <div key={movie.id}>
-                                <Link to={`/movie/${movie.id}`}>{movie.name}</Link>
+                                <Link to={`/movie/${movie.id}`}>
+                                    {movie.name}</Link>
                             </div>
                         ))}
                     </div>}
