@@ -238,16 +238,16 @@ const AddMovie = () => {
               {pair}
             </button>
           ))}
-          <button onClick={() => setShowPopup(true)}>+</button>
+          <button  class="tabButton"  onClick={() => setShowPopup(true)}>+</button>
         </div>
 
         {/* Попап для добавления новой языковой пары */}
         {showPopup && (
           <div className="popup">
-            <h3>Добавить языковую пару</h3>
+            <h3>Add Language Pair</h3>
             <div className="langPairRow">
               <SelectField
-                label="Язык 1"
+                label="Lang 1"
                 name="lang1"
                 value={newLanguagePair.lang1}
                 onChange={(e) =>
@@ -259,7 +259,7 @@ const AddMovie = () => {
                 options={availableLangs1}
               />
               <SelectField
-                label="Язык 2"
+                label="Lang 2"
                 name="lang2"
                 value={newLanguagePair.lang2}
                 onChange={(e) =>
@@ -270,7 +270,7 @@ const AddMovie = () => {
                 }
                 options={availableLangs2}
               />
-              <button onClick={addLanguagePair}>Добавить пару</button>
+              <button class="tabButton" onClick={addLanguagePair}>Add pair</button>
               <button onClick={() => setShowPopup(false)}>Сlose</button>
             </div>
           </div>
@@ -297,12 +297,13 @@ const AddMovie = () => {
             )}
         </ul>
         <button
+         class="tabButton" 
           onClick={() => {
             const wordPair = prompt("Введите пару слов:");
             if (wordPair) addWordPair(wordPair);
           }}
         >
-          Добавить слово
+          Add Word
         </button>
         <br></br>
         <br></br>
