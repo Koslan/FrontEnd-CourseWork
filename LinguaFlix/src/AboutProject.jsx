@@ -1,5 +1,8 @@
 import React from 'react';
 import './App.css';
+import OurMissionImage from './assets/1.png';
+import VisionImage from './assets/2.png';
+import FunctionalityImage from './assets/3.png';
 
 
 function AboutProject() {
@@ -9,7 +12,7 @@ function AboutProject() {
         <div className="about-project">
             <div className="about-project-block">
                 <div className="about-project-image">
-                    <img src="../src/assets/1.png" alt="Image 1" />
+                    <img src={OurMissionImage} alt="Image 1" />
                 </div>
                 <div className="about-project-text">
                     <h2>Our mission</h2>
@@ -18,7 +21,7 @@ function AboutProject() {
             </div>
             <div className="about-project-block">
                 <div className="about-project-image">
-                    <img src="../src/assets/2.png" alt="Image 2" />
+                    <img src={VisionImage} alt="Image 2" />
                 </div>
                 <div className="about-project-text">
                     <h2>Vision</h2>
@@ -27,7 +30,7 @@ function AboutProject() {
             </div>
             <div className="about-project-block">
                 <div className="about-project-image">
-                    <img src="../src/assets/3.png" alt="Image 3" />
+                    <img src={FunctionalityImage} alt="Image 3" />
                 </div>
                 <div className="about-project-text">
                     <h2>Functionality</h2>

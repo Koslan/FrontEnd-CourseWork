@@ -4,7 +4,7 @@ import './App.css';
 const teamMembers = [
     {
         name: 'Kostintyn Buriak',
-        photo: './src/assets/kostintyn.png',
+        photo: 'https://firebasestorage.googleapis.com/v0/b/linguaflix-1edb6.appspot.com/o/kostintyn.png?alt=media&token=7cb87bcc-58c7-4346-a637-9cc879334707&_gl=1*18kqeg0*_ga*MTQ3MjcyMjgyNS4xNjk3NzE4NzU1*_ga_CW55HF8NVT*MTY5Nzc3ODM4Mi41LjEuMTY5Nzc3ODUyNC4zMC4wLjA.',
         socialLinks: {
             facebook: 'https://www.facebook.com/johndoe',
             twitter: 'https://www.twitter.com/johndoe',
@@ -13,7 +13,7 @@ const teamMembers = [
     },
     {
         name: 'Elmira Volokhova',
-        photo: './src/assets/elmira.png',
+        photo: 'https://firebasestorage.googleapis.com/v0/b/linguaflix-1edb6.appspot.com/o/elmira.png?alt=media&token=96efaa26-f5ec-41ad-adf1-162c503ee092&_gl=1*ow40c3*_ga*MTQ3MjcyMjgyNS4xNjk3NzE4NzU1*_ga_CW55HF8NVT*MTY5Nzc3ODM4Mi41LjEuMTY5Nzc3ODUyMC4zNC4wLjA.',
         socialLinks: {
             facebook: 'https://www.facebook.com/johndoe',
             twitter: 'https://www.twitter.com/johndoe',
@@ -22,7 +22,7 @@ const teamMembers = [
     },
     {
         name: 'Olena Stovolosova',
-        photo: './src/assets/olena.png',
+        photo: 'https://firebasestorage.googleapis.com/v0/b/linguaflix-1edb6.appspot.com/o/olena.png?alt=media&token=f3c240ff-f859-4c9b-abad-7ee7a54c3249&_gl=1*1m456o2*_ga*MTQ3MjcyMjgyNS4xNjk3NzE4NzU1*_ga_CW55HF8NVT*MTY5Nzc3ODM4Mi41LjEuMTY5Nzc3ODUyNy4yNy4wLjA.',
         socialLinks: {
             facebook: 'https://www.facebook.com/johndoe',
             twitter: 'https://www.twitter.com/johndoe',
@@ -31,7 +31,7 @@ const teamMembers = [
     },
     {
         name: 'Anna Buriak',
-        photo: './src/assets/anna.png',
+        photo: 'https://firebasestorage.googleapis.com/v0/b/linguaflix-1edb6.appspot.com/o/anna.png?alt=media&token=d7052429-f47e-48e9-a76c-45d38b067461&_gl=1*1xrslbo*_ga*MTQ3MjcyMjgyNS4xNjk3NzE4NzU1*_ga_CW55HF8NVT*MTY5Nzc3ODM4Mi41LjEuMTY5Nzc3ODQ5NC42MC4wLjA.',
         socialLinks: {
             facebook: 'https://www.facebook.com/johndoe',
             twitter: 'https://www.twitter.com/johndoe',

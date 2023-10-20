@@ -3,6 +3,7 @@ import { useState, useEffect} from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import Logo from './assets/logo.svg';
+import SearchIcon from './assets/search.svg';
 import { Link } from 'react-router-dom';
 import HeaderUser from './components/HeaderUser.jsx';
 
@@ -24,7 +25,7 @@ function Header({ onSearch, results, isVisible }) {
             </div>
             <div className="header__center">
                 <div className="search-container">
-                    <img src="../src/assets/search.svg" alt="search" />
+                    <img src={SearchIcon} alt="search" />
                     <input
                         type="text"
                         placeholder="Search"
