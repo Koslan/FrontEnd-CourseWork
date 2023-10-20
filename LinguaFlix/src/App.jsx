@@ -94,6 +94,7 @@ function App() {
                     </div>}
                   </div>
                 } />
+                <Route path="/" element={<MoviesPage movies={movies} />} />  
                 <Route path="/movies" element={<MoviesPage movies={movies} />} />
                 <Route path="/movie/:id" element={<MovieDetails />} />
                 <Route path="/about_team" element={<AboutTeam />} />

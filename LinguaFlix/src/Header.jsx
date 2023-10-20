@@ -20,7 +20,7 @@ function Header({ onSearch, results, isVisible }) {
         <header className="header">
 
             <div className='header__logo'>
-            <Link to="/">
+            <Link to="/movies">
                     <img src={Logo}  width="160" height="33" alt="Logo" />
                 </Link>
             </div>
