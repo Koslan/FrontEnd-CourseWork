@@ -1,6 +1,8 @@
 // Import the functions you need from the SDKs you need
+import { getAuth} from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getDatabase } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,5 +22,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+export const auth = getAuth(app);
+export const database = getDatabase();
 
 export const DB_URL = 'https://linguaflix-1edb6-default-rtdb.europe-west1.firebasedatabase.app';

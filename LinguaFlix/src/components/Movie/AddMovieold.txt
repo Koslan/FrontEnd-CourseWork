@@ -1,0 +1,491 @@
+import { useState } from "react";
+import axios from "axios";
+import { DB_URL } from "../../store/firebase";
+import "./AddMovie.css";
+import sample from "./sampleMovie.jsx";
+
+const languages = [
+  { label: "Ukrainian", value: "ukr" },
+  { label: "Spanish", value: "spa" },
+  { label: "English", value: "eng" },
+  { label: "French", value: "fre" },
+  { label: "German", value: "ger" },
+  { label: "Italian", value: "ita" },
+  { label: "Portuguese", value: "por" },
+  { label: "Dutch", value: "dut" },
+  { label: "Polish", value: "pol" },
+];
+
+const customLabels = {
+  title: "Movie Title",
+  description: "Movie Description",
+  year: "Release Year",
+  posterURL: "Poster URL",
+  lexicalComplexity: "Lexical Complexity",
+  languagePairs: "Language Pairs",
+  vocabulary: "Vocabulary Word",
+};
+
+
+const InputField = ({ label, name, type, value, onChange, placeholder, ...otherProps }) => (
+  <div className="InputWrapper">
+      <label className="AddMovieLabel" htmlFor={name}>
+          {label}
+      </label>
+      <input
+          className="AddMovieInput"
+          type={type}
+          name={name}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          {...otherProps}
+      />
+  </div>
+);
+
+
+const TextAreaField = ({ label, name, value, onChange, placeholder }) => (
+  <div className="InputWrapper">
+      <label className="AddMovieLabel" htmlFor={name}>
+          {label}
+      </label>
+      <textarea
+          className="AddMovieTextArea"
+          name={name}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+      />
+  </div>
+);
+
+
+const SelectField = ({ label, name, value, onChange, options }) => (
+  <div className="InputWrapper">
+      <label className="AddMovieLabel" htmlFor={name}>
+          {label}
+      </label>
+      <select className="AddMovieSelect" name={name} value={value} onChange={onChange}>
+          {options.map(option => (
+              <option key={option.value} value={option.value}>
+                  {option.label}
+              </option>
+          ))}
+      </select>
+  </div>
+);
+
+
+const AddMovie = () => {
+  const [formData, setFormData] = useState({
+    description: "",
+    languagePairs: sample.languagePairs,
+    lexicalComplexity: "B1",
+    posterURL: sample.posterURL,
+    title: "",
+    year: "",
+    vocabByLanguage: sample.vocabByLanguage,
+  });
+
+  const [showPopup, setShowPopup] = useState(false);
+
+  const [languagePairs, setLanguagePairs] = useState([]);
+  const [newLanguagePair, setNewLanguagePair] = useState({
+    lang1: "eng",
+    lang2: "ukr",
+  });
+
+  const addLanguagePair = () => {
+    if (newLanguagePair.lang1 && newLanguagePair.lang2) {
+      setLanguagePairs([
+        ...languagePairs,
+        `${newLanguagePair.lang1}:${newLanguagePair.lang2}`,
+      ]);
+      setNewLanguagePair({ lang1: "", lang2: "" });
+    }
+  };
+
+  const [vocabByLanguage, setVocabByLanguage] = useState({});
+  const [currentLanguagePair, setCurrentLanguagePair] = useState(null);
+  const [currentLevel, setCurrentLevel] = useState("A1");
+
+  const addWordPair = (wordPair) => {
+    if (currentLanguagePair) {
+      setVocabByLanguage((prev) => ({
+        ...prev,
+        [currentLanguagePair]: {
+          ...prev[currentLanguagePair],
+          [currentLevel]: [
+            ...(prev[currentLanguagePair][currentLevel] || []),
+            wordPair,
+          ],
+        },
+      }));
+    }
+  };
+
+
+  const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+      }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.description.length < 20) {
+      alert("Description must be at least 20 characters.");
+      return;
+    }
+    try {
+      await axios.post(`${DB_URL}/movies.json`, formData);
+      alert("Movie added successfully!");
+    } catch (error) {
+      console.error("Error adding movie:", error);
+      alert("Error adding movie.");
+    }
+  };
+
+  const availableLangs1 = languages.filter(
+    (lang) => lang.value !== newLanguagePair.lang2
+  );
+
+  const availableLangs2 = languages.filter(
+    (lang) => lang.value !== newLanguagePair.lang1
+  );
+
+
+  return (
+      <div className="AddMovieContainer">
+          <h2 className="AddMovieTitle">Add New Movie</h2>
+          <form onSubmit={handleSubmit}>
+              <InputField
+                  label={customLabels.title}
+                  name="title"
+                  type="text"
+                  value={formData.title}
+                  onChange={handleInputChange}
+                  placeholder={customLabels.title}
+                  required
+              />
+
+              <TextAreaField
+                  label={customLabels.description}
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                  placeholder={customLabels.description}
+              />
+
+              <InputField
+                  label={customLabels.year}
+                  name="year"
+                  type="number"
+                  value={formData.year}
+                  min="1900"
+                  max={new Date().getFullYear().toString()}
+                  onChange={handleInputChange}
+                  placeholder={customLabels.year}
+                  required
+              />
+
+              <InputField
+                  label={customLabels.posterURL}
+                  name="posterURL"
+                  type="text"
+                  value={formData.posterURL}
+                  onChange={handleInputChange}
+                  placeholder={customLabels.posterURL}
+                  required
+              />
+
+              <SelectField
+                  label={customLabels.lexicalComplexity}
+                  name="lexicalComplexity"
+                  value={formData.lexicalComplexity}
+                  onChange={handleInputChange}
+                  options={[
+                      { label: 'A1', value: 'A1' },
+                      { label: 'A2', value: 'A2' },
+                      { label: 'B1', value: 'B1' },
+                      { label: 'B2', value: 'B2' },
+                      { label: 'C1', value: 'C1' },
+                      { label: 'C2', value: 'C2' },
+                  ]}
+              />
+
+<SelectField
+    label={customLabels.language}
+    name="language"
+    value={formData.language}
+    onChange={handleInputChange}
+    options={languages.map(lang => ({ label: lang, value: lang }))}
+/>
+
+              <button className="AddMovieButton" type="submit">
+                  Add Movie
+              </button>
+          </form>
+      </div>
+  );
+};
+
+/*function AddMovie() {
+
+  const [formData, setFormData] = useState({
+    description: "",
+    languagePairs: sample.languagePairs,
+    lexicalComplexity: "B1",
+    posterURL: sample.posterURL,
+    title: "",
+    year: "",
+    vocabByLanguage: sample.vocabByLanguage,
+  });
+
+  const [showPopup, setShowPopup] = useState(false);
+
+  const [languagePairs, setLanguagePairs] = useState([]);
+  const [newLanguagePair, setNewLanguagePair] = useState({
+    lang1: "eng",
+    lang2: "ukr",
+  });
+
+  const addLanguagePair = () => {
+    if (newLanguagePair.lang1 && newLanguagePair.lang2) {
+      setLanguagePairs([
+        ...languagePairs,
+        `${newLanguagePair.lang1}:${newLanguagePair.lang2}`,
+      ]);
+      setNewLanguagePair({ lang1: "", lang2: "" });
+    }
+  };
+
+  const [vocabByLanguage, setVocabByLanguage] = useState({});
+  const [currentLanguagePair, setCurrentLanguagePair] = useState(null);
+  const [currentLevel, setCurrentLevel] = useState("A1");
+
+  const addWordPair = (wordPair) => {
+    if (currentLanguagePair) {
+      setVocabByLanguage((prev) => ({
+        ...prev,
+        [currentLanguagePair]: {
+          ...prev[currentLanguagePair],
+          [currentLevel]: [
+            ...(prev[currentLanguagePair][currentLevel] || []),
+            wordPair,
+          ],
+        },
+      }));
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name.startsWith("vocabulary-")) {
+      const index = parseInt(name.split("-")[1], 10);
+      const vocabList = [...formData.vocabulary];
+      vocabList[index] = value;
+      setFormData((prevData) => ({ ...prevData, vocabulary: vocabList }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.description.length < 20) {
+      alert("Description must be at least 20 characters.");
+      return;
+    }
+    try {
+      await axios.post(`${DB_URL}/movies.json`, formData);
+      alert("Movie added successfully!");
+    } catch (error) {
+      console.error("Error adding movie:", error);
+      alert("Error adding movie.");
+    }
+  };
+
+  const availableLangs1 = languages.filter(
+    (lang) => lang.value !== newLanguagePair.lang2
+  );
+
+  const availableLangs2 = languages.filter(
+    (lang) => lang.value !== newLanguagePair.lang1
+  );
+
+  return (
+    <div className="AddMovieContainer">
+      <h2 className="AddMovieTitle">Add New Movie</h2>
+      <form onSubmit={handleSubmit}>
+        <label className="AddMovieLabel" htmlFor="title">
+          {customLabels.title}
+        </label>
+        <input
+          className="AddMovieInput"
+          type="text"
+          name="title"
+          value={formData.title}
+          onChange={handleInputChange}
+          placeholder={customLabels.title}
+          required
+        />
+
+        <label className="AddMovieLabel" htmlFor="description">
+          {customLabels.description}
+        </label>
+        <textarea
+          className="AddMovieTextArea"
+          name="description"
+          value={formData.description}
+          onChange={handleInputChange}
+          placeholder={customLabels.description}
+          required
+        />
+
+        <label className="AddMovieLabel" htmlFor="year">
+          {customLabels.year}
+        </label>
+        <input
+          className="AddMovieInput"
+          type="number"
+          name="year"
+          value={formData.year}
+          min="1900"
+          max={new Date().getFullYear()}
+          onChange={handleInputChange}
+          placeholder={customLabels.year}
+          required
+        />
+
+        <label className="AddMovieLabel" htmlFor="posterURL">
+          {customLabels.posterURL}
+        </label>
+        <input
+          className="AddMovieInput"
+          type="text"
+          name="posterURL"
+          value={formData.posterURL}
+          onChange={handleInputChange}
+          placeholder={customLabels.posterURL}
+          required
+        />
+
+        <label className="AddMovieLabel" htmlFor="lexicalComplexity">
+          {customLabels.lexicalComplexity}
+        </label>
+        <select
+          className="AddMovieSelect"
+          name="lexicalComplexity"
+          value={formData.lexicalComplexity}
+          onChange={handleInputChange}
+        >
+          <option value="A1">A1</option>
+          <option value="A2">A2</option>
+          <option value="B1" selected>
+            B1
+          </option>
+          <option value="B2">B2</option>
+          <option value="C1">C1</option>
+          <option value="C2">C2</option>
+        </select>
+
+        <label className="AddMovieLabel" htmlFor="languagePairs">
+          {customLabels.languagePairs}
+        </label>
+        <div>
+          {languagePairs.map((pair) => (
+            <button key={pair}>{pair}</button>
+          ))}
+          <button onClick={() => setShowPopup(true)}>+</button>
+          {showPopup && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "200px",
+              }}
+            >
+              <select
+                value={newLanguagePair.lang1}
+                onChange={(e) =>
+                  setNewLanguagePair((prev) => ({
+                    ...prev,
+                    lang1: e.target.value,
+                  }))
+                }
+              >
+                {availableLangs1.map((lang) => (
+                  <option key={lang.value} value={lang.value}>
+                    {lang.label}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={newLanguagePair.lang2}
+                onChange={(e) =>
+                  setNewLanguagePair((prev) => ({
+                    ...prev,
+                    lang2: e.target.value,
+                  }))
+                }
+              >
+                {availableLangs2.map((lang) => (
+                  <option key={lang.value} value={lang.value}>
+                    {lang.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+        </div>
+
+        <label className="AddMovieLabel" htmlFor="vocabByLanguage">
+          {customLabels.vocabByLanguage}
+        </label>
+
+        <div>
+          {Object.keys(vocabByLanguage).map((pair) => (
+            <button key={pair} onClick={() => setCurrentLanguagePair(pair)}>
+              {pair}
+            </button>
+          ))}
+          <div>
+            {["A1", "A2", "B1", "B2", "C1", "C2"].map((level) => (
+              <button key={level} onClick={() => setCurrentLevel(level)}>
+                {level}
+              </button>
+            ))}
+          </div>
+          <div>
+            {(vocabByLanguage[currentLanguagePair]?.[currentLevel] || []).map(
+              (word) => (
+                <div key={word}>{word}</div>
+              )
+            )}
+            <button
+              onClick={() => {
+                /* логика для добавления слова */
+                /*
+              }}
+            >
+              Добавить слово
+            </button>
+          </div>
+        </div>
+
+        <button className="AddMovieButton" type="submit">
+          Add Movie
+        </button>
+      </form>
+    </div>
+  );
+}
+*/
+export default AddMovie;
