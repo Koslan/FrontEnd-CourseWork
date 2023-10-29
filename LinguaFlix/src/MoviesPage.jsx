@@ -5,6 +5,7 @@ import './App.css'
 
 function MoviesPage() {
     const [movies, setMovies] = useState([]);
+    const [selectedLanguageLevel, setSelectedLanguageLevel] = useState('all');
     document.querySelector('.sidebar').style.display = 'flex';
 
     useEffect(() => {
@@ -27,9 +28,30 @@ function MoviesPage() {
     return (
         <div className="movies-page">
             <h1>Movies</h1>
+            <div className="language-filter">
+                <label htmlFor="languageLevel">Filter by Language Level:</label>
+                <select
+                    id="languageLevel"
+                    onChange={(e) => setSelectedLanguageLevel(e.target.value)}
+                    value={selectedLanguageLevel}
+                >
+                    <option value="all">All</option>
+                    <option value="A1">A1</option>
+                    <option value="A2">A2</option>
+                    <option value="B1">B1</option>
+                    <option value="B2">B2</option>
+                    <option value="C1">C1</option>
+                    <option value="C2">C2</option>
+                </select>
+            </div>
+            
             <div className="movies-row">
                 {movies.map((movie) => {
-                    return (
+                    if (
+                        selectedLanguageLevel === 'all' ||
+                        movie.lexicalComplexity === selectedLanguageLevel
+                    ) {
+                        return (
                         <Link key={movie.id} to={`/movie/${movie.id}`} className="movie-card-link">
                             <div className="movie-page-card">
                                 <div className="movie-card-top">
@@ -45,6 +67,8 @@ function MoviesPage() {
                             </div>
                         </Link>
                     );
+                    }
+                    return null;
                 })}
             </div>
         </div>
