@@ -2,6 +2,7 @@ import { useState } from "react";
 import { englishLevelsMap } from "./english"; // Corrected import statement
 import "./TextProcessor.css";
 import "../../App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const languages = [
   { label: "Ukrainian", value: "ukr" },
@@ -20,6 +21,7 @@ const TextProcessor = () => {
   const [sortedWords, setSortedWords] = useState({});
   const [sourceLang, setSourceLang] = useState("eng");
   const [transLang, setTransLang] = useState("ukr");
+  const [activeTab, setActiveTab] = useState(1);
 
   document.querySelector(".sidebar").style.display = "none";
 
@@ -78,11 +80,59 @@ const TextProcessor = () => {
     return word + "_trans";
   };
 
+  const generateTest = (level) => {
+    const wordsFromLevel = sortedWords[level] || [];
+    const questions = [];
+
+    if (wordsFromLevel.length === 0) return questions;
+
+    for (let i = 0; i < 10 && i < wordsFromLevel.length; i++) {
+        const correctWord = wordsFromLevel[i];
+        const options = [correctWord];
+
+        // Generate random options for the question
+        while (options.length < 4) {
+            const randomWord = wordsFromLevel[Math.floor(Math.random() * wordsFromLevel.length)];
+            if (!options.includes(randomWord)) {
+                options.push(randomWord);
+            }
+        }
+
+        options.sort(() => Math.random() - 0.5);
+
+        // Extract the portion of the sentence around the correctWord, delimited by punctuation
+        const punctuation = /([.,?!;:])/;
+        const sentences = inputText.split(punctuation);
+        let sentenceWithWord = "";
+        for (const sentence of sentences) {
+            if (sentence.includes(correctWord)) {
+                sentenceWithWord = sentence.trim();
+                break;
+            }
+        }
+
+        const questionText = sentenceWithWord.replace(new RegExp(`\\b${correctWord}\\b`, 'i'), '...');
+
+        questions.push({
+            questionText: questionText,
+            options: options,
+            correctAnswer: correctWord
+        });
+    }
+
+    return questions;
+};
+
   return (
     <div className="textProcessorContainer">
+      <textarea
+        value={inputText}
+        onChange={(e) => setInputText(e.target.value)}
+        placeholder="Enter your text here..."
+        rows="5"
+      ></textarea>
+
       <div className="languageSelectors">
-        {" "}
-        {/* Add a div wrapper for the selects */}
         <select
           value={sourceLang}
           onChange={(e) => setSourceLang(e.target.value)}
@@ -92,6 +142,7 @@ const TextProcessor = () => {
           </option>
           {renderLanguageOptions()}
         </select>
+
         <select
           value={transLang}
           onChange={(e) => setTransLang(e.target.value)}
@@ -103,41 +154,64 @@ const TextProcessor = () => {
         </select>
       </div>
 
-      <textarea
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
-        placeholder="Enter your text here..."
-        rows="5"
-      ></textarea>
       <button onClick={handleSubmit}>Process</button>
 
-      {Object.keys(sortedWords).map((level) => (
-        <div class="levelTables" key={level}>
-          <h3>{level}</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Word</th>
-                <th>Translation</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedWords[level].length > 0 ? (
-                sortedWords[level].map((word) => (
-                  <tr key={word}>
-                    <td>{word}</td>
-                    <td>{translateWord(word, sourceLang, transLang)}</td>
-                  </tr>
-                ))
-              ) : (
+      <div className="tabs">
+        <button onClick={() => setActiveTab(1)}>Semantic Core</button>
+        <button onClick={() => setActiveTab(2)}>Translations</button>
+        <button onClick={() => setActiveTab(3)}>Tests</button>
+      </div>
+
+      {activeTab === 1 &&
+        Object.keys(sortedWords).map((level) => (
+          <div key={level}>
+            <h3>{level}</h3>
+            <p>
+              {sortedWords[level].length > 0
+                ? sortedWords[level].join(", ")
+                : "No words found"}
+            </p>
+          </div>
+        ))}
+
+      {activeTab === 2 &&
+        Object.keys(sortedWords).map((level) => (
+          <div className="levelTables" key={level}>
+            <h3>{level}</h3>
+            <table>
+              <thead>
                 <tr>
-                  <td colSpan="2">No words found</td>
+                  <th>Word</th>
+                  <th>Translation</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      ))}
+              </thead>
+              <tbody>
+                {sortedWords[level].length > 0 ? (
+                  sortedWords[level].map((word) => (
+                    <tr key={word}>
+                      <td>{word}</td>
+                      <td>{translateWord(word, sourceLang, transLang)}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="2">No words found</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        ))}
+
+      {activeTab === 3 &&
+        generateTest("A1").map((q) => (
+          <div>
+            <p>{q.questionText}</p>
+            {q.options.map((opt) => (
+              <button>{opt}</button>
+            ))}
+          </div>
+        ))}
     </div>
   );
 };
