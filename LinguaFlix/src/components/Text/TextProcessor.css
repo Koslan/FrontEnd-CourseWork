@@ -1,45 +1,36 @@
-/* Container for the textarea and button */
 .textProcessorContainer {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center items horizontally */
-  gap: 10px; /* Space between items */
+  align-items: center;
+  gap: 10px;
   width: 100%;
-  max-width: 500px; /* You can adjust this based on your layout preference */
-  margin: 20px auto; /* Center the container horizontally */
+  max-width: 500px;
+  margin: 20px auto;
 }
-
-/* Style for the textarea */
-/* TextProcessor.css */
 
 .textProcessorContainer textarea {
-  color: black; /* Text color */
-  background-color: white; /* Background color */
-  width: 100%; /* Take the full width of the container */
-  height: 300px; /* Increase height */
-  padding: 10px; /* Add some padding */
-  box-sizing: border-box; /* So padding doesn't affect the overall width */
-  border: 1px solid #ccc; /* Add a subtle border */
-  border-radius: 4px; /* Slightly rounded corners */
-  font-size: 16px; /* Increase font size */
-  resize: vertical; /* Allow only vertical resizing by user */
+  color: black;
+  background-color: white;
+  width: 160%;
+  height: 480px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  resize: vertical;
 }
 
-/* If you want to further style the Search button: */
 .textProcessorContainer button {
-  margin-top: 10px; /* Space between textarea and button */
-  padding: 8px 15px; /* Button padding */
-  background-color: #007bff; /* Button color */
-  color: white; /* Button text color */
-  border: none; /* Remove default border */
-  border-radius: 4px; /* Slightly rounded corners */
-  cursor: pointer; /* Hand cursor on hover */
-  font-size: 16px; /* Button text size */
-  transition: background-color 0.3s; /* Smooth transition */
-}
-
-.textProcessorContainer button:hover {
-  background-color: #0056b3; /* Slightly darker color on hover */
+  margin-top: 10px;
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
 }
 
 .textProcessorContainer button:hover {
@@ -66,10 +57,98 @@ select {
   border-radius: 4px;
 }
 
-.textProcessorContainer {
+.wordPair {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+table {
+  max-width: 840px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-width: 500px;
-  margin: 0 auto;
+  align-items: flex-start;
+  border-radius: 16px;
+  border: 1px solid var(--Violet, #6612ed);
 }
+
+thead {
+  border-bottom: 1px solid var(--Violet, #6612ed);
+  width: 100%;
+}
+
+thead tr {
+  display: flex;
+  align-items: flex-start;
+  background: var(--Purple, #dac7fa);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+thead th {
+  display: flex;
+  width: 396px;
+  padding: 8px 12px;
+  justify-content: center;
+}
+
+tbody {
+  width: 100%;
+}
+
+tbody tr {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--Violet, #6612ed);
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr td {
+  width: 396px;
+  padding: 8px 12px;
+  flex-shrink: 0;
+  color: var(--Black, #131315);
+  text-align: center;
+  font-family: Comfortaa;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: var(--Purple, #dac7fa);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: Comfortaa;
+}
+
+.languageSelectors {
+  display: flex;       /* Use flexbox to align horizontally */
+  justify-content: space-between; /* Space them out evenly */
+  margin-bottom: 20px; /* Add some margin for spacing */
+}
+
+
+/* For webkit browsers like Chrome, Safari */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f5f5f5; /* You can modify this color as per your design */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #dac7fa; /* Color of the scroll thumb */
+  border-radius: 6px;
+}
+
+/* For Firefox */
+scrollbar-color: blue #dac7fa; /* thumb and track color respectively */

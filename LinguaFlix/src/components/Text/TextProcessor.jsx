@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { englishLevelsMap } from "./english"; // Corrected import statement
 import "./TextProcessor.css";
+import "../../App.css";
 
 const languages = [
   { label: "Ukrainian", value: "ukr" },
@@ -17,8 +18,10 @@ const languages = [
 const TextProcessor = () => {
   const [inputText, setInputText] = useState("");
   const [sortedWords, setSortedWords] = useState({});
-  const [sourceLang, setSourceLang] = useState("");
-  const [transLang, setTransLang] = useState("");
+  const [sourceLang, setSourceLang] = useState("eng");
+  const [transLang, setTransLang] = useState("ukr");
+
+  document.querySelector(".sidebar").style.display = "none";
 
   const handleSubmit = () => {
     // Ensure both source and translation languages are selected before processing
@@ -76,8 +79,10 @@ const TextProcessor = () => {
   };
 
   return (
-    <div>
-      <div className="textProcessorContainer">
+    <div className="textProcessorContainer">
+      <div className="languageSelectors">
+        {" "}
+        {/* Add a div wrapper for the selects */}
         <select
           value={sourceLang}
           onChange={(e) => setSourceLang(e.target.value)}
@@ -87,7 +92,6 @@ const TextProcessor = () => {
           </option>
           {renderLanguageOptions()}
         </select>
-
         <select
           value={transLang}
           onChange={(e) => setTransLang(e.target.value)}
@@ -97,29 +101,41 @@ const TextProcessor = () => {
           </option>
           {renderLanguageOptions()}
         </select>
-
-        <textarea
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          placeholder="Enter your text here..."
-          rows="5"
-        ></textarea>
-        <button onClick={handleSubmit}>Search</button>
       </div>
 
+      <textarea
+        value={inputText}
+        onChange={(e) => setInputText(e.target.value)}
+        placeholder="Enter your text here..."
+        rows="5"
+      ></textarea>
+      <button onClick={handleSubmit}>Process</button>
+
       {Object.keys(sortedWords).map((level) => (
-        <div key={level}>
+        <div class="levelTables" key={level}>
           <h3>{level}</h3>
-          <p>
-            {sortedWords[level].length > 0
-              ? sortedWords[level]
-                  .map(
-                    (word) =>
-                      `${word} ${translateWord(word, sourceLang, transLang)}`
-                  )
-                  .join(", ")
-              : "No words found"}
-          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Word</th>
+                <th>Translation</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sortedWords[level].length > 0 ? (
+                sortedWords[level].map((word) => (
+                  <tr key={word}>
+                    <td>{word}</td>
+                    <td>{translateWord(word, sourceLang, transLang)}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="2">No words found</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       ))}
     </div>
