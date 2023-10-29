@@ -154,12 +154,12 @@ const TextProcessor = () => {
         </select>
       </div>
 
-      <button onClick={handleSubmit}>Process</button>
+      <button class="process-button" onClick={handleSubmit}>Process</button>
 
       <div className="tabs">
-        <button onClick={() => setActiveTab(1)}>Semantic Core</button>
-        <button onClick={() => setActiveTab(2)}>Translations</button>
-        <button onClick={() => setActiveTab(3)}>Tests</button>
+        <button class="textTab" onClick={() => setActiveTab(1)}>Vocabulary Core</button>
+        <button class="textTab" onClick={() => setActiveTab(2)}>Translations</button>
+        <button class="textTab" onClick={() => setActiveTab(3)}>Tests</button>
       </div>
 
       {activeTab === 1 &&
@@ -205,10 +205,10 @@ const TextProcessor = () => {
 
       {activeTab === 3 &&
         generateTest("A1").map((q) => (
-          <div>
-            <p>{q.questionText}</p>
+          <div class="testQuestion">
+            <p class="testQuestionP">{q.questionText}</p>
             {q.options.map((opt) => (
-              <button>{opt}</button>
+              <button class="testQuestionButton">{opt}</button>
             ))}
           </div>
         ))}
