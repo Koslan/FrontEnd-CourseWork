@@ -16,6 +16,8 @@ import AboutProject from './AboutProject';
 import AddMovieRequest from './AddMovieRequest';
 import { DB_URL } from './store/firebase';
 import Login from './components/Login';
+import TextProcessor from './components/Text/TextProcessor'; // Укажите правильный путь к файлу
+
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -102,6 +104,8 @@ function App() {
                 <Route path="/add_movie" element={<AddMovie />} />
                 <Route path="/edit_movie/:id" element={<EditMovie />} />
                 <Route path='/login' element={<Login />} />
+                <Route path="/text_processor" element={<TextProcessor />} />
+
               </>
             )}
           </Routes>

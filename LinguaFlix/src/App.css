@@ -1,24 +1,24 @@
 @font-face {
-  font-family: 'Comfortaa';
-  src: url(../fonts/Comfortaa-Regular.ttf) format('ttf');
+  font-family: "Comfortaa";
+  src: url(../fonts/Comfortaa-Regular.ttf) format("ttf");
   font-style: normal;
   font-weight: 400;
 }
 @font-face {
-  font-family: 'Comfortaa';
-  src: url(../fonts/Comfortaa-Regular.woff) format('woff');
+  font-family: "Comfortaa";
+  src: url(../fonts/Comfortaa-Regular.woff) format("woff");
   font-style: normal;
   font-weight: 400;
 }
 @font-face {
-  font-family: 'Comfortaa';
-  src: url(../fonts/Comfortaa-SemiBold.ttf) format('ttf');
+  font-family: "Comfortaa";
+  src: url(../fonts/Comfortaa-SemiBold.ttf) format("ttf");
   font-style: normal;
   font-weight: 600;
 }
 @font-face {
-  font-family: 'Comfortaa';
-  src: url(../fonts/Comfortaa-SemiBold.woff) format('woff');
+  font-family: "Comfortaa";
+  src: url(../fonts/Comfortaa-SemiBold.woff) format("woff");
   font-style: normal;
   font-weight: 600;
 }
@@ -28,12 +28,12 @@
   margin: 0 auto;
   text-align: center;
   align-items: center;
-  min-height: 100vh; 
-  background-color: #fff; 
+  min-height: 100vh;
+  background-color: #fff;
   color: black;
   font-size: 14px;
   overflow: hidden;
-  font-family: 'Comfortaa';
+  font-family: "Comfortaa";
 }
 
 .logo {
@@ -108,9 +108,9 @@
   width: 260px;
   padding: 5px;
   border-radius: 20px;
-  border:2px solid #6612ED;
+  border: 2px solid #6612ed;
   background-color: transparent;
-  padding-left: 25px; 
+  padding-left: 25px;
 }
 
 .header__center input:focus {
@@ -118,7 +118,7 @@
 }
 
 .header__center input::placeholder {
-  color: #6612ED;
+  color: #6612ed;
 }
 
 .search-container {
@@ -151,7 +151,7 @@
 .header__center img {
   position: absolute;
   top: 50%;
-  left: 10px; 
+  left: 10px;
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
@@ -166,15 +166,15 @@
 }
 
 .header__right a:hover {
-  background-color: #DAC7FA;
-  border: 1px solid #6612ED;
+  background-color: #dac7fa;
+  border: 1px solid #6612ed;
   border-radius: 12px;
-  color: #6612ED;
+  color: #6612ed;
 }
 
 .header__right a:focus {
-  background-color: #6612ED;
-  border: 1px solid #6612ED;
+  background-color: #6612ed;
+  border: 1px solid #6612ed;
   border-radius: 12px;
   color: #fff;
 }
@@ -214,7 +214,7 @@
   align-items: flex-start;
   gap: 8px;
   display: flex;
-  border: 2px solid transparent; 
+  border: 2px solid transparent;
   border-radius: 12px;
   transition: box-shadow 0.3s ease-in-out;
 }
@@ -231,7 +231,7 @@
 }
 
 .movie-card-right-info p {
-  background: var(--Purple, #DAC7FA);
+  background: var(--Purple, #dac7fa);
   border-radius: 16px;
   padding: 1px 8px;
   margin-top: 8px;
@@ -243,7 +243,7 @@
   display: flex;
   gap: 10px;
   flex: 1;
-  flex-direction: row; 
+  flex-direction: row;
   align-items: center;
   box-sizing: border-box;
 }
@@ -262,11 +262,10 @@
 .line {
   display: inline-block;
   width: 240px;
-  outline: #DAC7FA solid 1px;
+  outline: #dac7fa solid 1px;
   margin-bottom: 12px;
   margin-top: 12px;
 }
-
 
 /* MoviesPage */
 
@@ -294,7 +293,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid transparent; 
+  border: 2px solid transparent;
   border-radius: 12px;
   transition: box-shadow 0.3s ease-in-out;
 }
@@ -321,7 +320,7 @@
 }
 
 .movie-card-top {
-  height: 200px; 
+  height: 200px;
 }
 
 .movie-card-top img {
@@ -346,8 +345,6 @@
   font-weight: 600;
   margin: 0;
 }
-
-
 
 /* About Team */
 
@@ -380,7 +377,6 @@
   margin: 10px 0;
   height: 32px;
   font-size: 18px;
-
 }
 
 .social-links a {
@@ -389,7 +385,7 @@
 
 /* About Project */
 
-.about-project-container{
+.about-project-container {
   margin: 0 auto;
 }
 
@@ -433,11 +429,9 @@
   font-size: 16px;
 }
 
-
 /* Add Movie */
 
 .addmovie-content {
-
 }
 
 .addmovie__container {
@@ -450,11 +444,11 @@
 .addmovie__info {
   text-align: left;
   display: flex;
-    width: 604px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    margin: 44px 128px 0 396px;
+  width: 604px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 44px 128px 0 396px;
 }
 
 .addmovie__info h1 {
@@ -475,7 +469,7 @@
   gap: 16px;
   width: 300px;
   height: 244px;
-  background: var(--White, #FFFFFC);
+  background: var(--White, #fffffc);
   border-radius: 12px;
   padding: 36px 20px 24px 20px;
   flex-direction: column;
@@ -483,7 +477,7 @@
 }
 
 .form__container button {
-  background-color: #6612ED;
+  background-color: #6612ed;
   border-radius: 12px;
   color: #fff;
   border: transparent;
@@ -497,27 +491,22 @@
 
 .forms input {
   width: 260px;
-  color: #6612ED;
+  color: #6612ed;
   width: 260px;
   padding: 5px;
   border-radius: 20px;
-  border:2px solid #6612ED;
+  border: 2px solid #6612ed;
   background-color: transparent;
-  padding-left: 8px; 
+  padding-left: 8px;
   margin-bottom: 12px;
 }
 
 .forms input::placeholder {
-  color: #6612ED;
+  color: #6612ed;
 }
 
 footer {
-  max-width: 1920px;
+  /* max-width: 1920px; */
   margin-left: 0;
   margin-right: 0;
 }
-
-
-
-
-
