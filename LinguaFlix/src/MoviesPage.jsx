@@ -5,7 +5,7 @@ import './App.css'
 
 function MoviesPage() {
     const [movies, setMovies] = useState([]);
-    document.querySelector('.sidebar').style.display = 'flex';
+   // document.querySelector('.sidebar').style.display = 'flex';
 
     useEffect(() => {
         axios

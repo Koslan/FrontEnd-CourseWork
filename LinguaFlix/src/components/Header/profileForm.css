@@ -1,0 +1,251 @@
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa-Regular.ttf) format('ttf');
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa-Regular.woff) format('woff');
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa-SemiBold.ttf) format('ttf');
+    font-style: normal;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa-SemiBold.woff) format('woff');
+    font-style: normal;
+    font-weight: 600;
+}
+
+/* profileForm.css */
+
+.form-container {
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #F4F4F6;
+}
+
+h1 {
+    color: var(--Black, #131315);
+    font-family: Comfortaa;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 36px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group-level,
+.form-group-status {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.form-group a {
+    color: #6612ED;
+    text-decoration: inherit;
+    font-family: Comfortaa;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.form-group a:hover {
+    border-bottom: 2px #6612ED;
+    cursor: pointer;
+    text-decoration: underline;
+    color: #6612ED;
+}
+
+
+.label {
+    display: block;
+    margin-bottom: 5px;
+    font-family: Comfortaa;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.input {
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid var(--Violet, #6612ED);
+    display: flex;
+    padding: 4px 4px 4px 8px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.radio-label {
+    font-family: Comfortaa;
+    margin-right: 10px;
+    width: 25%;
+    padding: 0 5px;
+    background-color: plum;
+    border-radius: 16px;
+    background: var(--Purple, #DAC7FA);
+    display: flex;
+    align-items: center;
+    height: 40px;
+    text-align: center;
+}
+
+.radio-input {
+    margin-right: 5px;
+    display: none;
+}
+
+.radio-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.radio-input:checked+.radio-dot {
+    margin: 0 10px;
+    background-color: #6612ED;
+    border-color: #6612ED;
+}
+
+.description {
+    font-style: italic;
+    margin: 10px 0;
+}
+
+.select {
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid var(--Violet, #6612ED);
+    display: flex;
+    padding: 4px 8px;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+}
+
+.checkbox-label {
+    width: 33%;
+    font-family: Comfortaa;
+    margin-right: 10px;
+    width: 28%;
+    padding: 0 5px;
+    background-color: plum;
+    border-radius: 16px;
+    background: var(--Purple, #DAC7FA);
+    display: flex;
+    align-items: center;
+    height: 40px;
+    text-align: center;
+}
+
+.checkbox-label input {
+    margin-right: 10px;
+    color: #6612ED;
+    background-color: #6612ED;
+}
+
+.form-group-interest {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.checkbox-label input[type="checkbox"]:checked+.custom-checkbox {
+    background-color: #6612ED;
+    color: #fff;
+}
+
+.form-container button {
+    border-radius: 21px;
+    background: var(--Violet, #6612ED);
+    width: 100%;
+    height: 40px;
+    color: var(--White, #FFFFFC);
+    font-family: Comfortaa;
+    font-size: 20px;
+    padding: 5px 12px 3px 12px;
+    margin-top: 30px;
+}
+
+/* Change password */
+
+.form-change-password {
+    border-radius: 12px;
+    background: var(--Gray, #F4F4F6);
+    margin: 0 auto;
+    padding: 0 5px;
+    width: 600px;
+}
+
+.form-change-password h1 {
+    color: var(--Black, #131315);
+    font-family: Comfortaa;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 36px;
+    text-align: start;
+    border-bottom: 2px solid #DAC7FA;
+    padding: 10px;
+}
+
+.form-change-password p {
+    color: var(--Black, #131315);
+    font-family: Comfortaa;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: start;
+    padding: 10px;
+}
+
+.form-change-password .form-group {
+    text-align: start;
+}
+
+.form-change-password label {
+    margin-right: 20px;
+}
+
+.form-change-password button {
+    width: 100%;
+    border-radius: 21px;
+    background: var(--Violet, #6612ED);
+}

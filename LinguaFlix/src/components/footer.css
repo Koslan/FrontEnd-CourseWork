@@ -27,7 +27,7 @@
 }
 
 footer {
-  max-width: 1920px;
+  max-width: 100%;
   max-height: 295px;
   background: var(--Purple, #dac7fa);
 }
@@ -75,4 +75,6 @@ footer h6 {
 
 .footer-line {
   padding: 29.5px 0 40px;
+  max-width: 1130px;
+  margin: 0 auto;
 }

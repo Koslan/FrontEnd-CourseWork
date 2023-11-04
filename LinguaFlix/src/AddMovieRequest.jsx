@@ -3,12 +3,10 @@ import { getDatabase, ref, push, set } from 'firebase/database';
 import { DB_URL } from './store/firebase.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
+import { useSelector } from 'react-redux';
 
-
-
-function AddMovieRequest () {
-
-    const customLabels  = {
+function AddMovieRequest() {
+    const customLabels = {
         title: "Movie Title",
         year: "Release Year",
     };
@@ -16,7 +14,6 @@ function AddMovieRequest () {
     const [formData, setFormData] = useState({
         title: '',
         year: '',
-        
     });
 
     const handleInputChange = (e) => {
@@ -42,9 +39,9 @@ function AddMovieRequest () {
         }
         try {
             const database = getDatabase();
-            const wantMovieRef = ref(database, 'wantmovie'); 
-            const newMovieRef = push(wantMovieRef); 
-            set(newMovieRef, formData); 
+            const wantMovieRef = ref(database, 'wantmovie');
+            const newMovieRef = push(wantMovieRef);
+            set(newMovieRef, formData);
             setFormData({ title: '', year: '' });
             handleAlert("Movie added to 'Want Movie' list successfully!", true);
         } catch (error) {
@@ -52,6 +49,7 @@ function AddMovieRequest () {
             handleAlert("Error adding movie.", false);
         }
     };
+
     const [alertMessage, setAlertMessage] = useState('');
     const [isSuccessAlert, setIsSuccessAlert] = useState(false);
 
@@ -63,32 +61,37 @@ function AddMovieRequest () {
             setIsSuccessAlert(false);
         }, 3000);
     };
-    
-    
+
+    const permissions = useSelector((state) => state.permissions);
+    const isUser = permissions.role === 'user';
+    const isGuest = permissions.role === 'guest';
 
     return (
-        <div className='main-content'>
-        <div className="addmovie__container">
-        <div className='addmovie__info'>
-                <h1>Didn't find the movie you want?</h1>
-                <h2>Fill out a form, and we will inform you when it is available in our library.</h2>
-        </div>
-            <form onSubmit={handleSubmit}  className='form__container'>
-            <div className='forms'>
-                <input type="text" name="title" value={formData.title} onChange={handleInputChange} placeholder={customLabels.title} required />
-                <input type="number" name="year" value={formData.year} min="1900" max={new Date().getFullYear()} onChange={handleInputChange} placeholder={customLabels.year} required />
-                <button type="submit">Send</button>
+        <div className='main-content-addmovie'>
+            <div className="addmovie__container">
+                <div className='addmovie__info'>
+                    <h1>Didn't find the movie you want?</h1>
+                    <h2>Fill out a form, and we will inform you when it is available in our library.</h2>
                 </div>
-            </form>
-        </div>
-        {alertMessage && (
+                <form onSubmit={handleSubmit} className='form__container'>
+                    <div className='forms'>
+                        <input type="text" name="title" value={formData.title} onChange={handleInputChange} placeholder={customLabels.title} required />
+                        <input type="number" name="year" value={formData.year} min="1900" max={new Date().getFullYear()} onChange={handleInputChange} placeholder={customLabels.year} required />
+                        {isUser ? (
+                            <button type="submit">Send</button>
+                        ) : (
+                            <button type="button" onClick={() => handleAlert("Please register to submit the form.", false)}>Send</button>
+                        )}
+                    </div>
+                </form>
+            </div>
+            {alertMessage && (
                 <Alert variant={isSuccessAlert ? 'success' : 'danger'}>
-                    {alertMessage}
+                    <p>Please register to submit the form.</p>
                 </Alert>
             )}
         </div>
     );
 }
-
 
 export default AddMovieRequest;

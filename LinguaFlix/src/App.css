@@ -34,7 +34,6 @@
   font-size: 14px;
   overflow: hidden;
   font-family: 'Comfortaa';
-  max-width: 1440px;
 }
 
 .logo {
@@ -77,10 +76,35 @@
 
 .main-content {
   display: flex;
+  margin: 0 396px;
+}
+
+.main-content-addmovie {
+  display: flex;
 }
 
 .movie-details {
   flex: 1;
+}
+
+.movie-details h3 {
+  text-align: start;
+  color: #000;
+font-family: Comfortaa;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px; 
+}
+
+.movie-details-linkes {
+  margin-top: 44px;
+}
+
+.movie-details-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 38px;
 }
 
 /* Header */
@@ -90,10 +114,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 12px 20px;*/
-  /* margin: 0 396px 55px;*/
-  margin-top: 20px;
-  margin-bottom: 44px;
+  margin: 20px 396px 44px;
 }
 
 .header__logo:hover {
@@ -102,7 +123,6 @@
 
 .header__logo {
   margin-top: 0;
-  /*padding: 12px;*/
   align-items: center;
 }
 
@@ -436,36 +456,47 @@
   font-size: 16px;
 }
 
-
 /* Add Movie */
-
 .addmovie__container {
   display: flex;
-  flex-direction: wrap;
-  justify-content: space-between;
+  width: 100%;
   margin-top: 44px;
   background-color: #f4f4f6 !important;
 }
 
 .addmovie__info {
-  text-align: left;
-  margin-left: 4px;
+  width: 604px;
+  height: 134px;
+  margin: 44px 0 174px 396px;
 }
 
 .addmovie__info h1 {
-  font-weight: 400;
-  margin-bottom: 10px;
+  font-family: Comfortaa;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 44px;
+    text-align: start;
 }
 
 .addmovie__info h2 {
-  margin: 0;
-  font-weight: 300;
+  font-family: Comfortaa;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: start;
 }
 
 .form__container {
-  margin-right: 150px;
-  margin-left: 150px;
+  border-radius: 12px;
+  background: var(--White, #FFFFFC);
+  display: inline-flex;
   padding: 36px 20px 24px 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 44px 492px 64px 132px;
+    width: 300px;
+    height: 244px;
 }
 
 .form__container button {
@@ -497,11 +528,6 @@
   color: #6612ED;
 }
 
-footer {
-  max-width: 1920px;
-  margin-left: 0;
-  margin-right: 0;
-}
 
 
 
