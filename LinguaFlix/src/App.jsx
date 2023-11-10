@@ -18,6 +18,8 @@ import { DB_URL } from './store/firebase';
 import Login from './components/Login';
 import ProfileForm from './components/Header/ProfileForm';
 import ChangePassword from './components/Header/ChangePassword';
+import TextProcessor from './components/Text/TextProcessor'; // Укажите правильный путь к файлу
+
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -105,6 +107,7 @@ function App() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/profile' element={<ProfileForm user={user} setUser={setUser} />} />
                 <Route path="/change-password" element={<ChangePassword />} />
+                <Route path="/text_processor" element={<TextProcessor />} />
               </>
             )}
           </Routes>

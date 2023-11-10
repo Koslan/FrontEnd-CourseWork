@@ -164,3 +164,17 @@ button[onClick="..."] {
 .tabButton:hover {
   background-color: #6612ed;
 }
+
+textarea {
+  color: black;
+  background-color: white;
+  width: 100%;
+  min-width: 640px;
+  height: 480px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  resize: vertical;
+}

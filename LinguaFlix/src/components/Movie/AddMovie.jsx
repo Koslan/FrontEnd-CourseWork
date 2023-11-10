@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { DB_URL } from "../../store/firebase";
 import "./AddMovie.css";
@@ -87,6 +87,8 @@ const SelectField = ({ label, name, value, onChange, options }) => (
   </div>
 );
 
+
+
 const AddMovie = () => {
   const [formData, setFormData] = useState({
     description: "",
@@ -95,7 +97,7 @@ const AddMovie = () => {
     posterURL: sample.posterURL,
     title: "",
     year: "",
-    vocabByLanguage: sample.vocabByLanguage,
+    vocabByLanguage: {},
   });
 
   const [showPopup, setShowPopup] = useState(false);
@@ -104,6 +106,26 @@ const AddMovie = () => {
     lang1: "eng",
     lang2: "ukr",
   });
+
+  const [inputText, setInputText] = useState(""); // This can be the movie description or any text related to the movie
+  const [readabilityScores, setReadabilityScores] = useState({
+    fleschKincaid: 0,
+    gunningFog: 0,
+  });
+
+  useEffect(() => {
+    const sidebar = document.querySelector(".sidebar");
+    if (sidebar) sidebar.style.display = "none";
+
+
+    if (inputText) {
+      calculateReadabilityScores(
+        inputText,
+        setReadabilityScores,
+        countSyllables
+      );
+    }
+  }, [inputText]);
 
   const addLanguagePair = () => {
     if (newLanguagePair.lang1 && newLanguagePair.lang2) {
@@ -118,21 +140,6 @@ const AddMovie = () => {
   const [vocabByLanguage, setVocabByLanguage] = useState({});
   const [currentLanguagePair, setCurrentLanguagePair] = useState(null);
   const [currentLevel, setCurrentLevel] = useState("A1");
-
-  const addWordPair = (wordPair) => {
-    if (currentLanguagePair) {
-      setVocabByLanguage((prev) => ({
-        ...prev,
-        [currentLanguagePair]: {
-          ...prev[currentLanguagePair],
-          [currentLevel]: [
-            ...(prev[currentLanguagePair][currentLevel] || []),
-            wordPair,
-          ],
-        },
-      }));
-    }
-  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -152,7 +159,17 @@ const AddMovie = () => {
   const canAddMovie = isAdmin;
   /////////
 
-  const handleSubmit = async (e) => {
+  //////////
+  const permissions = useSelector((state) => state.permissions);
+
+  const isAdmin = permissions.role === 'admin';
+  // const isUser = permissions.role === 'user';
+  // const isGuest = permissions.role === 'guest';
+
+  const canAddMovie = isAdmin;
+  /////////
+
+  /*const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.description.length < 20) {
       alert("Description must be at least 20 characters.");
@@ -161,6 +178,57 @@ const AddMovie = () => {
     try {
       await axios.post(`${DB_URL}/movies.json`, formData);
       alert("Movie added successfully!");
+    } catch (error) {
+      console.error("Error adding movie:", error);
+      alert("Error adding movie.");
+    }
+  };*/
+
+  const updateVocabByLanguage = async () => {
+    let processedText = processText(formData.description, englishLevelsMap);
+    let updatedVocabByLanguage = {};
+
+    for (let pair of formData.languagePairs) {
+      let [sourceLang, targetLang] = pair.split(":");
+      updatedVocabByLanguage[pair] = {};
+
+      for (let level in processedText) {
+        updatedVocabByLanguage[pair][level] = [];
+        for (let word of processedText[level]) {
+          let translation = await translateWord(word, sourceLang, targetLang); // Assuming translateWord returns a promise
+          updatedVocabByLanguage[pair][level].push(`${word}: ${translation}`);
+        }
+      }
+    }
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      vocabByLanguage: updatedVocabByLanguage,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.description.length < 20) {
+      alert("Description must be at least 20 characters.");
+      return;
+    }
+
+    // Additional functionality before submission, e.g., calculating readability scores
+    calculateReadabilityScores(
+      formData.description,
+      setReadabilityScores,
+      countSyllables
+    );
+
+    try {
+      /*  await axios.post(`${DB_URL}/movies.json`, {
+        ...formData,
+
+        readabilityScores: readabilityScores, // include readability scores in the data sent to the database
+      });*/
+      await updateVocabByLanguage();
+      console.log(formData);
     } catch (error) {
       console.error("Error adding movie:", error);
       alert("Error adding movie.");
@@ -251,7 +319,9 @@ const AddMovie = () => {
               {pair}
             </button>
           ))}
-          <button  class="tabButton"  onClick={() => setShowPopup(true)}>+</button>
+          <button class="tabButton" onClick={() => setShowPopup(true)}>
+            +
+          </button>
         </div>
 
         {/* Попап для добавления новой языковой пары */}
@@ -283,7 +353,9 @@ const AddMovie = () => {
                 }
                 options={availableLangs2}
               />
-              <button class="tabButton" onClick={addLanguagePair}>Add pair</button>
+              <button class="tabButton" onClick={addLanguagePair}>
+                Add pair
+              </button>
               <button onClick={() => setShowPopup(false)}>Сlose</button>
             </div>
           </div>
@@ -320,6 +392,12 @@ const AddMovie = () => {
         </button>
         <br></br>
         <br></br>
+        <textarea
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+          placeholder="Enter your text here..."
+          rows="5"
+        />
         <br></br>
         <br></br>
         <button className="AddMovieButton" type="submit">
