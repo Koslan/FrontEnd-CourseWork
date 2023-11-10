@@ -87,8 +87,6 @@ const SelectField = ({ label, name, value, onChange, options }) => (
   </div>
 );
 
-
-
 const AddMovie = () => {
   const [formData, setFormData] = useState({
     description: "",
@@ -116,7 +114,6 @@ const AddMovie = () => {
   useEffect(() => {
     const sidebar = document.querySelector(".sidebar");
     if (sidebar) sidebar.style.display = "none";
-
 
     if (inputText) {
       calculateReadabilityScores(
@@ -152,17 +149,7 @@ const AddMovie = () => {
   //////////
   const permissions = useSelector((state) => state.permissions);
 
-  const isAdmin = permissions.role === 'admin';
-  // const isUser = permissions.role === 'user';
-  // const isGuest = permissions.role === 'guest';
-
-  const canAddMovie = isAdmin;
-  /////////
-
-  //////////
-  const permissions = useSelector((state) => state.permissions);
-
-  const isAdmin = permissions.role === 'admin';
+  const isAdmin = permissions.role === "admin";
   // const isUser = permissions.role === 'user';
   // const isGuest = permissions.role === 'guest';
 
@@ -304,108 +291,86 @@ const AddMovie = () => {
               name="languagePairs"
               value={formData.languagePairs}
               onChange={handleInputChange}
-              options={languagePairs.map((pair) => ({ label: pair, value: pair }))}
+              options={languagePairs.map((pair) => ({
+                label: pair,
+                value: pair,
+              }))}
             />
 
-        <div className="languagePairTabs">
-          {languagePairs.map((pair) => (
-            <button
-              key={pair}
-              className={`tabButton ${
-                currentLanguagePair === pair ? "active" : ""
-              }`}
-              onClick={() => setCurrentLanguagePair(pair)}
-            >
-              {pair}
-            </button>
-          ))}
-          <button class="tabButton" onClick={() => setShowPopup(true)}>
-            +
-          </button>
-        </div>
-
-        {/* Попап для добавления новой языковой пары */}
-        {showPopup && (
-          <div className="popup">
-            <h3>Add Language Pair</h3>
-            <div className="langPairRow">
-              <SelectField
-                label="Lang 1"
-                name="lang1"
-                value={newLanguagePair.lang1}
-                onChange={(e) =>
-                  setNewLanguagePair({
-                    ...newLanguagePair,
-                    lang1: e.target.value,
-                  })
-                }
-                options={availableLangs1}
-              />
-              <SelectField
-                label="Lang 2"
-                name="lang2"
-                value={newLanguagePair.lang2}
-                onChange={(e) =>
-                  setNewLanguagePair({
-                    ...newLanguagePair,
-                    lang2: e.target.value,
-                  })
-                }
-                options={availableLangs2}
-              />
-              <button class="tabButton" onClick={addLanguagePair}>
-                Add pair
-              </button>
-              <button onClick={() => setShowPopup(false)}>Сlose</button>
-            </div>
-          </div>
-        )}
-
-            {/* Нижний ряд вкладок для выбора уровня языка */}
-            <div className="languageLevelTabs">
-              {["A1", "A2", "B1", "B2", "C1", "C2"].map((level) => (
+            <div className="languagePairTabs">
+              {languagePairs.map((pair) => (
                 <button
-                  key={level}
-                  className={`tabButton ${currentLevel === level ? "active" : ""}`}
-                  onClick={() => setCurrentLevel(level)}
+                  key={pair}
+                  className={`tabButton ${
+                    currentLanguagePair === pair ? "active" : ""
+                  }`}
+                  onClick={() => setCurrentLanguagePair(pair)}
                 >
-                  {level}
+                  {pair}
                 </button>
               ))}
+              <button class="tabButton" onClick={() => setShowPopup(true)}>
+                +
+              </button>
             </div>
 
-        {/* Список слов */}
-        <ul>
-          {vocabByLanguage[currentLanguagePair] &&
-            vocabByLanguage[currentLanguagePair][currentLevel].map(
-              (wordPair, index) => <li key={index}>{wordPair}</li>
+            {/* Попап для добавления новой языковой пары */}
+            {showPopup && (
+              <div className="popup">
+                <h3>Add Language Pair</h3>
+                <div className="langPairRow">
+                  <SelectField
+                    label="Lang 1"
+                    name="lang1"
+                    value={newLanguagePair.lang1}
+                    onChange={(e) =>
+                      setNewLanguagePair({
+                        ...newLanguagePair,
+                        lang1: e.target.value,
+                      })
+                    }
+                    options={availableLangs1}
+                  />
+                  <SelectField
+                    label="Lang 2"
+                    name="lang2"
+                    value={newLanguagePair.lang2}
+                    onChange={(e) =>
+                      setNewLanguagePair({
+                        ...newLanguagePair,
+                        lang2: e.target.value,
+                      })
+                    }
+                    options={availableLangs2}
+                  />
+                  <button class="tabButton" onClick={addLanguagePair}>
+                    Add pair
+                  </button>
+                  <button onClick={() => setShowPopup(false)}>Сlose</button>
+                </div>
+              </div>
             )}
-        </ul>
-        <button
-         class="tabButton" 
-          onClick={() => {
-            const wordPair = prompt("Введите пару слов:");
-            if (wordPair) addWordPair(wordPair);
-          }}
-        >
-          Add Word
-        </button>
-        <br></br>
-        <br></br>
-        <textarea
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          placeholder="Enter your text here..."
-          rows="5"
-        />
-        <br></br>
-        <br></br>
-        <button className="AddMovieButton" type="submit">
-          Add Movie
-        </button>
-      </form>
-    </div>
+
+            <br></br>
+            <br></br>
+            <textarea
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              placeholder="Enter your text here..."
+              rows="5"
+            />
+            <br></br>
+            <br></br>
+            <button className="AddMovieButton" type="submit">
+              Add Movie
+            </button>
+          </form>
+        </div>
+      ) : (
+        <div>This tab is only available to the administrator.</div>
+      )}
+      ;
+    </>
   );
 };
-
 export default AddMovie;

@@ -4,18 +4,21 @@
   font-style: normal;
   font-weight: 400;
 }
+
 @font-face {
   font-family: "Comfortaa";
   src: url(../fonts/Comfortaa-Regular.woff) format("woff");
   font-style: normal;
   font-weight: 400;
 }
+
 @font-face {
   font-family: "Comfortaa";
   src: url(../fonts/Comfortaa-SemiBold.ttf) format("ttf");
   font-style: normal;
   font-weight: 600;
 }
+
 @font-face {
   font-family: "Comfortaa";
   src: url(../fonts/Comfortaa-SemiBold.woff) format("woff");
@@ -55,6 +58,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -95,11 +99,11 @@
 .movie-details h3 {
   text-align: start;
   color: #000;
-font-family: Comfortaa;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: 24px; 
+  font-family: Comfortaa;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 .movie-details-linkes {
@@ -115,11 +119,12 @@ line-height: 24px;
 /* Header */
 
 .header {
-  max-height: 56px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 20px 396px 44px;
+  height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto 44px;
+    max-width: 1128px;
 }
 
 .header__logo:hover {
@@ -137,7 +142,7 @@ line-height: 24px;
   height: 24px;
   padding: 5px;
   border-radius: 20px;
-  border: 2px solid #6612ed;
+  border: 2px solid #6612ED;
   background-color: transparent;
   padding-left: 25px;
 }
@@ -160,7 +165,7 @@ line-height: 24px;
   position: relative;
 }
 
-.header__center input:focus + .search-results,
+.header__center input:focus+.search-results,
 .search-results:hover {
   display: block;
 }
@@ -228,14 +233,15 @@ line-height: 24px;
   flex-direction: column;
   background-color: #f5f5f5;
   border-radius: 12px;
+  max-height: 1124px;
 }
 
 .sidebar h1 {
-  font-size: 28px;
-  font-weight: 400;
-  padding: 8px;
-  margin: 0;
-  margin-bottom: 12px;
+  font-family: Comfortaa;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 36px;
 }
 
 .sidebar a:hover {
@@ -276,6 +282,13 @@ line-height: 24px;
   margin-top: 8px;
 }
 
+.movie-card-right-title {
+  display: flex;
+    /* justify-content: space-between; */
+    max-width: 256px;
+    gap: 10px;
+}
+
 .movie-card-right-info {
   font-size: 12px;
   font-weight: 400;
@@ -288,9 +301,13 @@ line-height: 24px;
 }
 
 .movie-card h2 {
-  font-size: 14px;
-  font-weight: 600;
-  margin: 0;
+  text-align: start;
+    font-family: Comfortaa;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    width: 120px;
 }
 
 .error {
@@ -304,6 +321,16 @@ line-height: 24px;
   outline: #dac7fa solid 1px;
   margin-bottom: 12px;
   margin-top: 12px;
+}
+
+.favorite-heart {
+  color: #DAC7FA;
+  cursor: pointer;
+}
+
+.favorite-heart.favorite path {
+  color: #6612ED;
+  background-color: #6612ED;
 }
 
 /* MoviesPage */
@@ -478,13 +505,13 @@ line-height: 24px;
 }
 
 .addmovie__info {
-  text-align: left;
-  display: flex;
+  margin-right: 128px;
   width: 604px;
+  padding: 16px 4px;
   flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
   gap: 10px;
-  margin: 44px 128px 0 396px;
 }
 
 .addmovie__info h1 {
@@ -505,7 +532,7 @@ line-height: 24px;
 
 .form__container {
   border-radius: 12px;
-  background: var(--White, #fffffc);
+  background: var(--White, #FFFFFC);
   max-width: 300px;
   display: inline-flex;
   padding: 36px 20px 24px 20px;
@@ -536,7 +563,7 @@ line-height: 24px;
   width: 260px;
   padding: 5px;
   border-radius: 20px;
-  border: 2px solid #6612ed;
+  border: 2px solid #6612ED;
   background-color: transparent;
   padding-left: 8px;
   margin-bottom: 12px;
@@ -546,13 +573,47 @@ line-height: 24px;
   color: #6612ed;
 }
 
+/* @media tablet */
 
-.language-filter {
-  text-align: left;
-}
+@media (max-width:1000px) {
+  .header {
+     max-width: 952px;
+     margin: 20px auto 24px;
 
-footer {
-  /* max-width: 1920px; */
-  margin-left: 0;
-  margin-right: 0;
+  }
+  .main-content {
+    max-width: 952px;
+  }
+
+  .sidebar {
+    max-width: 220px;
+  }
+
+  .movie-card {
+    max-width: 204px;
+  }
+
+  .line {
+    max-width: 196px;
+  }
+
+  .movie-details {
+    max-width: 709px;
+    max-height: 1143px;
+    margin: 0 20px 0 24px;
+  }
+
+  .toggle-button {
+    max-width: 709px;
+  }
+
+  .addmovie__container {
+    max-width: 951px;
+    margin: 44px 25px 0 24px;
+  }
+
+  .main-content-addmovie {
+    margin-top: 36px;
+  }
+
 }

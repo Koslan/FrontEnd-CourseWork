@@ -8,8 +8,7 @@ export const userSlice = createSlice({
         name: '',
         email: '',
         userId: '',
-        movies: [],
-        books: []
+        movies: []
     },
     reducers: {
         setActiveUser(state, action) {
@@ -18,7 +17,6 @@ export const userSlice = createSlice({
             state.email = action.payload.email;
             state.userId = action.payload.userId;
             state.movies = action.payload.movies;
-            state.books = action.payload.books;
         },
         logout(state) {
             state.isLoggedIn = false;
@@ -26,7 +24,6 @@ export const userSlice = createSlice({
             state.email = '';
             state.userId = '';
             state.movies = '';
-            state.books = '';
         }
     }
 });
@@ -50,7 +47,7 @@ export const getUserFromDB = (userId) => {
                 email: userFromDB.email,
                 userId: userId,
                 movies: userFromDB.movies || [],
-                books: userFromDB.books || []
+                isLoggedIn: true
             }));
         } catch (error) {
             console.log(error);
