@@ -1,12 +1,12 @@
+// Sidebar.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import "./App.css"
+import "./App.css";
 
 function Sidebar() {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
-    
 
     useEffect(() => {
         axios
@@ -18,8 +18,8 @@ function Sidebar() {
                         movieList.push({ id: movieKey, ...response.data[movieKey], isFavorite: false });
                     }
                 }
-                const last10Movies = movieList.slice(-10);
-                setMovies(last10Movies);
+                const last7Movies = movieList.slice(-7);
+                setMovies(last7Movies);
             })
             .catch((error) => {
                 setError('Error loading data: ' + error.message);
@@ -41,7 +41,9 @@ function Sidebar() {
                                 <img src={movie.posterURL} alt={movie.title} />
                             </div>
                             <div className="movie-card-right">
-                                <h2>{movie.title}</h2>
+                                <div className='movie-card-right-title'>
+                                    <h2>{movie.title}</h2>
+                                </div>
                                 <div className='movie-card-right-info'>
                                     <p>{movie.year}</p>
                                     <p>{movie.lexicalComplexity}</p>
@@ -57,5 +59,3 @@ function Sidebar() {
 }
 
 export default Sidebar;
-
-

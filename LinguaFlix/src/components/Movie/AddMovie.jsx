@@ -87,8 +87,6 @@ const SelectField = ({ label, name, value, onChange, options }) => (
   </div>
 );
 
-
-
 const AddMovie = () => {
   const [formData, setFormData] = useState({
     description: "",
@@ -159,15 +157,6 @@ const AddMovie = () => {
   const canAddMovie = isAdmin;
   /////////
 
-  //////////
-  const permissions = useSelector((state) => state.permissions);
-
-  const isAdmin = permissions.role === 'admin';
-  // const isUser = permissions.role === 'user';
-  // const isGuest = permissions.role === 'guest';
-
-  const canAddMovie = isAdmin;
-  /////////
 
   /*const handleSubmit = async (e) => {
     e.preventDefault();
@@ -244,7 +233,7 @@ const AddMovie = () => {
   );
 
   return (
-    <>
+   <>
       {isAdmin ? (
         <div className="AddMovieContainer">
           <h2 className="AddMovieTitle">Add New Movie</h2>
@@ -405,7 +394,9 @@ const AddMovie = () => {
         </button>
       </form>
     </div>
-  );
-};
+  ) : null}  
+  </>
+ );
+}
 
 export default AddMovie;
