@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Tab, Nav } from 'react-bootstrap';
-import SignIn from './Auth/Signin';
-import SignUp from './Auth/SignUp';
 import './login.css';
 import { useDispatch } from 'react-redux';
 import { getUserFromDB } from '../store/userSlice';
 import { auth } from '../store/firebase';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SignUp from './Auth/SignUp.jsx';
+import SignIn from './Auth/SignIn.jsx';
 
 const Login = () => {
-  const [activeTab, setActiveTab] = useState("signIn");
+  const [activeTab, setActiveTab] = useState('signIn');
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
@@ -18,22 +18,20 @@ const Login = () => {
   };
 
   useEffect(() => {
-    // Перевіряємо, чи користувач зареєстрований
     const userRegistered = localStorage.getItem('userRegistered');
-
     if (!userRegistered) {
-      // Якщо користувач не зареєстрований, встановлюємо showModal: true
       setShowModal(true);
     }
+
 
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         console.log(authUser);
         dispatch(getUserFromDB(authUser.uid));
-        // localStorage.setItem('isUserLoggedIn', 'true'); // Вказуємо, що користувач увійшов
-        // setShowModal(false);
+        setShowModal(false);
       } else {
         console.log('no user');
+        setShowModal(true);
       }
     });
   }, [dispatch]);

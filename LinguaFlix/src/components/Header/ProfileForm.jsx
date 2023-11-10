@@ -57,6 +57,8 @@ function ProfileForm({ setUser }) {
         updateDescription(level);
     };
 
+    console.log(user);
+
     const updateDescription = (level) => {
         switch (level) {
             case 'beginner':
@@ -80,7 +82,7 @@ function ProfileForm({ setUser }) {
                 <input
                     className="input"
                     type="text"
-                    value={user.name}
+                    value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
             </div>
