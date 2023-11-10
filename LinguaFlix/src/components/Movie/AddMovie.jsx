@@ -1,20 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { DB_URL } from "../../store/firebase";
 import "./AddMovie.css";
 import sample from "./sampleMovie.jsx";
+import { languages } from "../../Constants";
 
-const languages = [
-  { label: "Ukrainian", value: "ukr" },
-  { label: "Spanish", value: "spa" },
-  { label: "English", value: "eng" },
-  { label: "French", value: "fre" },
-  { label: "German", value: "ger" },
-  { label: "Italian", value: "ita" },
-  { label: "Portuguese", value: "por" },
-  { label: "Dutch", value: "dut" },
-  { label: "Polish", value: "pol" },
-];
+import {
+  calculateReadabilityScores,
+  countSyllables,
+  calculateApproximateLevel,
+} from "../Text/TextAnalysis";
+
+import {
+  processText,
+  translateWord,
+  generateTest,
+} from "../Text/TextUtilities";
+
+import { englishLevelsMap } from "../Text/english";
 
 const customLabels = {
   title: "Movie Title",
@@ -86,6 +89,8 @@ const SelectField = ({ label, name, value, onChange, options }) => (
   </div>
 );
 
+
+
 const AddMovie = () => {
   const [formData, setFormData] = useState({
     description: "",
@@ -94,7 +99,7 @@ const AddMovie = () => {
     posterURL: sample.posterURL,
     title: "",
     year: "",
-    vocabByLanguage: sample.vocabByLanguage,
+    vocabByLanguage: {},
   });
 
   const [showPopup, setShowPopup] = useState(false);
@@ -103,6 +108,26 @@ const AddMovie = () => {
     lang1: "eng",
     lang2: "ukr",
   });
+
+  const [inputText, setInputText] = useState(""); // This can be the movie description or any text related to the movie
+  const [readabilityScores, setReadabilityScores] = useState({
+    fleschKincaid: 0,
+    gunningFog: 0,
+  });
+
+  useEffect(() => {
+    const sidebar = document.querySelector(".sidebar");
+    if (sidebar) sidebar.style.display = "none";
+
+
+    if (inputText) {
+      calculateReadabilityScores(
+        inputText,
+        setReadabilityScores,
+        countSyllables
+      );
+    }
+  }, [inputText]);
 
   const addLanguagePair = () => {
     if (newLanguagePair.lang1 && newLanguagePair.lang2) {
@@ -118,26 +143,49 @@ const AddMovie = () => {
   const [currentLanguagePair, setCurrentLanguagePair] = useState(null);
   const [currentLevel, setCurrentLevel] = useState("A1");
 
-  const addWordPair = (wordPair) => {
-    if (currentLanguagePair) {
-      setVocabByLanguage((prev) => ({
-        ...prev,
-        [currentLanguagePair]: {
-          ...prev[currentLanguagePair],
-          [currentLevel]: [
-            ...(prev[currentLanguagePair][currentLevel] || []),
-            wordPair,
-          ],
-        },
-      }));
-    }
-  };
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
+
+  /*const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.description.length < 20) {
+      alert("Description must be at least 20 characters.");
+      return;
+    }
+    try {
+      await axios.post(`${DB_URL}/movies.json`, formData);
+      alert("Movie added successfully!");
+    } catch (error) {
+      console.error("Error adding movie:", error);
+      alert("Error adding movie.");
+    }
+  };*/
+
+  const updateVocabByLanguage = async () => {
+    let processedText = processText(formData.description, englishLevelsMap);
+    let updatedVocabByLanguage = {};
+
+    for (let pair of formData.languagePairs) {
+      let [sourceLang, targetLang] = pair.split(":");
+      updatedVocabByLanguage[pair] = {};
+
+      for (let level in processedText) {
+        updatedVocabByLanguage[pair][level] = [];
+        for (let word of processedText[level]) {
+          let translation = await translateWord(word, sourceLang, targetLang); // Assuming translateWord returns a promise
+          updatedVocabByLanguage[pair][level].push(`${word}: ${translation}`);
+        }
+      }
+    }
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      vocabByLanguage: updatedVocabByLanguage,
     }));
   };
 
@@ -147,9 +195,22 @@ const AddMovie = () => {
       alert("Description must be at least 20 characters.");
       return;
     }
+
+    // Additional functionality before submission, e.g., calculating readability scores
+    calculateReadabilityScores(
+      formData.description,
+      setReadabilityScores,
+      countSyllables
+    );
+
     try {
-      await axios.post(`${DB_URL}/movies.json`, formData);
-      alert("Movie added successfully!");
+      /*  await axios.post(`${DB_URL}/movies.json`, {
+        ...formData,
+
+        readabilityScores: readabilityScores, // include readability scores in the data sent to the database
+      });*/
+      await updateVocabByLanguage();
+      console.log(formData);
     } catch (error) {
       console.error("Error adding movie:", error);
       alert("Error adding movie.");
@@ -238,7 +299,9 @@ const AddMovie = () => {
               {pair}
             </button>
           ))}
-          <button  class="tabButton"  onClick={() => setShowPopup(true)}>+</button>
+          <button class="tabButton" onClick={() => setShowPopup(true)}>
+            +
+          </button>
         </div>
 
         {/* Попап для добавления новой языковой пары */}
@@ -270,43 +333,22 @@ const AddMovie = () => {
                 }
                 options={availableLangs2}
               />
-              <button class="tabButton" onClick={addLanguagePair}>Add pair</button>
+              <button class="tabButton" onClick={addLanguagePair}>
+                Add pair
+              </button>
               <button onClick={() => setShowPopup(false)}>Сlose</button>
             </div>
           </div>
         )}
 
-        {/* Нижний ряд вкладок для выбора уровня языка */}
-        <div className="languageLevelTabs">
-          {["A1", "A2", "B1", "B2", "C1", "C2"].map((level) => (
-            <button
-              key={level}
-              className={`tabButton ${currentLevel === level ? "active" : ""}`}
-              onClick={() => setCurrentLevel(level)}
-            >
-              {level}
-            </button>
-          ))}
-        </div>
-
-        {/* Список слов */}
-        <ul>
-          {vocabByLanguage[currentLanguagePair] &&
-            vocabByLanguage[currentLanguagePair][currentLevel].map(
-              (wordPair, index) => <li key={index}>{wordPair}</li>
-            )}
-        </ul>
-        <button
-         class="tabButton" 
-          onClick={() => {
-            const wordPair = prompt("Введите пару слов:");
-            if (wordPair) addWordPair(wordPair);
-          }}
-        >
-          Add Word
-        </button>
         <br></br>
         <br></br>
+        <textarea
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+          placeholder="Enter your text here..."
+          rows="5"
+        />
         <br></br>
         <br></br>
         <button className="AddMovieButton" type="submit">
