@@ -4,6 +4,8 @@
     transform: translate3d(-32px, 47.5px, 0px);
     width: 200px;
     height: 200px;
+    border-radius: 12px;
+    background: var(--Gray, #F4F4F6);
 }
 
 .dropdown-header {
@@ -15,7 +17,7 @@
 }
 
 .dropdown-menu.show a {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .dropdown-divider hr {

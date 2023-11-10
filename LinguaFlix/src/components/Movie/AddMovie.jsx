@@ -3,6 +3,7 @@ import axios from "axios";
 import { DB_URL } from "../../store/firebase";
 import "./AddMovie.css";
 import sample from "./sampleMovie.jsx";
+import { useSelector } from "react-redux";
 
 const languages = [
   { label: "Ukrainian", value: "ukr" },
@@ -141,6 +142,16 @@ const AddMovie = () => {
     }));
   };
 
+  //////////
+  const permissions = useSelector((state) => state.permissions);
+
+  const isAdmin = permissions.role === 'admin';
+  // const isUser = permissions.role === 'user';
+  // const isGuest = permissions.role === 'guest';
+
+  const canAddMovie = isAdmin;
+  /////////
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.description.length < 20) {
@@ -165,66 +176,68 @@ const AddMovie = () => {
   );
 
   return (
-    <div className="AddMovieContainer">
-      <h2 className="AddMovieTitle">Add New Movie</h2>
-      <form onSubmit={handleSubmit}>
-        <InputField
-          label={customLabels.title}
-          name="title"
-          type="text"
-          value={formData.title}
-          onChange={handleInputChange}
-          placeholder={customLabels.title}
-          required
-        />
-        <TextAreaField
-          label={customLabels.description}
-          name="description"
-          value={formData.description}
-          onChange={handleInputChange}
-          placeholder={customLabels.description}
-        />
-        <InputField
-          label={customLabels.year}
-          name="year"
-          type="number"
-          value="1999"
-          min="1900"
-          max={new Date().getFullYear().toString()}
-          onChange={handleInputChange}
-          placeholder={customLabels.year}
-          required
-        />
-        <InputField
-          label={customLabels.posterURL}
-          name="posterURL"
-          type="URL"
-          value={formData.posterURL}
-          onChange={handleInputChange}
-          placeholder={customLabels.posterURL}
-          required
-        />
-        <SelectField
-          label={customLabels.lexicalComplexity}
-          name="lexicalComplexity"
-          value={formData.lexicalComplexity}
-          onChange={handleInputChange}
-          options={[
-            { label: "A1", value: "A1" },
-            { label: "A2", value: "A2" },
-            { label: "B1", value: "B1" },
-            { label: "B2", value: "B2" },
-            { label: "C1", value: "C1" },
-            { label: "C2", value: "C2" },
-          ]}
-        />
-        <SelectField
-          label={customLabels.languagePairs}
-          name="languagePairs"
-          value={formData.languagePairs}
-          onChange={handleInputChange}
-          options={languagePairs.map((pair) => ({ label: pair, value: pair }))}
-        />
+    <>
+      {isAdmin ? (
+        <div className="AddMovieContainer">
+          <h2 className="AddMovieTitle">Add New Movie</h2>
+          <form onSubmit={handleSubmit}>
+            <InputField
+              label={customLabels.title}
+              name="title"
+              type="text"
+              value={formData.title}
+              onChange={handleInputChange}
+              placeholder={customLabels.title}
+              required
+            />
+            <TextAreaField
+              label={customLabels.description}
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              placeholder={customLabels.description}
+            />
+            <InputField
+              label={customLabels.year}
+              name="year"
+              type="number"
+              value="1999"
+              min="1900"
+              max={new Date().getFullYear().toString()}
+              onChange={handleInputChange}
+              placeholder={customLabels.year}
+              required
+            />
+            <InputField
+              label={customLabels.posterURL}
+              name="posterURL"
+              type="URL"
+              value={formData.posterURL}
+              onChange={handleInputChange}
+              placeholder={customLabels.posterURL}
+              required
+            />
+            <SelectField
+              label={customLabels.lexicalComplexity}
+              name="lexicalComplexity"
+              value={formData.lexicalComplexity}
+              onChange={handleInputChange}
+              options={[
+                { label: "A1", value: "A1" },
+                { label: "A2", value: "A2" },
+                { label: "B1", value: "B1" },
+                { label: "B2", value: "B2" },
+                { label: "C1", value: "C1" },
+                { label: "C2", value: "C2" },
+              ]}
+            />
+            <SelectField
+              label={customLabels.languagePairs}
+              name="languagePairs"
+              value={formData.languagePairs}
+              onChange={handleInputChange}
+              options={languagePairs.map((pair) => ({ label: pair, value: pair }))}
+            />
 
         <div className="languagePairTabs">
           {languagePairs.map((pair) => (
@@ -276,18 +289,18 @@ const AddMovie = () => {
           </div>
         )}
 
-        {/* Нижний ряд вкладок для выбора уровня языка */}
-        <div className="languageLevelTabs">
-          {["A1", "A2", "B1", "B2", "C1", "C2"].map((level) => (
-            <button
-              key={level}
-              className={`tabButton ${currentLevel === level ? "active" : ""}`}
-              onClick={() => setCurrentLevel(level)}
-            >
-              {level}
-            </button>
-          ))}
-        </div>
+            {/* Нижний ряд вкладок для выбора уровня языка */}
+            <div className="languageLevelTabs">
+              {["A1", "A2", "B1", "B2", "C1", "C2"].map((level) => (
+                <button
+                  key={level}
+                  className={`tabButton ${currentLevel === level ? "active" : ""}`}
+                  onClick={() => setCurrentLevel(level)}
+                >
+                  {level}
+                </button>
+              ))}
+            </div>
 
         {/* Список слов */}
         <ul>

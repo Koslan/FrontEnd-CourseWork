@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../store/firebase';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userActions } from '../../store';
 import '../Auth/auth.css';
- 
+
 function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,32 +15,33 @@ function SignIn() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const auth = getAuth();
 
-    function handleLogin(e) {
+    async function handleLogin(e) {
         e.preventDefault();
 
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+
+                console.log(user);
                 dispatch(
                     userActions.setActiveUser({
                         name: user.displayName,
                         email: email,
                         userId: user.uid,
-                        orders: [],
-                        cart: '',
+                        movies: [],
+                        books: ''
                     })
                 );
                 toast.success(`Welcome, ${user.displayName}!`);
                 navigate('/');
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+                console.error(error);
                 setErrorMessage('Incorrect password or login');
-                console.log(errorMessage);
                 toast.error(errorMessage);
-            });
+            })
     }
 
     return (

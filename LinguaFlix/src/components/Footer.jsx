@@ -17,7 +17,7 @@ function Footer() {
           <h6>©2023 LinguaFlix.</h6>
         </div>
         <div className='footer-line'>
-          <svg xmlns="http://www.w3.org/2000/svg" width="1130" height="2" viewBox="0 0 1130 2" fill="none">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1130 2" fill="none">
             <path d="M1 1L1129 1.0001" stroke="#6612ED" strokeLinecap="round" />
           </svg>
         </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './levelButton.css';
+import './button.css';
 
 function LevelButton({ levels, selectedLevel, setSelectedLevel }) {
   const [clickedLevels, setClickedLevels] = useState([]);
@@ -23,7 +23,7 @@ function LevelButton({ levels, selectedLevel, setSelectedLevel }) {
           className={selectedLevel === level ? 'selected' : ''}
         >
           <span>{level}</span>
-          
+          {level === 'C2'}
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" className={selectedLevel === level ? 'rotate' : ''}>
             <path d="M3 6L8 11L13 6" stroke={selectedLevel === level ? '#FFF' : '#6612ED'} strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" />
           </svg>

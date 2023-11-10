@@ -1,16 +1,42 @@
-import React, { useState } from 'react';
-import { Tab, Nav, Modal } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Tab, Nav } from 'react-bootstrap';
 import SignIn from './Auth/Signin';
 import SignUp from './Auth/SignUp';
 import './login.css';
+import { useDispatch } from 'react-redux';
+import { getUserFromDB } from '../store/userSlice';
+import { auth } from '../store/firebase';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState("signIn");
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
+
+  useEffect(() => {
+    // Перевіряємо, чи користувач зареєстрований
+    const userRegistered = localStorage.getItem('userRegistered');
+
+    if (!userRegistered) {
+      // Якщо користувач не зареєстрований, встановлюємо showModal: true
+      setShowModal(true);
+    }
+
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        console.log(authUser);
+        dispatch(getUserFromDB(authUser.uid));
+        // localStorage.setItem('isUserLoggedIn', 'true'); // Вказуємо, що користувач увійшов
+        // setShowModal(false);
+      } else {
+        console.log('no user');
+      }
+    });
+  }, [dispatch]);
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -40,7 +66,7 @@ const Login = () => {
                     eventKey="signUp"
                     onClick={() => handleTabChange("signUp")}
                   >
-                    Registration
+                    Sign Up
                   </Nav.Link>
                 </Nav.Item>
               </Nav>

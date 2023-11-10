@@ -16,13 +16,15 @@ import AboutProject from './AboutProject';
 import AddMovieRequest from './AddMovieRequest';
 import { DB_URL } from './store/firebase';
 import Login from './components/Login';
+import ProfileForm from './components/Header/ProfileForm';
+import ChangePassword from './components/Header/ChangePassword';
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const [user, setUser] = useState({ name: '', email: '', englishLevel: '', status: '' });
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -54,7 +56,7 @@ function App() {
       console.error("Error fetching movies:", error);
       setIsLoading(false);
     });
-  }, []);  
+  }, []);
 
   const handleSearch = (searchValue) => {
     console.log("search:", searchValue);
@@ -70,7 +72,6 @@ function App() {
     setFilteredMovies(filtered);
     setIsDropdownVisible(true);
   }
-
 
   return (
     <Provider store={store}>
@@ -102,6 +103,8 @@ function App() {
                 <Route path="/add_movie" element={<AddMovie />} />
                 <Route path="/edit_movie/:id" element={<EditMovie />} />
                 <Route path='/login' element={<Login />} />
+                <Route path='/profile' element={<ProfileForm user={user} setUser={setUser} />} />
+                <Route path="/change-password" element={<ChangePassword />} />
               </>
             )}
           </Routes>
@@ -114,4 +117,3 @@ function App() {
 }
 
 export default App;
-

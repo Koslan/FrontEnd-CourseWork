@@ -27,8 +27,11 @@
 }
 
 footer {
-  max-height: 295px;
-  background: var(--Purple, #dac7fa);
+  max-width: 100%;
+  min-height: 133px;
+  position: relative;
+  margin-top: auto;
+  background: var(--Purple, #DAC7FA);
 }
 
 .footer-content {
@@ -36,7 +39,9 @@ footer {
   justify-content: space-between;
   align-items: center;
   max-height: 33px;
-  padding: 36px 396px 0;
+  padding-top: 36px;
+  margin: 0 auto;
+  max-width: 1128px;
 }
 
 footer .logo {
@@ -75,5 +80,23 @@ footer h6 {
 .footer-line {
   padding: 29.5px 0 40px;
   max-width: 1128px;
-    margin: 0 auto;
+  margin: 0 auto;
+}
+
+@media (max-width:1000px) {
+  .footer {
+    max-height: 133px;
+  }
+  .footer-content {
+    max-width: 952px;
+    padding: 36px 0 64px;
+  }
+
+  .footer-line {
+    display: none;
+  }
+
+  .footer-line svg {
+    max-width: 952px;
+  }
 }

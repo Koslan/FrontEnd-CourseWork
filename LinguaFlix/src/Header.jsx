@@ -15,7 +15,6 @@ function Header({ onSearch, results, isVisible }) {
         onSearch(e.target.value);
     };
 
-
     return (
         <header className="header">
 
