@@ -1,0 +1,44 @@
+.login-container {
+    border: 2px solid #DAC7FA;
+    border-radius: 12px;
+    max-width: 100%;
+    background: #fff;
+    padding: 10px 40px 45px;
+    height: 600px;
+}
+
+.login-container h1 {
+    margin: 0;
+    font-family: Comfortaa;
+    font-size: 36px;
+    line-height: 44px;
+    margin-top: 20px;
+}
+
+.login-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    border-bottom: 1px solid #6612ED;
+}
+
+.nav-item {
+    padding: 1.6rem 2rem;
+    text-transform: uppercase;
+}
+
+.nav-item a {
+    font-family: Comfortaa;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    color: #6612ED;
+}
+
+.close-button {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}

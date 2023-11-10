@@ -1,0 +1,46 @@
+
+
+label {
+    font-family: Comfortaa;
+    font-size: 14px;
+    margin: 10px 0;
+    text-align: start;
+}
+
+input {
+    height: 40px;
+    padding: 0 2rem;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--Violet, #6612ED);
+    color: black;
+}
+
+.btn {
+    font-family: Comfortaa;
+    font-size: 20px;
+    margin-top: 20px;
+    height: 45px;
+    color: white;
+    border: 1px solid #6612ED;
+    background: #6612ED;
+    width: 100%;
+    border-radius: 12px;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #DAC7FA;
+    color: var(--Violet, #6612ED);
+    font-family: Comfortaa;
+    line-height: 24px;
+}
+
+.form-control {
+    border-radius: 12px;
+    border: 1px solid var(--Violet, #6612ED);
+}
+
+.btn:hover {
+    background: var(--Violet, #6612ED);
+    border-color: #6612ED;
+}

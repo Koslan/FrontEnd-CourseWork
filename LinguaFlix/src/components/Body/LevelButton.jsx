@@ -1,31 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './levelButton.css';
 
-function LevelButton({ levels, setSelectedLevel, saveData }) {
-    const [isClicked, setIsClicked] = useState(Array(levels.length).fill(false));
+function LevelButton({ levels, selectedLevel, setSelectedLevel }) {
+  const [clickedLevels, setClickedLevels] = useState([]);
 
-    const handleClick = (index) => {
-        setIsClicked((prevState) => {
-          const newState = [...prevState];
-          newState[index] = !newState[index];
-          return newState;
-        });
-        setSelectedLevel(levels[index]);
-        saveData();
-      };
+  useEffect(() => {
+    setClickedLevels(['C2']);
+    setSelectedLevel('C2');
+  }, [setSelectedLevel]);
 
-    return (
-        <>
-              {levels.map((level, index) => (
-                <button key={level} type='submit' onClick={() => handleClick(index)}>
-                    {level}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ transform: isClicked[index] ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-                        <path d="M3 6L8 11L13 6" stroke="#6612ED" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                </button>
-            ))}
-        </>
-    )
+  const handleClick = (level) => {
+    setSelectedLevel(level);
+  };
+
+  return (
+    <>
+      {levels.map((level) => (
+        <button
+          key={level}
+          type='submit'
+          onClick={() => handleClick(level)}
+          className={selectedLevel === level ? 'selected' : ''}
+        >
+          <span>{level}</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" className={selectedLevel === level ? 'rotate' : ''}>
+            <path d="M3 6L8 11L13 6" stroke={selectedLevel === level ? '#FFF' : '#6612ED'} strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      ))}
+    </>
+  );
 }
 
 export default LevelButton;

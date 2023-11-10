@@ -6,7 +6,7 @@ import "./App.css"
 function Sidebar() {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
-    const [favorites, setFavorites] = useState([]);
+    
 
     useEffect(() => {
         axios
@@ -18,28 +18,13 @@ function Sidebar() {
                         movieList.push({ id: movieKey, ...response.data[movieKey], isFavorite: false });
                     }
                 }
-                setMovies(movieList);
+                const last10Movies = movieList.slice(-10);
+                setMovies(last10Movies);
             })
             .catch((error) => {
                 setError('Error loading data: ' + error.message);
             });
     }, []);
-
-    const toggleFavorite = (movieId) => {
-        const updatedMovies = movies.map((movie) => {
-            if (movie.id === movieId) {
-                return { ...movie, isFavorite: !movie.isFavorite };
-            }
-            return movie;
-        });
-        setMovies(updatedMovies);
-
-        if (favorites.includes(movieId)) {
-            setFavorites(favorites.filter((id) => id !== movieId));
-        } else {
-            setFavorites([...favorites, movieId]);
-        }
-    };
 
     if (error) {
         return <div className="error">{error}</div>;
@@ -59,16 +44,7 @@ function Sidebar() {
                                 <h2>{movie.title}</h2>
                                 <div className='movie-card-right-info'>
                                     <p>{movie.year}</p>
-                                    <p>C1</p>
-                                </div>
-                                <div className="favorite-container">
-                                    <button onClick={() => toggleFavorite(movie.id)} 
-                                        className={`favorite-button ${movie.isFavorite ? 'favorite' : ''}`}>
-                                        <div className="favorite-content">
-                                            <img src={movie.isFavorite ? '../src/assets/Fav@2x.svg' : '../src/assets/Fav.svg'} alt="Fav" />
-                                            {favorites.includes(movie.id) ? 'Delete from favorites' : 'Add to favorites'}
-                                        </div>
-                                    </button>
+                                    <p>{movie.lexicalComplexity}</p>
                                 </div>
                             </div>
                         </div>

@@ -1,0 +1,137 @@
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa-Regular.ttf) format('ttf');
+    font-style: normal;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa-Regular.woff) format('woff');
+    font-style: normal;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa-SemiBold.ttf) format('ttf');
+    font-style: normal;
+    font-weight: 600;
+}
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa-SemiBold.woff) format('woff');
+    font-style: normal;
+    font-weight: 600;
+}
+
+.movie-details {
+    width: 100%;
+    margin: 0 20px 64px 24px;
+}
+
+.movie-details img {
+    max-width: 264px;
+    width: 100%;
+    border-radius: 12px;
+    background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+}
+
+.details-text {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 24px;
+}
+
+.details-text h1 {
+    font-family: 'Comfortaa';
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 44px;
+    margin: 0;
+}
+
+.details-text-year {
+    font-family: 'Comfortaa';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    display: flex;
+    padding: 1px 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    background: var(--Purple, #DAC7FA);
+    margin: 0;
+}
+
+.details-text h5 {
+    font-family: 'Comfortaa';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    margin: 20px 0 0;
+}
+
+.details-text h4 {
+    font-family: 'Comfortaa';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: start;
+    margin: 0;
+    max-width: 552px;
+}
+
+.selectedLanguage {
+    width: 840px;
+    height: 58px;
+    display: flex;
+    margin: 64px 0 44px;
+    align-items: flex-end;
+    gap: 24px;
+}
+
+.selectedLanguage h3 {
+    color: var(--Black, #131315);
+    font-family: 'Comfortaa';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: start;
+}
+
+.selectedLanguage button {
+    padding: 5px 12px 3px 12px;
+    border-radius: 21px;
+    border: 1px solid var(--Violet, #6612ED);
+    background: var(--Purple, #DAC7FA);
+    color: var(--Violet, #6612ED);
+    font-family: 'Comfortaa';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+select {
+    display: flex;
+    width: 264px;
+    padding: 4px 4px 4px 8px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 16px;
+    border: 1px solid var(--Violet, #6612ED);
+    background-color: transparent;
+    color: var(--Black, #131315);
+    font-family: 'Comfortaa';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+}
