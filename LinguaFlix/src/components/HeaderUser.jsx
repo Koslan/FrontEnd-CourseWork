@@ -8,6 +8,7 @@ import ProfileForm from './Header/ProfileForm';
 import { saveUserToFirebase } from '../store/userSlice';
 import { userActions } from '../store';
 import { useLocation } from 'react-router-dom';
+import { saveUserToLocalStorage } from '../store/userUtils';
 
 function HeaderUser() {
   const dispatch = useDispatch();
@@ -20,11 +21,12 @@ function HeaderUser() {
     if (user.userId) {
       console.log("User ID is present:", user.userId);
       saveUserToFirebase(user);
+    saveUserToLocalStorage(user);
     }
   }, [user]);
 
   const handleMyProfileClick = () => {
-    setShowProfileForm(true);
+       setShowProfileForm(!showProfileForm);
   };
 
   const handleCloseProfileForm = () => {
@@ -62,7 +64,7 @@ function HeaderUser() {
         Logout
       </NavDropdown.Item>
       {isProfilePage && showProfileForm && (
-        <ProfileForm user={user} onSave={handleCloseProfileForm} />
+        <ProfileForm user={user} setUser={setUser} onSave={handleCloseProfileForm} />
       )}
     </NavDropdown>
   );

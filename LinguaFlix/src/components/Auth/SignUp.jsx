@@ -9,6 +9,7 @@ import { database } from '../../store/firebase';
 import { useNavigate } from 'react-router-dom';
 import '../Auth/auth.css';
 import { userSlice } from '../../store/userSlice';
+import { saveUserToLocalStorage } from '../../store/userUtils';
 
 function SignUp() {
     const [email, setEmail] = useState('');
@@ -31,21 +32,24 @@ function SignUp() {
                     name: name,
                     email: email,
                     userId: user.uid,
-                    movies: [],
-                    books: ''
+                    movies: []
                 }).catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     console.log(errorMessage);
                 });
-                dispatch(userActions.setActiveUser({
+                const userData = {
                     name: name,
                     email: email,
                     userId: user.uid,
-                    movies: [],
-                    books: ''
-                }));
-                updateProfile(auth, currentUser, {
+                    movies: []
+                };
+                saveUserToLocalStorage(userData);
+
+                console.log('User data saved to localStorage:', userData);
+
+                dispatch(userActions.setActiveUser(userData));
+                updateProfile(auth, user, {
                     displayName: name
                 }).then(() => {
                     console.log('Profile updated');

@@ -1,26 +1,40 @@
 import Nav from './components/Nav.jsx';
-import { useState, useEffect} from 'react';
-import {  useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import Logo from './assets/logo.svg';
 import SearchIcon from './assets/search.svg';
 import { Link } from 'react-router-dom';
 import HeaderUser from './components/HeaderUser.jsx';
+import { getUserFromLocalStorage } from './store/userUtils.js';
+import { userActions } from './store/index.js';
 
 function Header({ onSearch, results, isVisible }) {
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
+    const [userLoaded, setUserLoaded] = useState(false);
 
     const handleInputChange = (e) => {
         onSearch(e.target.value);
     };
 
+    useEffect(() => {
+        if (!user.isLoggedIn && !userLoaded) {
+            const storedUser = getUserFromLocalStorage();
+            if (storedUser) {
+                dispatch(userActions.setActiveUser(storedUser));
+                setUserLoaded(true);
+            }
+        }
+    }, [user, dispatch, userLoaded]);
+
+
     return (
         <header className="header">
 
             <div className='header__logo'>
-            <Link to="/movies">
-                    <img src={Logo}  width="160" height="33" alt="Logo" />
+                <Link to="/movies">
+                    <img src={Logo} width="160" height="33" alt="Logo" />
                 </Link>
             </div>
             <div className="header__center">

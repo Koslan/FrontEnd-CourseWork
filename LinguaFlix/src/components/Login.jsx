@@ -18,11 +18,9 @@ const Login = () => {
   };
 
   useEffect(() => {
-    // Перевіряємо, чи користувач зареєстрований
     const userRegistered = localStorage.getItem('userRegistered');
 
     if (!userRegistered) {
-      // Якщо користувач не зареєстрований, встановлюємо showModal: true
       setShowModal(true);
     }
 
@@ -30,10 +28,10 @@ const Login = () => {
       if (authUser) {
         console.log(authUser);
         dispatch(getUserFromDB(authUser.uid));
-        // localStorage.setItem('isUserLoggedIn', 'true'); // Вказуємо, що користувач увійшов
-        // setShowModal(false);
+         setShowModal(false);
       } else {
         console.log('no user');
+        setShowModal(true);
       }
     });
   }, [dispatch]);
