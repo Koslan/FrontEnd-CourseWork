@@ -1,27 +1,30 @@
 @font-face {
-  font-family: "Comfortaa";
-  src: url(../fonts/Comfortaa-Regular.ttf) format("ttf");
+  font-family: 'Comfortaa';
+  src: url(../fonts/Comfortaa-Regular.ttf) format('ttf');
   font-style: normal;
   font-weight: 400;
 }
 
+
 @font-face {
-  font-family: "Comfortaa";
-  src: url(../fonts/Comfortaa-Regular.woff) format("woff");
+  font-family: 'Comfortaa';
+  src: url(../fonts/Comfortaa-Regular.woff) format('woff');
   font-style: normal;
   font-weight: 400;
 }
 
+
 @font-face {
-  font-family: "Comfortaa";
-  src: url(../fonts/Comfortaa-SemiBold.ttf) format("ttf");
+  font-family: 'Comfortaa';
+  src: url(../fonts/Comfortaa-SemiBold.ttf) format('ttf');
   font-style: normal;
   font-weight: 600;
 }
 
+
 @font-face {
-  font-family: "Comfortaa";
-  src: url(../fonts/Comfortaa-SemiBold.woff) format("woff");
+  font-family: 'Comfortaa';
+  src: url(../fonts/Comfortaa-SemiBold.woff) format('woff');
   font-style: normal;
   font-weight: 600;
 }
@@ -36,7 +39,7 @@
   color: black;
   font-size: 14px;
   overflow: hidden;
-  font-family: "Comfortaa";
+  font-family: 'Comfortaa';
 }
 
 .logo {
@@ -58,6 +61,7 @@
   from {
     transform: rotate(0deg);
   }
+
 
   to {
     transform: rotate(360deg);
@@ -94,7 +98,6 @@
 .movie-details {
   flex: 1;
 }
-
 
 .movie-details h3 {
   text-align: start;
@@ -139,7 +142,6 @@
 .header__center input {
   color: black;
   width: 260px;
-  height: 24px;
   padding: 5px;
   border-radius: 20px;
   border: 2px solid #6612ED;
@@ -152,14 +154,12 @@
 }
 
 .header__center input::placeholder {
-  color: #6612ed;
+  color: #6612ED;
 }
 
 .search-container {
   position: relative;
 }
-
-
 
 .search-wrapper {
   position: relative;
@@ -179,17 +179,9 @@
   max-height: 200px;
   overflow-y: auto;
   background-color: white;
-  border: 1px solid #6612ED;
-  border-radius: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.search-results a {
-  color: black;
-}
-
-.search-results a:hover {
-  color: #6612ED;
 }
 
 .header__center img {
@@ -210,15 +202,15 @@
 }
 
 .header__right a:hover {
-  background-color: #dac7fa;
-  border: 1px solid #6612ed;
+  background-color: #DAC7FA;
+  border: 1px solid #6612ED;
   border-radius: 12px;
-  color: #6612ed;
+  color: #6612ED;
 }
 
 .header__right a:focus {
-  background-color: #6612ed;
-  border: 1px solid #6612ed;
+  background-color: #6612ED;
+  border: 1px solid #6612ED;
   border-radius: 12px;
   color: #fff;
 }
@@ -233,6 +225,7 @@
   flex-direction: column;
   background-color: #f5f5f5;
   border-radius: 12px;
+  max-height: 1124px;
   max-height: 1124px;
 }
 
@@ -276,10 +269,17 @@
 }
 
 .movie-card-right-info p {
-  background: var(--Purple, #dac7fa);
+  background: var(--Purple, #DAC7FA);
   border-radius: 16px;
   padding: 1px 8px;
   margin-top: 8px;
+}
+
+.movie-card-right-title {
+  display: flex;
+    /* justify-content: space-between; */
+    max-width: 256px;
+    gap: 10px;
 }
 
 .movie-card-right-title {
@@ -308,6 +308,13 @@
     font-weight: 600;
     line-height: 20px;
     width: 120px;
+  text-align: start;
+    font-family: Comfortaa;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    width: 120px;
 }
 
 .error {
@@ -318,7 +325,7 @@
 .line {
   display: inline-block;
   width: 240px;
-  outline: #dac7fa solid 1px;
+  outline: #DAC7FA solid 1px;
   margin-bottom: 12px;
   margin-top: 12px;
 }
@@ -412,6 +419,8 @@
   margin: 0;
 }
 
+
+
 /* About Team */
 
 .about-team-container {
@@ -427,7 +436,7 @@
 }
 
 .team-card {
-  max-height: 1000px;
+  max-height: 620px;
   width: 200px;
   margin: 5px;
   padding: 10px;
@@ -436,13 +445,14 @@
 
 .team-card img {
   max-width: 100%;
-  height: 195px;
+  /*height: 195px;*/
 }
 
 .team-card h2 {
   margin: 10px 0;
   height: 32px;
   font-size: 18px;
+
 }
 
 .social-links a {
@@ -496,8 +506,6 @@
 }
 
 /* Add Movie */
-
-
 .addmovie__container {
   display: flex;
   max-width: 1128px;
@@ -506,9 +514,12 @@
 
 .addmovie__info {
   margin-right: 128px;
+  margin-right: 128px;
   width: 604px;
   padding: 16px 4px;
+  padding: 16px 4px;
   flex-direction: column;
+  justify-content: center;
   justify-content: center;
   align-items: flex-start;
   gap: 10px;
@@ -533,6 +544,7 @@
 .form__container {
   border-radius: 12px;
   background: var(--White, #FFFFFC);
+  background: var(--White, #FFFFFC);
   max-width: 300px;
   display: inline-flex;
   padding: 36px 20px 24px 20px;
@@ -545,7 +557,7 @@
 }
 
 .form__container button {
-  background-color: #6612ed;
+  background-color: #6612ED;
   border-radius: 12px;
   color: #fff;
   border: transparent;
@@ -559,7 +571,7 @@
 
 .forms input {
   width: 260px;
-  color: #6612ed;
+  color: #6612ED;
   width: 260px;
   padding: 5px;
   border-radius: 20px;
@@ -570,7 +582,7 @@
 }
 
 .forms input::placeholder {
-  color: #6612ed;
+  color: #6612ED;
 }
 
 /* @media tablet */

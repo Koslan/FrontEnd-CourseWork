@@ -1,5 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getDatabase, ref, child, push, update } from "firebase/database";
 import { DB_URL } from "./firebase";
+
+export const writeNewPost = (uid, username, useremail) => {
+    const db = getDatabase();
+  
+    // A post entry.
+    const postData = {
+      name: username,
+      email: useremail,
+      userId: uid,
+    };
+  
+    // Get a key for a new Post.
+    const newPostKey = push(child(ref(db), 'posts')).key;
+  
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    const updates = {};
+    updates['/posts/' + newPostKey] = postData;
+    updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+  
+    return update(ref(db), updates);
+  }
 
 export const userSlice = createSlice({
     name: 'user',
@@ -75,5 +97,3 @@ export const permissionsSlice = createSlice({
         },
     },
 });
-// export const { setRole } = permissionsSlice.actions;
-// export default permissionsSlice.reducer;

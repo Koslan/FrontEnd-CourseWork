@@ -2,23 +2,25 @@ import React, { useEffect, useState } from 'react';
 import './profileForm.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { async } from '@firebase/util';
+import { auth, database } from '../../store/firebase';
+import { update, ref, child, push } from '@firebase/database';
 
-function ProfileForm({ setUser }) {
-    const user = useSelector(state => state.user);
+function ProfileForm({ setUser, user }) {
     const [name, setName] = useState('');
-    const [email, setEmail] = useState(user.email || '');
+    const [email, setEmail] = useState('');
     const [englishLevel, setEnglishLevel] = useState(user.englishLevel || '');
     const [status, setStatus] = useState(user.status || '');
     const [description, setDescription] = useState('');
     const [interests, setInterests] = useState(user.interest || []);
 
     useEffect(() => {
-        const storedData = localStorage.getItem('user_data');
+        const storedData = localStorage.getItem('currentUser');
 
         if (storedData) {
             const parsedData = JSON.parse(storedData);
-            setName(parsedData.name);
-            setEmail(parsedData.email);
+            setName(parsedData.name || user.name || '');
+            setEmail(parsedData.email || user.email || '');
             setEnglishLevel(parsedData.englishLevel);
             setStatus(parsedData.status);
             setInterests(parsedData.interest);
@@ -28,7 +30,7 @@ function ProfileForm({ setUser }) {
         }
     }, [user]);
 
-    const saveDataToLocalStorage = () => {
+    const saveDataToLocalStorage = async () => {
         const dataToStore = {
             name,
             email,
@@ -36,17 +38,25 @@ function ProfileForm({ setUser }) {
             status,
             interest: interests,
         };
-        localStorage.setItem('user_data', JSON.stringify(dataToStore));
-
+        localStorage.setItem('currentUser', JSON.stringify(dataToStore));
         setUser(dataToStore);
 
-        window.location.href = '/';
+        try {
+            const userRef = ref(database, `users/${user.userId}`);
+            await update(userRef, dataToStore);
+
+            window.location.href = '/';
+        } catch (error) {
+            console.error('Помилка під час збереження даних в Firebase:', error);
+        }
     };
 
     const handleInterestChange = (interest) => {
-        const updatedInterests = interests.includes(interest)
-            ? interests.filter((item) => item !== interest)
-            : [...interests, interest];
+        const updatedInterests = interests
+            ? interests.includes(interest)
+                ? interests.filter((item) => item !== interest)
+                : [...interests, interest]
+            : [interest];
         setInterests(updatedInterests);
 
         localStorage.setItem('userInterests', JSON.stringify(updatedInterests));
@@ -72,7 +82,6 @@ function ProfileForm({ setUser }) {
                 break;
         }
     };
-    console.log(saveDataToLocalStorage);
 
     return (
         <div className="form-container">
@@ -195,7 +204,7 @@ function ProfileForm({ setUser }) {
                         <input
                             type="checkbox"
                             value="Grammar"
-                            checked={interests.includes('Grammar')}
+                            checked={interests && interests.includes('Grammar')}
                             onChange={() => handleInterestChange('Grammar')}
                         /><span className="custom-checkbox">&#10003;</span>
                         Grammar
@@ -204,7 +213,7 @@ function ProfileForm({ setUser }) {
                         <input
                             type="checkbox"
                             value="Vocabulary"
-                            checked={interests.includes('Vocabulary')}
+                            checked={interests && interests.includes('Vocabulary')}
                             onChange={() => handleInterestChange('Vocabulary')}
                         /><span className="custom-checkbox">&#10003;</span>
                         Vocabulary
@@ -213,7 +222,7 @@ function ProfileForm({ setUser }) {
                         <input
                             type="checkbox"
                             value="Listening Skills"
-                            checked={interests.includes('Listening skills')}
+                            checked={interests && interests.includes('Listening skills')}
                             onChange={() => handleInterestChange('Listening skills')}
                         /><span className="custom-checkbox">&#10003;</span>
                         Listening Skills
@@ -222,7 +231,7 @@ function ProfileForm({ setUser }) {
                         <input
                             type="checkbox"
                             value="Reading Skills"
-                            checked={interests.includes('Reading skills')}
+                            checked={interests && interests.includes('Reading skills')}
                             onChange={() => handleInterestChange('Reading skills')}
                         /><span className="custom-checkbox">&#10003;</span>
                         Reading Skills
@@ -231,7 +240,7 @@ function ProfileForm({ setUser }) {
                         <input
                             type="checkbox"
                             value="Writing Skills"
-                            checked={interests.includes('Writing skills')}
+                            checked={interests && interests.includes('Writing skills')}
                             onChange={() => handleInterestChange('Writing skills')}
                         /><span className="custom-checkbox">&#10003;</span>
                         Writing Skills

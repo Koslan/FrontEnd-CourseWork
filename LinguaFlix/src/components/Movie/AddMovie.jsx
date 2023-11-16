@@ -149,12 +149,13 @@ const AddMovie = () => {
   //////////
   const permissions = useSelector((state) => state.permissions);
 
-  const isAdmin = permissions.role === "admin";
+  const isAdmin = permissions.role === 'admin';
   // const isUser = permissions.role === 'user';
   // const isGuest = permissions.role === 'guest';
 
   const canAddMovie = isAdmin;
   /////////
+
 
   /*const handleSubmit = async (e) => {
     e.preventDefault();
@@ -231,7 +232,7 @@ const AddMovie = () => {
   );
 
   return (
-    <>
+   <>
       {isAdmin ? (
         <div className="AddMovieContainer">
           <h2 className="AddMovieTitle">Add New Movie</h2>
@@ -351,26 +352,53 @@ const AddMovie = () => {
               </div>
             )}
 
-            <br></br>
-            <br></br>
-            <textarea
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              placeholder="Enter your text here..."
-              rows="5"
-            />
-            <br></br>
-            <br></br>
-            <button className="AddMovieButton" type="submit">
-              Add Movie
-            </button>
-          </form>
-        </div>
-      ) : (
-        <div>This tab is only available to the administrator.</div>
-      )}
-      ;
-    </>
-  );
-};
+            {/* Нижний ряд вкладок для выбора уровня языка */}
+            <div className="languageLevelTabs">
+              {["A1", "A2", "B1", "B2", "C1", "C2"].map((level) => (
+                <button
+                  key={level}
+                  className={`tabButton ${currentLevel === level ? "active" : ""}`}
+                  onClick={() => setCurrentLevel(level)}
+                >
+                  {level}
+                </button>
+              ))}
+            </div>
+
+        {/* Список слов */}
+        <ul>
+          {vocabByLanguage[currentLanguagePair] &&
+            vocabByLanguage[currentLanguagePair][currentLevel].map(
+              (wordPair, index) => <li key={index}>{wordPair}</li>
+            )}
+        </ul>
+        <button
+         class="tabButton" 
+          onClick={() => {
+            const wordPair = prompt("Введите пару слов:");
+            if (wordPair) addWordPair(wordPair);
+          }}
+        >
+          Add Word
+        </button>
+        <br></br>
+        <br></br>
+        <textarea
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+          placeholder="Enter your text here..."
+          rows="5"
+        />
+        <br></br>
+        <br></br>
+        <button className="AddMovieButton" type="submit">
+          Add Movie
+        </button>
+      </form>
+    </div>
+  ) : null}  
+  </>
+ );
+}
+
 export default AddMovie;

@@ -28,7 +28,7 @@ const Login = () => {
       if (authUser) {
         console.log(authUser);
         dispatch(getUserFromDB(authUser.uid));
-        setShowModal(false);
+         setShowModal(false);
       } else {
         console.log('no user');
         setShowModal(true);
