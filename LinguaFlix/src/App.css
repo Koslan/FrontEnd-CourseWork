@@ -80,7 +80,7 @@
 
 .main-content {
   display: flex;
-  margin: 0 auto;
+  margin: 0 auto 64px;
   max-width: 1128px;
 }
 
@@ -88,7 +88,9 @@
   display: flex;
   background-color: #f4f4f6 !important;
   width: 100%;
-  margin-top: 64px;
+  height: 352px;
+  left: 0px;
+  bottom: 0px;
 }
 
 .movie-details {
@@ -119,11 +121,11 @@
 
 .header {
   height: 56px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto 44px;
-    max-width: 1128px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto 44px;
+  max-width: 1128px;
 }
 
 .header__logo:hover {
@@ -226,10 +228,10 @@
 
 .sidebar h1 {
   font-family: Comfortaa;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 36px;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 36px;
 }
 
 .sidebar a:hover {
@@ -272,9 +274,9 @@
 
 .movie-card-right-title {
   display: flex;
-    /* justify-content: space-between; */
-    max-width: 256px;
-    gap: 10px;
+  /* justify-content: space-between; */
+  max-width: 256px;
+  gap: 10px;
 }
 
 .movie-card-right-info {
@@ -290,12 +292,12 @@
 
 .movie-card h2 {
   text-align: start;
-    font-family: Comfortaa;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 20px;
-    width: 120px;
+  font-family: Comfortaa;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  width: 120px;
 }
 
 .error {
@@ -400,8 +402,6 @@
   margin: 0;
 }
 
-
-
 /* About Team */
 
 .about-team-container {
@@ -417,7 +417,7 @@
 }
 
 .team-card {
-  max-height: 620px;
+  margin-bottom: 100px;
   width: 200px;
   margin: 5px;
   padding: 10px;
@@ -531,6 +531,7 @@
   margin-right: 96px;
   margin-bottom: 64px;
   margin: 0 96px 64px 0;
+  height: 244px;
 }
 
 .form__container button {
@@ -566,10 +567,36 @@
 
 @media (max-width:1000px) {
   .header {
-     max-width: 952px;
-     margin: 20px auto 24px;
-
+    max-width: 952px;
+    margin: 0 auto 24px;
   }
+
+  .search-container {
+    display: flex;
+    padding: 4px 8px;
+    align-items: flex-start;
+  }
+
+  .header__center input {
+    border: 1px solid var(--Violet, #6612ED);
+    width: 80px;
+    height: 24px;
+    color: var(--Violet, #6612ED);
+    font-family: Comfortaa;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+  }
+
+  .nav-item {
+    padding: 0;
+  }
+
+  .header__right a {
+    margin-left: 0;
+  }
+
   .main-content {
     max-width: 952px;
   }
@@ -588,7 +615,7 @@
 
   .movie-details {
     max-width: 709px;
-    max-height: 1143px;
+    min-height: 1143px;
     margin: 0 20px 0 24px;
   }
 
@@ -600,9 +627,8 @@
     max-width: 951px;
     margin: 44px 25px 0 24px;
   }
+}
 
-  .main-content-addmovie {
-    margin-top: 36px;
-  }
-
+button:hover {
+  background-color: #646cff;
 }

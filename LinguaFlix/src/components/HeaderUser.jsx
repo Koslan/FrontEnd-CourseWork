@@ -7,7 +7,7 @@ import { PersonFill } from 'react-bootstrap-icons';
 import ProfileForm from './Header/ProfileForm';
 import { saveUserToFirebase } from '../store/userSlice';
 import { userActions } from '../store';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { saveUserToLocalStorage } from '../store/userUtils';
 
 function HeaderUser() {
@@ -15,18 +15,21 @@ function HeaderUser() {
   const [showProfileForm, setShowProfileForm] = useState(false);
   const user = useSelector(state => state.user);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  console.log('Name:', user);
 
   useEffect(() => {
     console.log("User effect triggered.");
     if (user.userId) {
       console.log("User ID is present:", user.userId);
       saveUserToFirebase(user);
-    saveUserToLocalStorage(user);
+      saveUserToLocalStorage(user);
     }
   }, [user]);
 
   const handleMyProfileClick = () => {
-       setShowProfileForm(!showProfileForm);
+    setShowProfileForm(!showProfileForm);
   };
 
   const handleCloseProfileForm = () => {
@@ -39,12 +42,14 @@ function HeaderUser() {
       .then(() => {
         console.log('signout');
         dispatch(userActions.logout());
-        window.location.href = '/';
+        saveUserToLocalStorage(null);
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);
       });
   }
+
   const isProfilePage = location.pathname === '/profile';
 
   return (
@@ -58,7 +63,7 @@ function HeaderUser() {
       <NavDropdown.Item href="/profile" onClick={handleMyProfileClick}>
         My profile
       </NavDropdown.Item>
-      <NavDropdown.Item href="#">Watched movies</NavDropdown.Item>
+
       <NavDropdown.Divider />
       <NavDropdown.Item href="#" onClick={handleLogout}>
         Logout

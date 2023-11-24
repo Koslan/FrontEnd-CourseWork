@@ -5,8 +5,10 @@ import { useSelector } from 'react-redux';
 import { async } from '@firebase/util';
 import { auth, database } from '../../store/firebase';
 import { update, ref, child, push } from '@firebase/database';
+import { writeNewPost } from '../../store/userSlice';
 
-function ProfileForm({ setUser, user }) {
+function ProfileForm({ setUser }) {
+    const user = useSelector(state => state.user);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [englishLevel, setEnglishLevel] = useState(user.englishLevel || '');
@@ -14,11 +16,13 @@ function ProfileForm({ setUser, user }) {
     const [description, setDescription] = useState('');
     const [interests, setInterests] = useState(user.interest || []);
 
+    console.log('User', user);
+
     useEffect(() => {
         const storedData = localStorage.getItem('currentUser');
 
         if (storedData) {
-            const parsedData = JSON.parse(storedData);
+            const parsedData = JSON.parse(storedData) || {};
             setName(parsedData.name || user.name || '');
             setEmail(parsedData.email || user.email || '');
             setEnglishLevel(parsedData.englishLevel);
@@ -38,12 +42,24 @@ function ProfileForm({ setUser, user }) {
             status,
             interest: interests,
         };
+        console.log(user);
+
+        console.log('uid before writeNewPost', user.userId);
+
+        console.log('Uid:', user.userId);
+        console.log('User', user);
+
+        console.log('Name:', name);
+        console.log('Email:', email);
+
         localStorage.setItem('currentUser', JSON.stringify(dataToStore));
         setUser(dataToStore);
 
         try {
             const userRef = ref(database, `users/${user.userId}`);
             await update(userRef, dataToStore);
+
+            await writeNewPost(user.userId, name, email);
 
             window.location.href = '/';
         } catch (error) {

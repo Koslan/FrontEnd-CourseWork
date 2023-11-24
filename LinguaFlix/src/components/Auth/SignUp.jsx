@@ -8,7 +8,6 @@ import { ref, set } from 'firebase/database';
 import { database } from '../../store/firebase';
 import { useNavigate } from 'react-router-dom';
 import '../Auth/auth.css';
-import { userSlice } from '../../store/userSlice';
 import { saveUserToLocalStorage } from '../../store/userUtils';
 
 function SignUp() {
@@ -20,6 +19,11 @@ function SignUp() {
 
     function handleSignUp(e) {
         e.preventDefault();
+
+        console.log('Email before signUp:', email);
+        console.log('Name before signUp:', name);
+        console.log('Password before signUp:', password);
+
 
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -44,6 +48,10 @@ function SignUp() {
                     userId: user.uid,
                     movies: []
                 };
+
+                console.log('Name:', name);
+                console.log('Email:', email);
+
                 saveUserToLocalStorage(userData);
 
                 console.log('User data saved to localStorage:', userData);

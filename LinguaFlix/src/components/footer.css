@@ -32,6 +32,11 @@ footer {
   position: relative;
   margin-top: auto;
   background: var(--Purple, #DAC7FA);
+
+  left: 0px;
+  bottom: 0px;
+  height: 30px;
+  width: 100%;
 }
 
 .footer-content {
@@ -87,9 +92,10 @@ footer h6 {
   .footer {
     max-height: 133px;
   }
+
   .footer-content {
     max-width: 952px;
-    padding: 36px 0 64px;
+    padding: 60px 0 64px;
   }
 
   .footer-line {
