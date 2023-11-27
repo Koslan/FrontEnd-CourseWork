@@ -1,6 +1,6 @@
 import './footer.css';
-import Logo from '../assets/logo.svg';
-import Nav from './Nav';
+import Logo from '../../assets/logo.svg';
+import Nav from '../Header/Nav';
 
 function Footer() {
 

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Tab, Nav } from 'react-bootstrap';
+import SignIn from './Signin';
+import SignUp from './SignUp';
 import './login.css';
 import { useDispatch } from 'react-redux';
-import { getUserFromDB } from '../store/userSlice';
-import { auth } from '../store/firebase';
+import { getUserFromDB } from '../../store/userSlice';
+import { auth } from '../../store/firebase';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SignUp from './Auth/SignUp.jsx';
-import SignIn from './Auth/SignIn.jsx';
 
 const Login = () => {
-  const [activeTab, setActiveTab] = useState('signIn');
+  const [activeTab, setActiveTab] = useState("signIn");
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
@@ -19,10 +19,10 @@ const Login = () => {
 
   useEffect(() => {
     const userRegistered = localStorage.getItem('userRegistered');
+
     if (!userRegistered) {
       setShowModal(true);
     }
-
 
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
