@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Tab, Nav } from 'react-bootstrap';
-import SignIn from './Auth/Signin';
-import SignUp from './Auth/SignUp';
+import SignIn from './Signin';
+import SignUp from './SignUp';
 import './login.css';
 import { useDispatch } from 'react-redux';
-import { getUserFromDB } from '../store/userSlice';
-import { auth } from '../store/firebase';
+import { getUserFromDB } from '../../store/userSlice';
+import { auth } from '../../store/firebase';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = () => {

@@ -1,8 +1,8 @@
 import React from 'react';
-import './App.css';
-import OurMissionImage from './assets/1.png';
-import VisionImage from './assets/2.png';
-import FunctionalityImage from './assets/3.png';
+import '../App.css';
+import OurMissionImage from '../assets/1.png';
+import VisionImage from '../assets/2.png';
+import FunctionalityImage from '../assets/3.png';
 
 
 function AboutProject() {

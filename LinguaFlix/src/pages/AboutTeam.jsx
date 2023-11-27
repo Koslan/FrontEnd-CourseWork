@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
+import '../App.css';
 
-import Elmira from './assets/elmira.png';
-import Kostintyn from './assets/kostintyn.png';
-import Olena from './assets/olena.png';
-import Anna from './assets/anna.png';
+import Elmira from '../assets/elmira.png';
+import Kostintyn from '../assets/kostintyn.png';
+import Olena from '../assets/olena.png';
+import Anna from '../assets/anna.png';
 
 const teamMembers = [
     {

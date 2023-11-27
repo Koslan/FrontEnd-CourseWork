@@ -1,27 +1,27 @@
 @font-face {
   font-family: 'Comfortaa';
-  src: url(../fonts/Comfortaa-Regular.ttf) format('ttf');
+  src: url(./fonts/Comfortaa-Regular.ttf) format('ttf');
   font-style: normal;
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Comfortaa';
-  src: url(../fonts/Comfortaa-Regular.woff) format('woff');
+  src: url(./fonts/Comfortaa-Regular.woff) format('woff');
   font-style: normal;
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Comfortaa';
-  src: url(../fonts/Comfortaa-SemiBold.ttf) format('ttf');
+  src: url(./fonts/Comfortaa-SemiBold.ttf) format('ttf');
   font-style: normal;
   font-weight: 600;
 }
 
 @font-face {
   font-family: 'Comfortaa';
-  src: url(../fonts/Comfortaa-SemiBold.woff) format('woff');
+  src: url(./fonts/Comfortaa-SemiBold.woff) format('woff');
   font-style: normal;
   font-weight: 600;
 }
@@ -536,7 +536,7 @@
 
 .form__container button {
   background-color: #6612ED;
-  border-radius: 12px;
+  border-radius: 20px;
   color: #fff;
   border: transparent;
   margin: 0;

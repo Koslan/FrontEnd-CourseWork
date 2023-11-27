@@ -1,13 +1,13 @@
-import Nav from './components/Nav.jsx';
+import Nav from './Nav.jsx';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './App.css';
-import Logo from './assets/logo.svg';
-import SearchIcon from './assets/search.svg';
+import '../../App.css';
+import Logo from '../../assets/logo.svg';
+import SearchIcon from '../../assets/search.svg';
 import { Link } from 'react-router-dom';
-import HeaderUser from './components/HeaderUser.jsx';
-import { getUserFromLocalStorage } from './store/userUtils.js';
-import { userActions } from './store/index.js';
+import HeaderUser from './HeaderUser.jsx';
+import { getUserFromLocalStorage } from '../../store/userUtils.js';
+import { userActions } from '../../store/index.js';
 
 function Header({ onSearch, results, isVisible }) {
     const user = useSelector(state => state.user);

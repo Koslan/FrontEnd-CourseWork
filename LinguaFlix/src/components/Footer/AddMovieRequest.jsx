@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getDatabase, ref, push, set } from "firebase/database";
-import { DB_URL } from "./store/firebase.js";
+import { DB_URL } from "../../store/firebase.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Alert from "react-bootstrap/Alert";
 import { useSelector } from "react-redux";
@@ -63,8 +63,8 @@ function AddMovieRequest() {
   };
 
   const permissions = useSelector((state) => state.permissions);
-  const isUser = permissions.role === "user";
-  const isGuest = permissions.role === "guest";
+  const isUser = permissions.isUser;
+  const isGuest = permissions.isGuest;
 
   return (
     <div className="main-content-addmovie">
@@ -97,17 +97,17 @@ function AddMovieRequest() {
               required
             />
             {isUser ? (
-              <button type="submit">Send</button>
-            ) : (
-              <button
-                type="button"
-                onClick={() =>
-                  handleAlert("Please register to submit the form.", false)
-                }
-              >
-                Send
-              </button>
-            )}
+  <button type="submit">Send</button>
+) : (
+  <button
+    type="button"
+    onClick={() => {
+      handleAlert("Please register to submit the form.", false);
+    }}
+  >
+    Send
+  </button>
+)}
           </div>
         </form>
       </div>
