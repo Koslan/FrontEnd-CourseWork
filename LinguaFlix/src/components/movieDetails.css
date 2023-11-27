@@ -4,18 +4,21 @@
     font-style: normal;
     font-weight: 400;
 }
+
 @font-face {
     font-family: 'Comfortaa';
     src: url(../fonts/Comfortaa-Regular.woff) format('woff');
     font-style: normal;
     font-weight: 400;
 }
+
 @font-face {
     font-family: 'Comfortaa';
     src: url(../fonts/Comfortaa-SemiBold.ttf) format('ttf');
     font-style: normal;
     font-weight: 600;
 }
+
 @font-face {
     font-family: 'Comfortaa';
     src: url(../fonts/Comfortaa-SemiBold.woff) format('woff');
@@ -25,7 +28,7 @@
 
 .movie-details {
     width: 100%;
-    margin-left: 24px;
+    margin: 0 20px 0 24px;
 }
 
 .movie-details img {
@@ -91,7 +94,7 @@
     width: 840px;
     height: 58px;
     display: flex;
-    margin: 64px 0 44px;
+    margin: 44px 0;
     align-items: flex-end;
     gap: 24px;
 }
@@ -117,6 +120,8 @@
     font-style: normal;
     font-weight: 400;
     line-height: 24px;
+    width: 96px;
+    height: 32px;
 }
 
 select {
@@ -134,4 +139,26 @@ select {
     font-style: normal;
     font-weight: 600;
     line-height: 20px;
+}
+
+.selectedLanguage label select {
+    border-radius: 16px;
+    border: 1px solid var(--Violet, #6612ED);
+    display: flex;
+    width: 264px;
+    height: 28px;
+    padding: 4px 4px 4px 8px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selectedLanguage button:hover {
+    background-color: #646cff;
+    color: white;
+}
+
+@media (max-width:1000px) {
+    .selectedLanguage {
+        margin: 24px 0;
+    }
 }

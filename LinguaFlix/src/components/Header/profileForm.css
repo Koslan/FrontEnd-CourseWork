@@ -247,5 +247,16 @@ h1 {
 .form-change-password button {
     width: 100%;
     border-radius: 21px;
-    background: var(--Violet, #6612ED);
+    background: var(--Violet, #6612ED) transparent;
+}
+
+.form-container button.clicked {
+    color: white !important;
+    background-color: #6612ED !important;
+}
+
+.form-container button:hover {
+    color: white;
+    text-decoration: underline;
+    box-shadow: none;
 }

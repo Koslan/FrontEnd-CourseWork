@@ -9,7 +9,7 @@ export const writeNewPost = (uid, username, useremail) => {
     const postData = {
       name: username,
       email: useremail,
-      userId: uid,
+      userId: uid
     };
   
     // Get a key for a new Post.
@@ -17,8 +17,8 @@ export const writeNewPost = (uid, username, useremail) => {
   
     // Write the new post's data simultaneously in the posts list and the user's post list.
     const updates = {};
-    updates['/posts/' + newPostKey] = postData;
-    updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+  //  updates['/posts/' + newPostKey] = postData;
+    // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
   
     return update(ref(db), updates);
   }
@@ -49,6 +49,7 @@ export const userSlice = createSlice({
         }
     }
 });
+
 export const getUserFromDB = (userId) => {
     return async (dispatch) => {
         const sendRequest = async () => {

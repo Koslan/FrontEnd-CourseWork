@@ -34,10 +34,11 @@
 
 .toggle-button {
   display: flex;
-  width: 840px;
+  max-width: 840px;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 36px;
+  max-height: 44px;
 }
 
 .custom-button {
@@ -58,6 +59,11 @@
   height: 44px;
 }
 
+.custom-button:hover {
+  background-color: white;
+  box-shadow: none;
+}
+
 .custom-button h2 {
   font-family: Comfortaa;
   font-size: 28px;
@@ -74,4 +80,5 @@
 
 .custom-button:focus {
   outline: none;
+  box-shadow: none;
 }
