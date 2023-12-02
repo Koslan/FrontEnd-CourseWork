@@ -4,23 +4,22 @@ import { Link } from 'react-router-dom';
 import './App.css';
 import { Provider } from 'react-redux';
 import store from './store';
-import Footer from './components/Footer';
+import Footer from './components/Footer/Footer';
 import AddMovie from './components/Movie/AddMovie';
 import AddMovie2 from './components/Movie/AddMovie2';
 import EditMovie from './components/Movie/EditMovie';
-import Header from './Header';
-import Sidebar from './Sidebar';
-import MovieDetails from './MovieDetails';
-import MoviesPage from './MoviesPage';
-import AboutTeam from './AboutTeam';
-import AboutProject from './AboutProject';
-import AddMovieRequest from './AddMovieRequest';
+import Header from './components/Header/Header';
+import Sidebar from './components/Main/Sidebar';
+import MovieDetails from './components/Main/MovieDetails';
+import MoviesPage from './pages/MoviesPage';
+import AboutTeam from './pages/AboutTeam';
+import AboutProject from './pages/AboutProject';
+import AddMovieRequest from './components/Footer/AddMovieRequest';
 import { DB_URL } from './store/firebase';
-import Login from './components/Login';
+import Login from './components/Auth/Login';
 import ProfileForm from './components/Header/ProfileForm';
 import ChangePassword from './components/Header/ChangePassword';
 import TextProcessor from './components/Text/TextProcessor'; // Укажите правильный путь к файлу
-
 
 function App() {
   const [movies, setMovies] = useState([]);

@@ -91,10 +91,12 @@ export const permissionsSlice = createSlice({
     name: 'permissions',
     initialState: {
         role: 'guest', // Роль "гостя" за замовчуванням
+        isUser: false,
     },
     reducers: {
         setRole(state, action) {
             state.role = action.payload;
+            state.isUser = action.payload === 'user';
         },
     },
 });

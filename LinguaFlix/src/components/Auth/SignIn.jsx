@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userActions } from '../../store';
 import '../Auth/auth.css';
+import { permissionsSlice } from '../../store/userSlice';
 
 function SignIn() {
     const [email, setEmail] = useState('');
@@ -25,13 +26,17 @@ function SignIn() {
                 const user = userCredential.user;
 
                 console.log(user);
+
+                const userRole = 'user';
+
+                dispatch(permissionsSlice.actions.setRole(userRole));
+
                 dispatch(
                     userActions.setActiveUser({
                         name: user.displayName,
                         email: email,
                         userId: user.uid,
                         movies: [],
-                        books: ''
                     })
                 );
                 toast.success(`Welcome, ${user.displayName}!`);

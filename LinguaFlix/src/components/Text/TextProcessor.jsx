@@ -3,7 +3,7 @@ import "./TextProcessor.css";
 import "../../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { processText, translateWord, generateTest } from "./TextUtilities";
-import { languages } from "../../Constants";
+import { languages } from "../../store/Constants";
 import {
   calculateReadabilityScores,
   countSyllables,

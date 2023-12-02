@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import './components/movieDetails.css';
-import LevelButton from './components/Body/LevelButton';
-import Table from './components/Body/Table';
-import { DB_URL } from './store/firebase';
-import ToggleButton from '../src/components/Body/ToggleButton.jsx';
+import './movieDetails.css';
+import LevelButton from './LevelButton';
+import Table from './Table';
+import { DB_URL } from '../../store/firebase';
+import ToggleButton from './ToggleButton.jsx';
 
 function MovieDetails() {
   document.querySelector('.sidebar').style.display = 'flex';

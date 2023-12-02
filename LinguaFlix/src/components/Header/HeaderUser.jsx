@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { NavDropdown } from 'react-bootstrap';
-import { auth } from '../store/firebase';
+import { auth } from '../../store/firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import './headerUser.css';
 import { PersonFill } from 'react-bootstrap-icons';
-import ProfileForm from './Header/ProfileForm';
-import { saveUserToFirebase } from '../store/userSlice';
-import { userActions } from '../store';
+import ProfileForm from './ProfileForm';
+import { saveUserToFirebase } from '../../store/userSlice';
+import { userActions } from '../../store';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { saveUserToLocalStorage } from '../store/userUtils';
+import { saveUserToLocalStorage } from '../../store/userUtils';
 
 function HeaderUser() {
   const dispatch = useDispatch();
