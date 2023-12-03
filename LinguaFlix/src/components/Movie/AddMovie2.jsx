@@ -3,7 +3,7 @@ import { getDatabase, ref, push, set } from "firebase/database";
 
 const AddMovie = () => {
   const [movie, setMovie] = useState({
-    name: "",
+    title: "",
     releaseYear: "",
     description: "",
     posterURL: "",
@@ -42,7 +42,7 @@ const AddMovie = () => {
       .then(() => {
         alert("Movie added successfully!");
         setMovie({
-          name: "",
+          title: "",
           releaseYear: "",
           description: "",
           posterURL: "",
@@ -62,16 +62,16 @@ const AddMovie = () => {
         <input
           type="text"
           className="form-control"
-          name="name"
-          value={movie.name}
+          name="title"
+          value={movie.title}
           onChange={handleChange}
-          placeholder="Name"
+          placeholder="Title"
         />
       </div>
 
       <div className="mb-3">
         <input
-          type="text"
+          type="number"
           className="form-control"
           name="releaseYear"
           value={movie.releaseYear}
@@ -92,7 +92,7 @@ const AddMovie = () => {
 
       <div className="mb-3">
         <input
-          type="text"
+          type="url"
           className="form-control"
           name="posterURL"
           value={movie.posterURL}

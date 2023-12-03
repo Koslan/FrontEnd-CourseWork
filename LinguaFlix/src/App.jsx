@@ -19,7 +19,7 @@ import { DB_URL } from './store/firebase';
 import Login from './components/Auth/Login';
 import ProfileForm from './components/Header/ProfileForm';
 import ChangePassword from './components/Header/ChangePassword';
-import TextProcessor from './components/Text/TextProcessor'; // Укажите правильный путь к файлу
+import TextProcessor from './components/Text/TextProcessor'; 
 
 function App() {
   const [movies, setMovies] = useState([]);
