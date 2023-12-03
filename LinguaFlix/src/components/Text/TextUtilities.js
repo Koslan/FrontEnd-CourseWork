@@ -1,5 +1,11 @@
 import { translatedLevelsMap as engSpaMap } from '../Text/Languages/eng-spa.js';
 import { translatedLevelsMap as engUkrMap } from '../Text/Languages/eng-ukr.js';
+import { translatedLevelsMap as engFreMap } from '../Text/Languages/eng-fre.js';
+import { translatedLevelsMap as engGerMap } from '../Text/Languages/eng-ger.js';
+import { translatedLevelsMap as engItaMap } from '../Text/Languages/eng-ita.js';
+import { translatedLevelsMap as engJapMap } from '../Text/Languages/eng-jap.js';
+import { translatedLevelsMap as engKorMap } from '../Text/Languages/eng-kor.js';
+import { translatedLevelsMap as engPolMap } from '../Text/Languages/eng-pol.js';
 
 
 
@@ -36,18 +42,30 @@ export const processText = (text, languageLevelsMap) => {
 
 export function translateWord(word, sourceLang, transLang) {
     const lowerCaseWord = word.toLowerCase();
-  
+
     let translationMap;
-    if (sourceLang === 'eng' && transLang === 'spa') {
-      translationMap = engSpaMap;
+    if (sourceLang === 'eng' && transLang === 'fre') {
+        translationMap = engFreMap;
+    } else if (sourceLang === 'eng' && transLang === 'ger') {
+        translationMap = engGerMap;
+    } else if (sourceLang === 'eng' && transLang === 'ita') {
+        translationMap = engItaMap;
+    } else if (sourceLang === 'eng' && transLang === 'jap') {
+        translationMap = engJapMap;
+    } else if (sourceLang === 'eng' && transLang === 'kor') {
+        translationMap = engKorMap;
+    } else if (sourceLang === 'eng' && transLang === 'pol') {
+        translationMap = engPolMap;
+    } else if (sourceLang === 'eng' && transLang === 'spa') {
+        translationMap = engSpaMap;
     } else if (sourceLang === 'eng' && transLang === 'ukr') {
-      translationMap = engUkrMap;
+        translationMap = engUkrMap;
     }
-    
-    const translation = translationMap[lowerCaseWord];
-  
-    return translation ? translation : '-';
-  }
+
+    const translation = translationMap ? translationMap[lowerCaseWord] : null;
+
+    return translation || '-';
+}
 
 export const generateTest = (level, inputText, sortedWords) => {
     const wordsFromLevel = sortedWords[level] || [];

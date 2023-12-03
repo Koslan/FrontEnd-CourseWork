@@ -170,7 +170,6 @@ function MovieDetails() {
     return <div>Loading...</div>;
   }
 
-
   const handleSubmit = () => {
     console.log("Accepted button clicked.");
     setSourceLang(selectedLanguages.firstLanguage);
@@ -221,6 +220,12 @@ function MovieDetails() {
             >
               <option value="ukr">Ukrainian</option>
               <option value="spa">Spanish</option>
+              <option value="fre">French</option>
+              <option value="ger">German</option>
+              <option value="ita">Italian</option>
+              <option value="jap">Japanese</option>
+              <option value="kor">Korean</option>
+              <option value="pol">Polish</option>
             </select>
           </label>
           <button type="submit" onClick={handleSubmit}>
