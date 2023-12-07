@@ -252,9 +252,7 @@ const TextProcessor = () => {
         <button className="textTab" onClick={() => setActiveTab(2)}>
           Translations
         </button>
-        <button className="textTab" onClick={() => setActiveTab(3)}>
-          Tests
-        </button>
+
         <button className="textTab" onClick={() => setActiveTab(4)}>
           Full Text
         </button>
