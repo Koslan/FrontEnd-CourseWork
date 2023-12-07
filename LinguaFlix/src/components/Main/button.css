@@ -1,0 +1,84 @@
+/* LevelButton */
+
+.level_button {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 12px;
+}
+
+.level_button button {
+  border-radius: 21px;
+  border: 1px solid var(--Violet, #6612ED);
+  background: var(--Purple, #DAC7FA);
+  color: var(--Violet, #6612ED);
+  display: flex;
+  padding: 5px 12px 3px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+.level_button button:hover {
+  background: var(--Violet, #6612ED);
+  color: white;
+  outline: none;
+}
+
+.level_button svg:hover {
+  transform: rotate(180deg);
+  fill: white;
+}
+
+/* ToggleButton */
+
+.toggle-button {
+  display: flex;
+  max-width: 840px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
+  max-height: 44px;
+}
+
+.custom-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  color: black;
+  outline: none;
+  display: flex;
+  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex: 1 0 0;
+  max-width: 280px;
+  height: 44px;
+}
+
+.custom-button:hover {
+  background-color: white;
+  box-shadow: none;
+}
+
+.custom-button h2 {
+  font-family: Comfortaa;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 36px;
+}
+
+.custom-button.clicked {
+  color: #6612ED;
+  text-decoration: underline;
+  box-shadow: none;
+}
+
+.custom-button:focus {
+  outline: none;
+  box-shadow: none;
+}

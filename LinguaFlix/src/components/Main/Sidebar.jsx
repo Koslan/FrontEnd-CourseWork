@@ -1,12 +1,12 @@
+// Sidebar.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import "./App.css"
+import "../../App.css";
 
-function Sidebar() {
+function Sidebar({ addToWatchedCallback }) {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
-    const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
         axios
@@ -18,14 +18,15 @@ function Sidebar() {
                         movieList.push({ id: movieKey, ...response.data[movieKey], isFavorite: false });
                     }
                 }
-                setMovies(movieList);
+                const last7Movies = movieList.slice(-7);
+                setMovies(last7Movies);
             })
             .catch((error) => {
                 setError('Error loading data: ' + error.message);
             });
     }, []);
 
-    const toggleFavorite = (movieId) => {
+    const handleToggleFavorite = (movieId) => {
         const updatedMovies = movies.map((movie) => {
             if (movie.id === movieId) {
                 return { ...movie, isFavorite: !movie.isFavorite };
@@ -33,12 +34,11 @@ function Sidebar() {
             return movie;
         });
         setMovies(updatedMovies);
+    };
 
-        if (favorites.includes(movieId)) {
-            setFavorites(favorites.filter((id) => id !== movieId));
-        } else {
-            setFavorites([...favorites, movieId]);
-        }
+    const handleAddToWatched = (movieId) => {
+        addToWatchedCallback(movieId);
+        console.log(`Фільм з ID ${movieId} додано до списку "Watched movies"`);
     };
 
     if (error) {
@@ -56,19 +56,12 @@ function Sidebar() {
                                 <img src={movie.posterURL} alt={movie.title} />
                             </div>
                             <div className="movie-card-right">
-                                <h2>{movie.title}</h2>
+                                <div className='movie-card-right-title'>
+                                    <h2>{movie.title}</h2>
+                                </div>
                                 <div className='movie-card-right-info'>
                                     <p>{movie.year}</p>
-                                    <p>C1</p>
-                                </div>
-                                <div className="favorite-container">
-                                    <button onClick={() => toggleFavorite(movie.id)} 
-                                        className={`favorite-button ${movie.isFavorite ? 'favorite' : ''}`}>
-                                        <div className="favorite-content">
-                                            <img src={movie.isFavorite ? '../src/assets/Fav@2x.svg' : '../src/assets/Fav.svg'} alt="Fav" />
-                                            {favorites.includes(movie.id) ? 'Delete from favorites' : 'Add to favorites'}
-                                        </div>
-                                    </button>
+                                    <p>{movie.lexicalComplexity}</p>
                                 </div>
                             </div>
                         </div>
@@ -81,5 +74,3 @@ function Sidebar() {
 }
 
 export default Sidebar;
-
-
