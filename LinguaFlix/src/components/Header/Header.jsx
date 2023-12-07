@@ -8,14 +8,29 @@ import { Link } from 'react-router-dom';
 import HeaderUser from './HeaderUser.jsx';
 import { getUserFromLocalStorage } from '../../store/userUtils.js';
 import { userActions } from '../../store/index.js';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../store/i18n.js';
+
+import multilanguage from '../../store/i18n.js';
+
+import { Globe } from 'react-bootstrap-icons';
+import i18next from 'i18next';
 
 function Header({ onSearch, results, isVisible }) {
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
     const [userLoaded, setUserLoaded] = useState(false);
 
+    const [showLanguageOptions, setShowLanguageOptions] = useState(false);
+    
+    const { t, i18n } = useTranslation();
+    const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
     const handleInputChange = (e) => {
         onSearch(e.target.value);
+    };
+
+    const toggleLanguageOptions = () => {
+        setShowLanguageOptions(!showLanguageOptions);
     };
 
     useEffect(() => {
@@ -28,10 +43,15 @@ function Header({ onSearch, results, isVisible }) {
         }
     }, [user, dispatch, userLoaded]);
 
+   const changeLanguage = (language) => {
+    i18n.changeLanguage(language);
+    setSelectedLanguage(language);
+    setShowLanguageOptions(false);
+       console.log(`Switching language to ${language}`);
+      };
 
     return (
         <header className="header">
-
             <div className='header__logo'>
                 <Link to="/movies">
                     <img src={Logo} width="160" height="33" alt="Logo" />
@@ -42,7 +62,6 @@ function Header({ onSearch, results, isVisible }) {
                     <img src={SearchIcon} alt="search" />
                     <input
                         type="text"
-                        placeholder="Search"
                         onChange={handleInputChange}
                     />
                     {isVisible && <div className="search-results">
@@ -56,8 +75,22 @@ function Header({ onSearch, results, isVisible }) {
                 </div>
             </div>
             <div className="header__right">
-                <Nav />
+                <Nav t={t} />
             </div>
+            <div className="language-icon" onClick={toggleLanguageOptions}>
+                <Globe />
+                <span>{selectedLanguage.toUpperCase()}</span>
+            </div>
+            {showLanguageOptions && (
+                <div className="language-dropdown">
+                    <div onClick={() => changeLanguage('uk')}>
+                        UK
+                    </div>
+                    <div onClick={() => changeLanguage('en')}>
+                        EN
+                    </div>
+                </div>
+            )}
             <div className='login'>
                 {!user.isLoggedIn && <Link to="/login" className={'nav-link'}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">

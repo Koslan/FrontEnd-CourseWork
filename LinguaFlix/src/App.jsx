@@ -8,7 +8,7 @@ import Footer from './components/Footer/Footer';
 import AddMovie from './components/Movie/AddMovie';
 import EditMovie from './components/Movie/EditMovie';
 import Header from './components/Header/Header';
-import Sidebar from './components/Main/Sidebar';
+import Sidebar from './components/Main/Sidebar.jsx';
 import MovieDetails from './components/Main/MovieDetails';
 import MoviesPage from './pages/MoviesPage';
 import AboutTeam from './pages/AboutTeam';
@@ -19,6 +19,8 @@ import Login from './components/Auth/Login';
 import ProfileForm from './components/Header/ProfileForm';
 import ChangePassword from './components/Header/ChangePassword';
 import TextProcessor from './components/Text/TextProcessor'; // Укажите правильный путь к файлу
+
+import './store/i18n.js';
 
 function App() {
   const [movies, setMovies] = useState([]);
