@@ -1,3 +1,14 @@
+import { translatedLevelsMap as engSpaMap } from '../Text/Languages/eng-spa.js';
+import { translatedLevelsMap as engUkrMap } from '../Text/Languages/eng-ukr.js';
+import { translatedLevelsMap as engFreMap } from '../Text/Languages/eng-fre.js';
+import { translatedLevelsMap as engGerMap } from '../Text/Languages/eng-ger.js';
+import { translatedLevelsMap as engItaMap } from '../Text/Languages/eng-ita.js';
+import { translatedLevelsMap as engJapMap } from '../Text/Languages/eng-jap.js';
+import { translatedLevelsMap as engKorMap } from '../Text/Languages/eng-kor.js';
+import { translatedLevelsMap as engPolMap } from '../Text/Languages/eng-pol.js';
+
+
+
 export const processText = (text, languageLevelsMap) => {
     const words = text.split(/\W+/).filter((word) => isNaN(word) && word);
 
@@ -29,11 +40,32 @@ export const processText = (text, languageLevelsMap) => {
     return proficiencyLevels;
 };
 
-export const translateWord = (word, sourceLang, transLang) => {
-    // This is a dummy translation function.
-    // In a real scenario, you would use an API or a library to get translations.
-    return word + "_trans";
-};
+export function translateWord(word, sourceLang, transLang) {
+    const lowerCaseWord = word.toLowerCase();
+
+    let translationMap;
+    if (sourceLang === 'eng' && transLang === 'fre') {
+        translationMap = engFreMap;
+    } else if (sourceLang === 'eng' && transLang === 'ger') {
+        translationMap = engGerMap;
+    } else if (sourceLang === 'eng' && transLang === 'ita') {
+        translationMap = engItaMap;
+    } else if (sourceLang === 'eng' && transLang === 'jap') {
+        translationMap = engJapMap;
+    } else if (sourceLang === 'eng' && transLang === 'kor') {
+        translationMap = engKorMap;
+    } else if (sourceLang === 'eng' && transLang === 'pol') {
+        translationMap = engPolMap;
+    } else if (sourceLang === 'eng' && transLang === 'spa') {
+        translationMap = engSpaMap;
+    } else if (sourceLang === 'eng' && transLang === 'ukr') {
+        translationMap = engUkrMap;
+    }
+
+    const translation = translationMap ? translationMap[lowerCaseWord] : null;
+
+    return translation || '-';
+}
 
 export const generateTest = (level, inputText, sortedWords) => {
     const wordsFromLevel = sortedWords[level] || [];
@@ -126,3 +158,20 @@ export const tagPartsOfSpeech = (text) => {
     });
 };
 
+export const formatSubtitles = (subtitleText) => {
+    const lines = subtitleText.split('\n');
+
+    let formattedSubtitles = '';
+    let currentSubtitleNumber = 1;
+
+    lines.forEach((line) => {
+        if (line.trim() === currentSubtitleNumber.toString()) {
+            formattedSubtitles += line + '\n';
+            currentSubtitleNumber++;
+        } else {
+            formattedSubtitles += line + '\n\n';
+        }
+    });
+
+    return formattedSubtitles.trim();
+};

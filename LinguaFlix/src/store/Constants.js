@@ -1,11 +1,10 @@
 export const languages = [
-    { label: "Ukrainian", value: "ukr" },
-    { label: "Spanish", value: "spa" },
-    { label: "English", value: "eng" },
-    { label: "French", value: "fre" },
-    { label: "German", value: "ger" },
-    { label: "Italian", value: "ita" },
-    { label: "Portuguese", value: "por" },
-    { label: "Dutch", value: "dut" },
-    { label: "Polish", value: "pol" },
+    { label: "English-French", value: "eng-fre" },
+    { label: "English-German", value: "eng-ger" },
+    { label: "English-Italian", value: "eng-ita" },
+    { label: "English-Japanese", value: "eng-jap" },
+    { label: "English-Korean", value: "eng-kor" },
+    { label: "English-Polish", value: "eng-pol" },
+    { label: "English-Spanish", value: "eng-spa" },
+    { label: "English-Ukrainian", value: "eng-ukr" }
 ];

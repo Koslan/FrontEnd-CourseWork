@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import Footer from './components/Footer/Footer';
 import AddMovie from './components/Movie/AddMovie';
+import AddMovie2 from './components/Movie/AddMovie2';
 import EditMovie from './components/Movie/EditMovie';
 import Header from './components/Header/Header';
 import Sidebar from './components/Main/Sidebar.jsx';
@@ -18,7 +19,7 @@ import { DB_URL } from './store/firebase';
 import Login from './components/Auth/Login';
 import ProfileForm from './components/Header/ProfileForm';
 import ChangePassword from './components/Header/ChangePassword';
-import TextProcessor from './components/Text/TextProcessor'; // Укажите правильный путь к файлу
+import TextProcessor from './components/Text/TextProcessor'; 
 
 import './store/i18n.js';
 
@@ -103,7 +104,7 @@ function App() {
                 <Route path="/movie/:id" element={<MovieDetails />} />
                 <Route path="/about_team" element={<AboutTeam />} />
                 <Route path="/about_project" element={<AboutProject />} />
-                <Route path="/add_movie" element={<AddMovie />} />
+                <Route path="/add_movie" element={<AddMovie2 />} />
                 <Route path="/edit_movie/:id" element={<EditMovie />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/profile' element={<ProfileForm user={user} setUser={setUser} />} />
