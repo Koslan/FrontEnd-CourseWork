@@ -461,7 +461,7 @@
 
 .team-card {
   margin-bottom: 100px;
-  width: 200px;
+  width: 250px;
   margin: 5px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -473,14 +473,37 @@
 }
 
 .team-card h2 {
-  margin: 10px 0;
-  height: 32px;
-  font-size: 18px;
+  font-family: Comfortaa;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  align-self: stretch;
+  margin: 16px 0 8px;
+  text-align: start;
+}
 
+.team-card p {
+  color: var(--Black, #131315);
+    font-family: Comfortaa;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: start;
+}
+
+.social-links {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 8px;
 }
 
 .social-links a {
-  margin-right: 10px;
+  display: flex;
+    width: 44px;
+    height: 44px;
+    padding: 7px 3px 6.345px 5px;
+    justify-content: center;
+    align-items: center;
 }
 
 /* About Project */

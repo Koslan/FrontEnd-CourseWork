@@ -4,23 +4,27 @@ import OurMissionImage from '../assets/1.png';
 import VisionImage from '../assets/2.png';
 import FunctionalityImage from '../assets/3.png';
 
+import '../store/i18n';
+import { useTranslation } from 'react-i18next';
+
 
 function AboutProject() {
+    const { t } = useTranslation();
 
     document.querySelector('.sidebar').style.display = 'none';
 
     
     return (
         <div className='about-project-container'> 
-        <h1>Hello, We are a LinguaFlix</h1>
+        <h1>{t('Hello, We are a LinguaFlix')}</h1>
         <div className="about-project">
             <div className="about-project-block">
                 <div className="about-project-image">
                     <img src={OurMissionImage} alt="Image 1" />
                 </div>
                 <div className="about-project-text">
-                    <h2>Our mission</h2>
-                    <p>Our primary objective is to support language learners by integrating art and education. We believe that individuals should be able to read, watch, and understand original content, and we offer resources to simplify this journey.</p>
+                    <h2>{t('Our mission')}</h2>
+                    <p>{t('Our mission_text')}</p>
                 </div>
             </div>
             <div className="about-project-block">
@@ -28,8 +32,8 @@ function AboutProject() {
                     <img src={VisionImage} alt="Image 2" />
                 </div>
                 <div className="about-project-text">
-                    <h2>Vision</h2>
-                    <p>To create an environment where linguistic barriers don't hinder access to art. Our platform seeks to promote deeper understanding by addressing the challenges of language comprehension.</p>
+                    <h2>{t('Vision')}</h2>
+                    <p>{t('Vision_text')}</p>
                 </div>
             </div>
             <div className="about-project-block">
@@ -37,8 +41,8 @@ function AboutProject() {
                     <img src={FunctionalityImage} alt="Image 3" />
                 </div>
                 <div className="about-project-text">
-                    <h2>Functionality</h2>
-                    <p>Our website allows users to select a book, movie, or series. We then analyze the content and classify words into recognized difficulty levels: A1, A2, B1, B2, C1, C2. Users receive a structured breakdown of words from the content, aiding their learning process. Additionally, a dedicated section on our website permits users to input any text and receive a similar breakdown.</p>
+                    <h2>{t('Functionality')}</h2>
+                    <p>{t('Functionality_text')}</p>
                 </div>
             </div>
         </div>

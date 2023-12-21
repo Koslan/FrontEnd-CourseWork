@@ -45,7 +45,7 @@ export const userSlice = createSlice({
             state.name = '';
             state.email = '';
             state.userId = '';
-            state.movies = '';
+            state.movies = [];
         }
     }
 });

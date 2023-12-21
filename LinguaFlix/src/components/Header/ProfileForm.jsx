@@ -7,6 +7,9 @@ import { auth, database } from '../../store/firebase';
 import { update, ref, child, push } from '@firebase/database';
 import { writeNewPost } from '../../store/userSlice';
 
+import '../../store/i18n';
+import { useTranslation } from 'react-i18next';
+
 function ProfileForm({ setUser }) {
     const user = useSelector(state => state.user);
     const [name, setName] = useState('');
@@ -15,6 +18,8 @@ function ProfileForm({ setUser }) {
     const [status, setStatus] = useState(user.status || '');
     const [description, setDescription] = useState('');
     const [interests, setInterests] = useState(user.interest || []);
+
+    const { t } = useTranslation();
 
     console.log('User', user);
 
@@ -88,22 +93,22 @@ function ProfileForm({ setUser }) {
     const updateDescription = (level) => {
         switch (level) {
             case 'beginner':
-                setDescription('You know a little English. You can have simple conversations in shops, restaurants, etc. You can write simple sentences, but you usually need a dictionary to help you.');
+                setDescription(t('beginner_descr'));
                 break;
             case 'intermediate':
-                setDescription('You can have simple conversations about a lot of different topics. You can make some complex sentences. You can read some English texts, but often need a dictionary to help you.');
+                setDescription(t('intermediate_descr'));
                 break;
             case 'advanced':
-                setDescription('You have a strong command of English. You can have in-depth conversations, read English literature, and write complex essays.');
+                setDescription(t('advanced_descr'));
                 break;
         }
     };
 
     return (
         <div className="form-container">
-            <h1>My profile:</h1>
+            <h1>{t('Profile')}</h1>
             <div className="form-group">
-                <label className="label">Name:</label>
+                <label className="label">{t('Name')}</label>
                 <input
                     className="input"
                     type="text"
@@ -112,7 +117,7 @@ function ProfileForm({ setUser }) {
                 />
             </div>
             <div className="form-group">
-                <label className="label">Email:</label>
+                <label className="label">{t('Email')}</label>
                 <input
                     className="input"
                     type="text"
@@ -122,10 +127,10 @@ function ProfileForm({ setUser }) {
             </div>
             <div className='form-group'>
 
-                <Link to="/change-password">Change Password</Link>
+                <Link to="/change-password">{t('Change_Password')}</Link>
             </div>
             <div className="form-group">
-                <label className="label">English Proficiency Level:</label>
+                <label className="label">{t('Level')}:</label>
                 <div className='form-group-level'>
                     <label className="radio-label">
                         <input
@@ -135,7 +140,7 @@ function ProfileForm({ setUser }) {
                             checked={englishLevel === 'beginner'}
                             onChange={() => handleEnglishLevelChange('beginner')}
                         /> <span className="radio-dot"></span>
-                        Beginner
+                        {t('Level_beginner')}
                     </label>
                     <label className="radio-label">
                         <input
@@ -145,7 +150,7 @@ function ProfileForm({ setUser }) {
                             checked={englishLevel === 'intermediate'}
                             onChange={() => handleEnglishLevelChange('intermediate')}
                         /> <span className="radio-dot"></span>
-                        Intermediate
+                        {t('Level_intermediate')}
                     </label>
                     <label className="radio-label">
                         <input
@@ -155,13 +160,13 @@ function ProfileForm({ setUser }) {
                             checked={englishLevel === 'advanced'}
                             onChange={() => handleEnglishLevelChange('advanced')}
                         /> <span className="radio-dot"></span>
-                        Advanced
+                        {t('Level_advanced')}
                     </label>
                 </div>
                 <p>{description}</p>
             </div>
             <div className="form-group">
-                <label className="label">Your Status:</label>
+                <label className="label">{t('Status')}</label>
                 <div className='form-group-status'>
                     <label className="radio-label">
                         <input
@@ -171,7 +176,7 @@ function ProfileForm({ setUser }) {
                             checked={status === 'teacher'}
                             onChange={() => setStatus('teacher')}
                         /><span className="radio-dot"></span>
-                        Teacher
+                        {t('Teacher')}
                     </label>
                     <label className="radio-label">
                         <input
@@ -181,7 +186,7 @@ function ProfileForm({ setUser }) {
                             checked={status === 'student'}
                             onChange={() => setStatus('student')}
                         /><span className="radio-dot"></span>
-                        Student
+                        {t('Student')}
                     </label>
                     <label className="radio-label">
                         <input
@@ -191,7 +196,7 @@ function ProfileForm({ setUser }) {
                             checked={status === 'business'}
                             onChange={() => setStatus('business')}
                         /><span className="radio-dot"></span>
-                        Business
+                        {t('Business')}
                     </label>
                     <label className="radio-label">
                         <input
@@ -201,12 +206,12 @@ function ProfileForm({ setUser }) {
                             checked={status === 'other'}
                             onChange={() => setStatus('other')}
                         /><span className="radio-dot"></span>
-                        Other
+                        {t('Others')}
                     </label>
                 </div>
             </div>
             <div className="form-group">
-                <label className="label">First language:</label>
+                <label className="label">{t('First_language')}</label>
                 <select className="select" name="profile.language">
                     <option value="Ukrainian">Ukrainian</option>
                     <option value="English">English</option>
@@ -214,7 +219,7 @@ function ProfileForm({ setUser }) {
                 </select>
             </div>
             <div className="form-group">
-                <label className="label">Areas of interest:</label>
+                <label className="label">{t('A_interest')}</label>
                 <div className='form-group-interest'>
                     <label className="checkbox-label">
                         <input
@@ -223,7 +228,7 @@ function ProfileForm({ setUser }) {
                             checked={interests && interests.includes('Grammar')}
                             onChange={() => handleInterestChange('Grammar')}
                         /><span className="custom-checkbox">&#10003;</span>
-                        Grammar
+                        {t('Grammar')}
                     </label>
                     <label className="checkbox-label">
                         <input
@@ -232,7 +237,7 @@ function ProfileForm({ setUser }) {
                             checked={interests && interests.includes('Vocabulary')}
                             onChange={() => handleInterestChange('Vocabulary')}
                         /><span className="custom-checkbox">&#10003;</span>
-                        Vocabulary
+                        {t('Vocabulary')}
                     </label>
                     <label className="checkbox-label">
                         <input
@@ -241,7 +246,7 @@ function ProfileForm({ setUser }) {
                             checked={interests && interests.includes('Listening skills')}
                             onChange={() => handleInterestChange('Listening skills')}
                         /><span className="custom-checkbox">&#10003;</span>
-                        Listening Skills
+                        {t('L_skills')}
                     </label>
                     <label className="checkbox-label">
                         <input
@@ -250,7 +255,7 @@ function ProfileForm({ setUser }) {
                             checked={interests && interests.includes('Reading skills')}
                             onChange={() => handleInterestChange('Reading skills')}
                         /><span className="custom-checkbox">&#10003;</span>
-                        Reading Skills
+                        {t('R_skills')}
                     </label>
                     <label className="checkbox-label">
                         <input
@@ -259,11 +264,11 @@ function ProfileForm({ setUser }) {
                             checked={interests && interests.includes('Writing skills')}
                             onChange={() => handleInterestChange('Writing skills')}
                         /><span className="custom-checkbox">&#10003;</span>
-                        Writing Skills
+                        {t('W_skills')}
                     </label>
                 </div>
             </div>
-            <button onClick={saveDataToLocalStorage}>Save</button>
+            <button onClick={saveDataToLocalStorage}>{t('Save')}</button>
         </div >
     );
 }

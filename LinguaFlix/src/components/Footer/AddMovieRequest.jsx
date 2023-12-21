@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getDatabase, ref, push, set } from "firebase/database";
 import { DB_URL } from "../../store/firebase.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Alert from "react-bootstrap/Alert";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import '../../store/userSlice.js';
 
-function AddMovieRequest() {
+import '../../store/i18n.js';
+import { useTranslation } from "react-i18next";
+import { getUserFromDB } from "../../store/userSlice.js";
+
+function AddMovieRequest({ user }) {
+  const { t } = useTranslation();
+
+  const userId = useSelector((state) => state.user.userId);
+  const dispatch = useDispatch();
+
+  console.log("User Info:", user);
+
   const customLabels = {
     title: "Movie Title",
     year: "Release Year",
@@ -34,7 +46,7 @@ function AddMovieRequest() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.title === "" || formData.year === "") {
-      handleAlert("Please fill out both title and year fields.", false);
+      handleAlert(t("addMovieRequest.fillFields"), false);
       return;
     }
     try {
@@ -43,10 +55,10 @@ function AddMovieRequest() {
       const newMovieRef = push(wantMovieRef);
       set(newMovieRef, formData);
       setFormData({ title: "", year: "" });
-      handleAlert("Movie added to 'Want Movie' list successfully!", true);
+      handleAlert(t("addMovieRequest.movieAddedSuccess"), true);
     } catch (error) {
       console.error("Error adding movie:", error);
-      handleAlert("Error adding movie.", false);
+      handleAlert(t("addMovieRequest.errorAddingMovie"), false);
     }
   };
 
@@ -61,20 +73,20 @@ function AddMovieRequest() {
       setIsSuccessAlert(false);
     }, 3000);
   };
+  // const permissions = useSelector((state) => state.permissions);
+  // const isUser = permissions.isUser;
+  // const isGuest = permissions.isGuest;
 
-  const permissions = useSelector((state) => state.permissions);
-  const isUser = permissions.isUser;
-  const isGuest = permissions.isGuest;
+  useEffect(() => {
+    dispatch(getUserFromDB(userId));
+  }, [dispatch, userId]);
 
   return (
     <div className="main-content-addmovie">
       <div className="addmovie__container">
         <div className="addmovie__info">
-          <h1>Didn't find the movie you want?</h1>
-          <h2>
-            Fill out a form, and we will inform you when it is available in our
-            library.
-          </h2>
+          <h1>{t('Add_request')}</h1>
+          <h2>{t('Add_request_text')}</h2>
         </div>
         <form onSubmit={handleSubmit} className="form__container">
           <div className="forms">
@@ -83,7 +95,7 @@ function AddMovieRequest() {
               name="title"
               value={formData.title}
               onChange={handleInputChange}
-              placeholder={customLabels.title}
+              placeholder={t('Add_request_title')}
               required
             />
             <input
@@ -93,21 +105,21 @@ function AddMovieRequest() {
               min="1900"
               max={new Date().getFullYear()}
               onChange={handleInputChange}
-              placeholder={customLabels.year}
+              placeholder={t('Add_request_year')}
               required
             />
-            {isUser ? (
-  <button type="submit">Send</button>
-) : (
-  <button
-    type="button"
-    onClick={() => {
-      handleAlert("Please register to submit the form.", false);
-    }}
-  >
-    Send
-  </button>
-)}
+            {user ? (
+              <button type="submit">{t('Send')}</button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  handleAlert(t('handle_Alert'), false);
+                }}
+              >
+                {t('Send')}
+              </button>
+            )}
           </div>
         </form>
       </div>
@@ -115,9 +127,9 @@ function AddMovieRequest() {
         <Alert variant={isSuccessAlert ? "success" : "danger"}>
           <p>{alertMessage}</p>
         </Alert>
+
       )}
     </div>
   );
 }
-
 export default AddMovieRequest;

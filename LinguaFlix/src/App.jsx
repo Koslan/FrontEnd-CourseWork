@@ -20,6 +20,7 @@ import ProfileForm from './components/Header/ProfileForm';
 import ChangePassword from './components/Header/ChangePassword';
 import TextProcessor from './components/Text/TextProcessor'; // Укажите правильный путь к файлу
 
+import { useTranslation } from 'react-i18next';
 import './store/i18n.js';
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [user, setUser] = useState({ name: '', email: '', englishLevel: '', status: '' });
+
+   const { t } = useTranslation();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -113,7 +116,7 @@ function App() {
             )}
           </Routes>
         </div>
-        <AddMovieRequest />
+        <AddMovieRequest  user={user}/>
         <Footer />
       </Router>
     </Provider>

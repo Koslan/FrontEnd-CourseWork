@@ -4,9 +4,14 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import "../../App.css";
 
+import '../../store/i18n';
+import { useTranslation } from 'react-i18next';
+
 function Sidebar({ addToWatchedCallback }) {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
+
+    const { t } = useTranslation();
 
     useEffect(() => {
         axios
@@ -47,7 +52,7 @@ function Sidebar({ addToWatchedCallback }) {
 
     return (
         <div className="sidebar">
-            <h1>Popular now</h1>
+            <h1>{t('Popular now')}</h1>
             {movies.map((movie) => {
                 return (
                     <Link key={movie.id} to={`/movie/${movie.id}`} className="movie-card-link">

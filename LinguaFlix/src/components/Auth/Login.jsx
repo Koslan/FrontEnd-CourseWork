@@ -8,10 +8,15 @@ import { getUserFromDB } from '../../store/userSlice';
 import { auth } from '../../store/firebase';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import '../../store/i18n';
+import { useTranslation } from 'react-i18next';
+
 const Login = () => {
   const [activeTab, setActiveTab] = useState("signIn");
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
+
+  const { t } = useTranslation();
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -48,7 +53,7 @@ const Login = () => {
             <div className="close-button" onClick={handleCloseModal}>
               X
             </div>
-            <h1 className="login-title">Personal office</h1>
+            <h1 className="login-title">{t('Personal_office')}</h1>
             <Tab.Container activeKey={activeTab}>
               <Nav variant="pills" className="login-tabs">
                 <Nav.Item>
@@ -56,7 +61,7 @@ const Login = () => {
                     eventKey="signIn"
                     onClick={() => handleTabChange("signIn")}
                   >
-                    Sign In
+                    {t('Sign In')}
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
@@ -64,7 +69,7 @@ const Login = () => {
                     eventKey="signUp"
                     onClick={() => handleTabChange("signUp")}
                   >
-                    Sign Up
+                    {t('Sign Up')}
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
