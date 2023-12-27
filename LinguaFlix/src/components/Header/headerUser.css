@@ -1,0 +1,29 @@
+.dropdown-menu.show {
+    position: absolute;
+    inset: 0px 0px auto auto;
+    transform: translate3d(-32px, 47.5px, 0px);
+    width: 200px;
+    height: 200px;
+    border-radius: 12px;
+    background: var(--Gray, #F4F4F6);
+}
+
+.dropdown-header {
+    color: var(--Black, #131315);
+    font-family: Comfortaa;
+    font-style: normal;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.dropdown-menu.show a {
+    margin-bottom: 20px;
+}
+
+.dropdown-divider hr {
+    margin: 30px 0 20px;
+}
+
+.dropdown-divider {
+    margin-top: 50px;
+}
