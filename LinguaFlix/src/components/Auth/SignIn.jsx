@@ -9,6 +9,9 @@ import { userActions } from '../../store';
 import '../Auth/auth.css';
 import { permissionsSlice } from '../../store/userSlice';
 
+import '../../store/i18n';
+import { useTranslation } from 'react-i18next';
+
 function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,6 +20,8 @@ function SignIn() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const auth = getAuth();
+
+    const { t } = useTranslation();
 
     async function handleLogin(e) {
         e.preventDefault();
@@ -52,15 +57,15 @@ function SignIn() {
     return (
         <Form onSubmit={handleLogin}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ display: 'flex', flexDirection: 'column' }}>
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)} />
+                <Form.Label>{t('Email address')}</Form.Label>
+                <Form.Control type="email" placeholder={t('Placeholder_email')} onChange={(e) => setEmail(e.target.value)} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput2" style={{ display: 'flex', flexDirection: 'column' }}>
-                <Form.Label>Password</Form.Label>
+                <Form.Label>{t('Password')}</Form.Label>
                 <Form.Control type="password" placeholder="*******" onChange={(e) => setPassword(e.target.value)} />
             </Form.Group>
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            <Button type="submit">Sign In</Button>
+            <Button type="submit">{t('Sign In')}</Button>
         </Form>
     );
 }

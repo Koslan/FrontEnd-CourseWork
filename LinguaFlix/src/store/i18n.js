@@ -3,12 +3,11 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import { uk } from '../i18n/locales/uk/uk.js';
+import { en } from '../i18n/locales/en/en.js';
 
 const resources = {
   en: {
-    translation: {
-      "Welcome to React": "Welcome to React and react-i18next"
-    }
+    translation: en
   },
   uk: {
     translation: uk

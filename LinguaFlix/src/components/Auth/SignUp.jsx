@@ -11,12 +11,17 @@ import { useNavigate } from 'react-router-dom';
 import '../Auth/auth.css';
 import { saveUserToLocalStorage } from '../../store/userUtils';
 
+import '../../store/i18n';
+import { useTranslation } from 'react-i18next';
+
 function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const { t } = useTranslation();
 
     function handleSignUp(e) {
         e.preventDefault();
@@ -76,26 +81,26 @@ function SignUp() {
     return (
         <Form onSubmit={handleSignUp}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput3" style={{ display: 'flex', flexDirection: 'column' }}>
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="text" onChange={(e) => setName(e.target.value)} />
+                <Form.Label>{t('Name')}</Form.Label>
+                <Form.Control type="text" placeholder={t('Name')} onChange={(e) => setName(e.target.value)} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput4" style={{ display: 'flex', flexDirection: 'column' }}>
-                <Form.Label>Email address</Form.Label>
+                <Form.Label>{t('Email address')}</Form.Label>
                 <Form.Control
                     type="email"
-                    placeholder="name@example.com"
+                    placeholder={t('Placeholder_email')}
                     onChange={(e) => setEmail(e.target.value)}
                 />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput5" style={{ display: 'flex', flexDirection: 'column' }}>
-                <Form.Label>Password</Form.Label>
+                <Form.Label>{t('Password')}</Form.Label>
                 <Form.Control
                     type="password"
                     placeholder='*******'
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </Form.Group>
-            <Button type="submit">Sign Up</Button>
+            <Button type="submit">{t('Sign Up')}</Button>
         </Form>
     );
 }

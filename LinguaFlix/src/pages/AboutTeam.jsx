@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 
 import Elmira from '../assets/elmira.png';
@@ -6,69 +6,82 @@ import Kostintyn from '../assets/kostintyn.png';
 import Olena from '../assets/olena.png';
 import Anna from '../assets/anna.png';
 
-const teamMembers = [
-    {
-        name: 'Kostintyn Buriak',
-        photo: Kostintyn,
-        socialLinks: {
-            linkedin: 'https://www.linkedin.com/in/kburiak/',
-            github: 'https://github.com/Koslan',
-        },
-        about: 'Kostiantyn Buriak is a competent Full Stack Developer, weaving together backend, frontend, and DevOps expertise with ease. Mastery in Java, HTML, CSS, JS, React, Redux, and Firebase ensures he`s equipped to engineer intricate UI components and cohesive web platforms. While he`s recognized as a certified Salesforce Developer, his vast experience speaks to a broader technological depth, with projects ranging from app integrations to streamlining CI/CD processes using GitHub actions. An esteemed graduate from the Odessa National Academy of Communications and fluent in English (B2), Kostiantyn is a valuable asset to any development venture.',
-    },
-    {
-        name: 'Elmira Volokhova',
-        photo: Elmira,
-        socialLinks: {
-            linkedin: 'https://www.facebook.com/johndoe',
-            github: 'https://github.com/Elmimira',
-        },
-        about: 'Elmira Volokhova is an aspiring front-end developer with a passion for creating attractive and user-friendly web interfaces. Proficient in HTML, CSS, JavaScript and modern front-end libraries such as React, he strives to create exceptional user experiences. With a bachelor`s degree in mathematics teaching and a keen eye for design, Elmira strives to contribute to web development projects and bring them to life.',
-    },
-    {
-        name: 'Olena Stovolosova',
-        photo: Olena,
-        socialLinks: {
-            linkedin: 'https://www.facebook.com/johndoe',
-            github: 'https://github.com/Stovolosova',
-        },
-        about: 'Olena Stovolosova is an aspiring Front-End Developer with a passion for creating intuitive and visually appealing web experiences. Proficient in HTML, CSS, and JavaScript, Olena is dedicated to crafting responsive and user-friendly websites. She has also gained proficiency in popular front-end frameworks, including React, and has a keen eye for design, ensuring a seamless user interface. Olena is a quick learner and a team player, always eager to collaborate with others to bring creative ideas to life. ',
-    },
-    {
-        name: 'Anna Buriak',
-        photo: Anna,
-        socialLinks: {
-            linkedin: 'https://www.facebook.com/johndoe',
-            github: 'https://www.twitter.com/johndoe',
-        },
-        about: 'Anna Buriak is a budding web designer with a passion for crafting visually appealing and user-friendly digital experiences. Her journey into the world of web design began with a fascination for the intersection of creativity and technology. She is dedicated to honing my skills in HTML, CSS, and responsive design to bring my creative visions to life. She believe that every website should not only look great but also provide a seamless and engaging user experience. She is excited to learn, grow, and contribute to the ever-evolving field of web design.',
-    },
-];
+import '../store/i18n';
+import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
+import i18n from '../store/i18n';
+
+
 
 function AboutTeam() {
+    const { t } = useTranslation();
+
+    const teamMembers = [
+        {
+            name: t('Kostintyn_Buriak'),
+            photo: Kostintyn,
+            socialLinks: {
+                linkedin: 'https://www.linkedin.com/in/kburiak/',
+                github: 'https://github.com/Koslan',
+            },
+            about: t('Kostiantyn_Buriak_description'),
+        },
+        {
+            name: t('Elmira_Volokhova'),
+            photo: Elmira,
+            socialLinks: {
+                linkedin: 'https://www.facebook.com/johndoe',
+                github: 'https://github.com/Elmimira',
+            },
+            about: t('Elmira_Volokhova_description'),
+        },
+        {
+            name: t('Olena_Stovolosova'),
+            photo: Olena,
+            socialLinks: {
+                linkedin: 'https://www.facebook.com/johndoe',
+                github: 'https://github.com/Stovolosova',
+            },
+            about: t('Olena_Stovolosova_description'),
+        },
+        {
+            name: t('Anna_Buriak'),
+            photo: Anna,
+            socialLinks: {
+                linkedin: 'https://www.facebook.com/johndoe',
+                github: 'https://www.twitter.com/johndoe',
+            },
+            about: t('Anna_Buriak_description'),
+        },
+    ];
 
     document.querySelector('.sidebar').style.display = 'none';
 
-    
+
     return (
         <div className="about-team-container">
-        <h1>About LinguaFlix team</h1>
-        <div className='about-team'>
-            {teamMembers.map((member, index) => (
-                <div className="team-card" key={index}>
-                    <img src={member.photo} alt={member.name} />
-                    <h2>{member.name}</h2>
-                    <div className="social-links">
-                        <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
-                            Linkedin
-                        </a>
-                        <a href={member.socialLinks.github} target="_blank" rel="noopener noreferrer">
-                        Github
-                        </a>
+            <h1>{t('About_team')}</h1>
+            <div className='about-team'>
+                {teamMembers.map((member, index) => (
+                    <div className="team-card" key={index}>
+                        <img src={member.photo} alt={member.name} />
+                        <h2>{t(member.name)}</h2>
+                        <div className="social-links">
+                            <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="31" viewBox="0 0 36 31" fill="none">
+                                    <path d="M34.2337 28.7106C34.3109 28.7114 34.3875 28.6963 34.4587 28.6663C34.5298 28.6362 34.5941 28.5919 34.6474 28.5359C34.7007 28.48 34.7419 28.4138 34.7686 28.3413C34.7952 28.2688 34.8066 28.1916 34.8022 28.1144C34.8022 27.6916 34.5471 27.4896 34.0237 27.4896H33.178V29.7034H33.4961V28.7384H33.887L33.8959 28.7501L34.5024 29.7034H34.8426L34.19 28.7168L34.2337 28.7106ZM33.8658 28.4889H33.497V27.7405H33.9645C34.206 27.7405 34.4813 27.7799 34.4813 28.0961C34.4813 28.4598 34.2027 28.4889 33.864 28.4889M25.9366 25.9363H21.4263V18.873C21.4263 17.1887 21.3962 15.0205 19.0805 15.0205C16.7314 15.0205 16.3719 16.8556 16.3719 18.7504V25.9359H11.8616V11.4108H16.1915V13.3958H16.2521C16.6855 12.6549 17.3116 12.0454 18.0639 11.6322C18.8162 11.2191 19.6665 11.0177 20.5242 11.0495C25.0956 11.0495 25.9385 14.0564 25.9385 17.9681L25.9366 25.9363ZM6.77251 9.42533C6.25484 9.42542 5.74876 9.272 5.31829 8.98448C4.88781 8.69695 4.55226 8.28823 4.35407 7.81C4.15588 7.33177 4.10395 6.80551 4.20485 6.29777C4.30575 5.79003 4.55495 5.32361 4.92093 4.9575C5.28692 4.59138 5.75324 4.34202 6.26095 4.24094C6.76866 4.13985 7.29493 4.19159 7.77324 4.38961C8.25154 4.58763 8.66038 4.92303 8.94806 5.3534C9.23573 5.78378 9.38933 6.2898 9.38943 6.80747C9.38949 7.15119 9.32185 7.49156 9.19037 7.80914C9.05889 8.12671 8.86615 8.41529 8.62314 8.65838C8.38014 8.90147 8.09164 9.09432 7.7741 9.22591C7.45657 9.3575 7.11623 9.42526 6.77251 9.42533ZM9.02766 25.9363H4.51266V11.4108H9.02766V25.9363ZM28.1852 0.00207312H2.24623C1.65749 -0.00457082 1.09019 0.222794 0.669001 0.634205C0.247811 1.04562 0.00718526 1.60741 0 2.19615V28.2427C0.00693934 28.8317 0.247411 29.3939 0.668586 29.8057C1.08976 30.2176 1.65719 30.4454 2.24623 30.4391H28.1852C28.7754 30.4465 29.3444 30.2194 29.7672 29.8075C30.1901 29.3957 30.4322 28.8329 30.4403 28.2427V2.19427C30.4319 1.60437 30.1897 1.04193 29.7668 0.63053C29.344 0.219129 28.7751 -0.00758627 28.1852 0.000193824" fill="#0A66C2" />
+                                    <path d="M33.9043 26.5034C33.3556 26.5087 32.8313 26.7311 32.446 27.1219C32.0608 27.5127 31.846 28.0402 31.8487 28.589C31.8513 29.1378 32.0711 29.6631 32.4601 30.0503C32.8491 30.4374 33.3755 30.6547 33.9243 30.6547C34.4731 30.6547 34.9995 30.4374 35.3885 30.0503C35.7775 29.6631 35.9973 29.1378 36 28.589C36.0026 28.0402 35.7878 27.5127 35.4026 27.1219C35.0174 26.7311 34.493 26.5087 33.9443 26.5034H33.9043ZM33.9043 30.4171C33.5444 30.423 33.1908 30.3222 32.8882 30.1272C32.5856 29.9322 32.3476 29.6519 32.2043 29.3216C32.0611 28.9914 32.0189 28.6261 32.0833 28.2719C32.1476 27.9177 32.3155 27.5906 32.5658 27.3318C32.8161 27.0731 33.1375 26.8943 33.4893 26.8182C33.8411 26.7421 34.2077 26.7721 34.5425 26.9043C34.8773 27.0365 35.1654 27.265 35.3704 27.5609C35.5753 27.8569 35.6879 28.207 35.6939 28.5669V28.5974C35.704 29.0696 35.5261 29.5264 35.1994 29.8675C34.8727 30.2085 34.424 30.4059 33.9518 30.4161H33.9048" fill="#0A66C2" />
+                                </svg>
+                            </a>
+                            <a href={member.socialLinks.github} target="_blank" rel="noopener noreferrer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
+                                    <path d="M16.0411 32.2629C16.0411 32.4081 15.8742 32.5242 15.6637 32.5242C15.4242 32.546 15.2573 32.4298 15.2573 32.2629C15.2573 32.1177 15.4242 32.0016 15.6347 32.0016C15.8524 31.9798 16.0411 32.096 16.0411 32.2629ZM13.7839 31.9363C13.7331 32.0815 13.8782 32.2484 14.096 32.2919C14.2847 32.3645 14.5024 32.2919 14.546 32.1468C14.5895 32.0016 14.4516 31.8347 14.2339 31.7694C14.0452 31.7186 13.8347 31.7911 13.7839 31.9363ZM16.9919 31.8129C16.7815 31.8637 16.6363 32.0016 16.6581 32.1686C16.6798 32.3137 16.8685 32.4081 17.0863 32.3573C17.2968 32.3065 17.4419 32.1686 17.4202 32.0234C17.3984 31.8855 17.2024 31.7911 16.9919 31.8129ZM21.7677 4C11.7008 4 4 11.6427 4 21.7097C4 29.7589 9.06613 36.6468 16.3024 39.071C17.2315 39.2379 17.5581 38.6645 17.5581 38.1927C17.5581 37.7427 17.5363 35.2605 17.5363 33.7363C17.5363 33.7363 12.4556 34.825 11.3887 31.5734C11.3887 31.5734 10.5613 29.4613 9.37097 28.9169C9.37097 28.9169 7.70887 27.7774 9.4871 27.7992C9.4871 27.7992 11.2944 27.9444 12.2887 29.6718C13.8782 32.4734 16.5419 31.6677 17.5798 31.1887C17.7468 30.0274 18.2185 29.2218 18.7411 28.7427C14.6839 28.2927 10.5903 27.7048 10.5903 20.7226C10.5903 18.7266 11.1419 17.725 12.3032 16.4476C12.1145 15.9758 11.4976 14.0306 12.4919 11.5194C14.0089 11.0476 17.5 13.479 17.5 13.479C18.9516 13.0726 20.5121 12.8621 22.0581 12.8621C23.604 12.8621 25.1645 13.0726 26.6161 13.479C26.6161 13.479 30.1073 11.0403 31.6242 11.5194C32.6185 14.0379 32.0016 15.9758 31.8129 16.4476C32.9742 17.7323 33.6855 18.7339 33.6855 20.7226C33.6855 27.7266 29.4105 28.2855 25.3532 28.7427C26.021 29.3161 26.5871 30.4048 26.5871 32.1105C26.5871 34.5565 26.5653 37.5831 26.5653 38.1782C26.5653 38.65 26.8992 39.2234 27.821 39.0565C35.079 36.6468 40 29.7589 40 21.7097C40 11.6427 31.8347 4 21.7677 4ZM11.0548 29.0331C10.9605 29.1056 10.9823 29.2726 11.1056 29.4105C11.2218 29.5266 11.3887 29.5774 11.4831 29.4831C11.5774 29.4105 11.5556 29.2435 11.4323 29.1056C11.3161 28.9895 11.1492 28.9387 11.0548 29.0331ZM10.271 28.4452C10.2202 28.5395 10.2927 28.6556 10.4379 28.7282C10.554 28.8008 10.6992 28.779 10.75 28.6774C10.8008 28.5831 10.7282 28.4669 10.5831 28.3944C10.4379 28.3508 10.3218 28.3726 10.271 28.4452ZM12.6226 31.029C12.5065 31.1234 12.55 31.3411 12.7169 31.479C12.8839 31.646 13.0944 31.6677 13.1887 31.5516C13.2831 31.4573 13.2395 31.2395 13.0944 31.1016C12.9347 30.9347 12.7169 30.9129 12.6226 31.029ZM11.7952 29.9621C11.679 30.0347 11.679 30.2234 11.7952 30.3903C11.9113 30.5573 12.1073 30.6298 12.2016 30.5573C12.3177 30.4629 12.3177 30.2742 12.2016 30.1073C12.1 29.9403 11.9113 29.8677 11.7952 29.9621Z" fill="#131315" />
+                                </svg>
+                            </a>
+                        </div>
+                        <p>{t(member.about)}</p>
                     </div>
-                    <p>{member.about}</p>
-                </div>
-            ))}
+                ))}
             </div>
         </div>
     );

@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import '../App.css'
+import '../App.css';
+
+import '../store/i18n';
+import { useTranslation } from 'react-i18next';
 
 function MoviesPage() {
     const [movies, setMovies] = useState([]);
+
+    const { t } = useTranslation();
    // document.querySelector('.sidebar').style.display = 'flex';
 
     useEffect(() => {
@@ -26,7 +31,7 @@ function MoviesPage() {
 
     return (
         <div className="movies-page">
-            <h1>Movies</h1>
+            <h1>{t('Movies')}</h1>
             <div className="movies-row">
                 {movies.map((movie) => {
                     return (
